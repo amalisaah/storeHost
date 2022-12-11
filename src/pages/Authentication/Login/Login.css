@@ -1,0 +1,15 @@
+.loginSubmit .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginSubmit .button a {
+    padding-top: 7%;
+}
+
+
+.login .signPic {
+
+    background-image: url('../resources/images/Desktop1.jpg');
+
+}
