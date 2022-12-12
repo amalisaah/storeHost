@@ -7,6 +7,7 @@ const  Profile = ()=> {
     const navigate = useNavigate()
     function handleClick(){
         localStorage.clear();
+        sessionStorage.clear();
         setUser({});
         navigate('/authentication/login')
     }

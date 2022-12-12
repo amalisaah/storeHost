@@ -27,22 +27,22 @@ form>div {
     margin-right: 20px;
 } 
 form input {
-    /* width: 98%; */
-    /* border: none; */
-    /* border-color: inherit; */
+
     padding: 0%;
-    height: 50%;
-    border-radius: 8px;
-    color: var(--fontGray);
+
     padding: 2px 5px;
-    font-size: 1em;
+
 }
 
 
 form label {
     font-size: 0.875em;
-    color: var(--fontGrayW);
+    /* color: var(--fontGrayW); */
 }
+.signUp input[type='submit'] {
+    width: 49%;
+}
+
 
 
 p a {
@@ -53,10 +53,7 @@ p a {
 @media only screen and (max-width: 885px){
     .signPic {
         border-radius: 0 0 0;
-        /* width: 57%; */
-        /* background-attachment: fixed; */
-        /* min-height: 100vh; */
-        /* height: 100%; */ 
+ 
     }
     .signUp {
         width: 50%;

@@ -11,7 +11,7 @@ const  Form = ({value,handleChange,handleBlur,error,personal,changeForm,onSubmit
         e.preventDefault();
         const role=personal ? 'personal': 'business'
         onSubmit(role);
-        navigate('../login')
+        navigate('../auth')
     }
 
     
@@ -35,9 +35,9 @@ const  Form = ({value,handleChange,handleBlur,error,personal,changeForm,onSubmit
                 {error && <p role='alert' className='text-red-600' >input a valid email</p>}
                 <Input type="password" id="pwd" name="pwd"  label='Password' onChange={handleChange} value={value.pwd} onBlur={handleBlur} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$' />
                 <Submit value='Create Account'  />
-                <p> Already A Member? <Link to='../login'>Log In</Link> </p>
             </form>
-            <div className='account mt-24 '>Create <span className='text-bgBlue cursor-pointer' onClick={changeForm} >{personal ? 'Business':'Personal' } Account</span></div>
+                <p className="mt-9"> Already A Member? <Link to='../login'>Log In</Link> </p>
+            <div className='account mt-16 '>Create <span className='text-bgBlue cursor-pointer' onClick={changeForm} >{personal ? 'Business':'Personal' } Account</span></div>
         </>
     )
 };

@@ -6,7 +6,14 @@
 .loginSubmit .button a {
     padding-top: 7%;
 }
-
+.login input[type='submit'] {
+    background-color: var(--white);
+    color: var(--bgBlue);
+}
+.login input[type='submit']:hover {
+    background-color: var(--hoverBlue);
+    color: var(--white);
+}
 
 .login .signPic {
 

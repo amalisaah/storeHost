@@ -1,36 +1,9 @@
 .box input:not(input[type=submit]) {
-    width: 58px;
-    height: 58px;
-    margin-right: 15px;
-    border-radius: 8px;
     line-height: 30px;
     font-size: 1.25rem;
 }
-.box input[type=submit] {
-    width: 16%;
-    border-radius: 8px;
-    border-style: none;
-}
-.box input:valid {
+.box input[type='text']:valid {
     border: 1px solid var(--bdGreen);
 }
-.auth h1 {
-    margin-top: 8.2%;
-}
-.auth p {
-    color: black;
-    font-size: 20px;
-    line-height: 22px;
-    margin-bottom: 4.5%;
-    margin-top: 1.6%;
-}
-.val {
-    margin-bottom: 4.5%;
-}
-.logo {
-    position: absolute;
-    top: 1.7%;
-    font-weight: 900;
-    color: var(--bgBlue);
-    margin-left: 2.5%;
-}
+
+

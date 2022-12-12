@@ -14,6 +14,8 @@ module.exports = {
         'bgBlue': '#0085FF',
         'white': '#FFF',
         'bdGreen': 'green',
+        'error': '#FF3131',
+        'hoverBlue': '#59AFFF',
       },
     },
   },

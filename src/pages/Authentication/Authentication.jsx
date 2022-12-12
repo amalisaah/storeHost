@@ -11,7 +11,7 @@ import FactorAuth from "./FactorAuth/FactorAuth";
 
 const  Authentication = ()=> {
 
-        /*CHANGE TEST AND BACKGROUND*/
+        /*CHANGE  BACKGROUND*/
         function changeBackground(){
             const id=document.getElementById('signP');
             if(id){
@@ -31,7 +31,29 @@ const  Authentication = ()=> {
             
         },[])
 
-
+        /* CHANGE TEXT */
+        const [text,setText] = useState('');
+        function changeText(){
+            const msgs = ['Your own online store with a few clicks', 'Easy to use templates','Well created UI Design']
+            const index = Math.floor((Math.random() * 3));
+            setText(msgs[index])    
+        }
+        useEffect(()=>{
+            const intervalId=setInterval(() => {
+                changeText();    
+            }, 18000);
+            return ()=>{clearInterval(intervalId)}
+            
+        },[])
+        
+        // ['Your own','online store','with a few clicks'
+        // Easy to use
+        // templates
+        // ''
+        // ']
+            
+            
+            // ]
     /*PATTERN*/
     // const pattern={ mail:'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$',
     //                 pwd:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
@@ -48,8 +70,7 @@ const  Authentication = ()=> {
     const [value,setValue]=useState({});
     function handleChange(e){
         const name=e.target.name;
-        setValue(prev=>({...prev,[name]:e.target.value}))
-        
+        setValue(prev=>({...prev,[name]:e.target.value}));
         if(error){
             const isValid=!e.target.validity.patternMismatch
             isValid && setError(false)
@@ -64,6 +85,7 @@ const  Authentication = ()=> {
         if (e.target.validity.patternMismatch){
             // ref.current.focus();
             setError(true);
+            
         } 
         
     }
@@ -77,22 +99,29 @@ const  Authentication = ()=> {
     function handleSubmit(role){
         if(!error){
             console.log(value,role)
-            setValue({})
+            
             // async()=>{
             //     const url=`${baseUrl}${role}`
             //     const response = await axios.post(url,value);
-            //     setUser(response)
+            //     response.ok && setUser(response)
             // }();
+            setValue({})
             setUser({name:'thor odinson',id:243})
             console.log(user)
         }
         
     }
 
+    /*PERMANENTLY REMEMBER USER UNTIL LOGOUT*/ 
+    const [rememberMe, setRememberMe] = useState(false);
+    function Remember () {
+        setRememberMe(prev=>!prev)
+    };
+
     /*CLEARS VALUES ON LEAVING THE PAGE*/
     const location =useLocation()
     useEffect(()=>{ setValue({}) },[location])
-    useEffect(()=>{ setHide(false); console.log(hide)},[location])
+    useEffect(()=>{ setHide(false) },[location])
 
 
     /*FOR HiDING EMAIL BOX ON CHANGE PASSWORD*/
@@ -103,12 +132,17 @@ const  Authentication = ()=> {
 
     return (
         <Routes>
-            <Route path='/signup' element={<SignUp value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error} personal={personal} changeForm={changeForm} handleSubmit={handleSubmit} />} />
-            <Route index element={<Login value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit}  />} />
-            <Route path="/login" element={<Login value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit} />} />
+            <Route path='/signup' element={<SignUp value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error} personal={personal} changeForm={changeForm} handleSubmit={handleSubmit} text={text} />} />
+
+            <Route index element={<Login value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit} Remember={Remember} rememberMe={rememberMe} text={text} />} />
+
+            <Route path="/login" element={<Login value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit} Remember={Remember} rememberMe={rememberMe} text={text} />} />
+
             <Route path='/cmail' element={<Cmail value={value} handleChange={handleChange} handleBlur={handleBlur} handleSubmit={handleSubmit} hide={hide} changeHide={changeHide} /> } />
+            
             <Route path='/changepassword' element={<Password value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit}/>} />
-            <Route path='/auth' element={<FactorAuth /> } />
+
+            <Route path='/auth' element={<FactorAuth value={value} handleChange={handleChange} handleSubmit={handleSubmit} /> } />
         </Routes>
     )
 };
