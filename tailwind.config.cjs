@@ -17,6 +17,10 @@ module.exports = {
         'error': '#FF3131',
         'hoverBlue': '#59AFFF',
       },
+      fontFamily: {
+        'fontRoboto':['Roboto','Helvetica', 'Arial', 'sans-serif'],
+        'fontPoppins':[ 'Poppins','Helvetica','Sans-serif'],
+      },
     },
   },
   plugins: [],
