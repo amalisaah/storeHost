@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Header from "../../Components/Header";
+import NavItem from "../../Components/NavItem";
 import PicFrame from "../../Components/PicFrame";
 import  team from '../../assets/images/Ellipse3.png';
 import Button from "../../Components/Button";
@@ -15,7 +15,10 @@ const  Home = ()=> {
     return (
         <>
         <div className='page relative min-h-screen'>
-            <Header/>
+            <Header className={'fixed'}>
+                <NavItem value='Log in' className='mr-[39px]' link='/authentication' />
+                <Button value='Register' className='h-10 w-36' link='/authentication/signup' />
+            </Header>
             <div className=''>
                 <div className='flex px-[100px]'>
 
@@ -44,8 +47,8 @@ const  Home = ()=> {
                     <div className='mb-10 justify-center flex items-center py-24'>
                         <div className='divide-y divide-solid divide-[#AAAAAA]'>
                             {
-                                table.map(val=>
-                                    <div className='font-medium text-4xl text-left leading-[56px] py-8'>{val}</div>
+                                table.map((val,index)=>
+                                    <div className='font-medium text-4xl text-left leading-[56px] py-8' key={index+1}>{val}</div>
                                 )
                             }
                             
