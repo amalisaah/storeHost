@@ -12,6 +12,8 @@
   --bdGreen: green;
   --error: #FF3131;
   --hoverBlue: #59AFFF;
+  --darkBlue: #00284C;
+
 }
 * {
   box-sizing: border-box;

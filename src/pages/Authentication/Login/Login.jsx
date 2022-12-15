@@ -15,7 +15,8 @@ const  Login = (props)=> {
     const {user} = useContext(LoginContext)
     function handleSubmit(e){
         e.preventDefault();
-        props.handleSubmit('');
+        const path='/login';
+        props.handleSubmit(path);
         if(user.id) {
             props.rememberMe ? localStorage.setItem('user',JSON.stringify(user)) : sessionStorage.setItem('user',JSON.stringify(user));
             console.log(user.id);
@@ -33,11 +34,11 @@ const  Login = (props)=> {
             <main className="login flex justify-between h-screen">
                 
                 <OuterDiv heading='Login'>
-                {props.error && <p role='alert' className='text-error' >username or password</p>}
+                {props.error && <p role='alert' className='text-error' >username or password incorrect</p>}
                     <form className='' onSubmit={handleSubmit}  >
-                        <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$' onBlur={props.handleBlur}  />
+                        <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
 
-                        <Input type="password" id="pwd" name="password"  label='Password' onChange={props.handleChange} value={props.value.password} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$' onBlur={props.handleBlur}  />
+                        <Input type="password" id="pwd" name="password"  label='Password' onChange={props.handleChange} value={props.value.password} />
 
                         {/* <div className=''> */}
                             <input className='bg-[#4E4E4E]' type="checkbox" name="" id="check" onClick={handleSelect} />
@@ -46,7 +47,7 @@ const  Login = (props)=> {
 
                         <div className='loginSubmit flex justify-between'>
                             {/* <Button value='Forgot Password' link='/authentication/cmail' />   */}
-                            <div role='button' className="button leading-5 h-12 w-[45%] rounded-lg bg-white text-bgBlue hover:bg-hoverBlue hover:text-white" > <Link to='/authentication/cmail' className='leading-5 text-inherit h-full w-full'>Forgot Password</Link> </div>                     
+                            <div role='button' className="button leading-5 h-12 w-[45%] rounded-lg bg-white text-bgBlue hover:bg-hoverBlue hover:text-white" > <Link to='/authentication/verify-email' className='leading-5 text-inherit h-full w-full'>Forgot Password</Link> </div>                     
                             <Submit value='Log In' />                       
                         </div>
                         <p> Not a member? <Link to='/authentication/signup'>Sign up</Link> </p>

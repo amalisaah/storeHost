@@ -9,31 +9,33 @@ const  Form = ({value,handleChange,handleBlur,error,personal,changeForm,onSubmit
 
     function handleSubmit(e){
         e.preventDefault();
-        const role=personal ? 'personal': 'business'
-        onSubmit(role);
+        const role=personal ? 'individual': 'business';
+        const path=`/register?role=${role}`
+        onSubmit(path);
         navigate('../auth')
     }
 
     
 
       
-    // console.log(error)
+    console.log(error)
     return (
         <>
             <form className='' onSubmit={handleSubmit}  >
                 {personal ? 
                 <div className='nameIn  flex justify-between '>
-                    <Input type="text" id="fname" name="fname" label='First Name' onChange={handleChange} value={value.fname} />
-                    <Input type="text" id="lname" name="lname"  label='Last Name' onChange={handleChange} value={value.lname} />    
+                    <Input type="text" id="fname" name="firstname" label='First Name' onChange={handleChange} value={value.firstname} />
+                    <Input type="text" id="lname" name="lastname"  label='Last Name' onChange={handleChange} value={value.lastname} />    
                 </div>
                 :
-                <Input type="text" id="name" name="name"  label='Business Name' onChange={handleChange} value={value.name} />
+                <Input type="text" id="name" name="bname"  label='Business Name' onChange={handleChange} value={value.bname} />
                 }
                 
                 {/* <Input type="email" id="email" name="email"  label='Email' onChange={handleChange} value={value.email} onBlur={handleBlur} pattern={pattern.mail}  /> */}
-                <Input type="email" id="email" name="email"  label='Email' onChange={handleChange} value={value.email} onBlur={handleBlur} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
-                {error && <p role='alert' className='text-red-600' >input a valid email</p>}
-                <Input type="password" id="pwd" name="pwd"  label='Password' onChange={handleChange} value={value.pwd} onBlur={handleBlur} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$' />
+                <Input type="email" id="email" name="email"  label='Email' onChange={handleChange} value={value.email} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
+                {error && <p role='alert' className='text-red-600' >accepted criteria for password</p>}
+                <Input type="password" id="pwd" name="password"  label='Password' onChange={handleChange} value={value.password} onBlur={handleBlur} pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$' />
+                {/* <Input type="password" id="pwd" name="password2"  label='Confirm Password' onChange={handleChange} value={value.password2} onBlur={()=>{ (props.value.password===props.value.password2) ? handleBlur : }}  /> */}
                 <Submit value='Create Account'  />
             </form>
                 <p className="mt-9"> Already A Member? <Link to='../login'>Log In</Link> </p>

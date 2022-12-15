@@ -10,7 +10,7 @@ import FactorAuth from "./FactorAuth/FactorAuth";
 
 
 const  Authentication = ()=> {
-
+    
         /*CHANGE  BACKGROUND*/
         function changeBackground(){
             const id=document.getElementById('signP');
@@ -46,15 +46,9 @@ const  Authentication = ()=> {
             
         },[])
         
-        // ['Your own','online store','with a few clicks'
-        // Easy to use
-        // templates
-        // ''
-        // ']
+    
             
-            
-            // ]
-    /*PATTERN*/
+     /*PATTERN*/
     // const pattern={ mail:'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$',
     //                 pwd:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
     //             }
@@ -95,18 +89,26 @@ const  Authentication = ()=> {
 
     /*HANDLE FORM SUBMISSION*/
     const {setUser,user} = useContext(LoginContext)
-    const baseUrl=''
+    const baseUrl='https://storefront-dpqh.onrender.com'
     function handleSubmit(role){
         if(!error){
-            console.log(value,role)
+            // console.log(value,role)
             
-            // async()=>{
-            //     const url=`${baseUrl}${role}`
-            //     const response = await axios.post(url,value);
-            //     response.ok && setUser(response)
-            // }();
+            (async()=>{
+                try {
+                    const url=`${baseUrl}${role}`;
+                    const val=value;
+                    const response = await axios.post(url,val);
+                    response.data.id  && setUser(response.data)
+                    console.log(response.data) 
+                } catch (error) {
+                    console.log(error.response.data);
+                    if (error.response.data==='Unauthorized'){setError(true)}
+                }
+                
+            })();
             setValue({})
-            setUser({name:'thor odinson',id:243})
+            // setUser({name:'thor odinson',id:243})
             console.log(user)
         }
         
@@ -138,7 +140,7 @@ const  Authentication = ()=> {
 
             <Route path="/login" element={<Login value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit} Remember={Remember} rememberMe={rememberMe} text={text} />} />
 
-            <Route path='/cmail' element={<Cmail value={value} handleChange={handleChange} handleBlur={handleBlur} handleSubmit={handleSubmit} hide={hide} changeHide={changeHide} /> } />
+            <Route path='/verify-email' element={<Cmail value={value} handleChange={handleChange} handleBlur={handleBlur} handleSubmit={handleSubmit} hide={hide} changeHide={changeHide} /> } />
             
             <Route path='/changepassword' element={<Password value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit}/>} />
 

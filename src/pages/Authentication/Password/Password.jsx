@@ -14,7 +14,8 @@ const  Password = (props)=> {
         e.preventDefault();
         
         if(props.value.newPassword===props.value.confirmPassword){
-            props.handleSubmit('');
+            const path='/reset-password'
+            props.handleSubmit(path);
             navigate('/authentication/login')
         }else console.log("password doesn't match")
 

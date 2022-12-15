@@ -16,6 +16,7 @@ module.exports = {
         'bdGreen': 'green',
         'error': '#FF3131',
         'hoverBlue': '#59AFFF',
+        'darkBlue': '#00284C',
       },
       fontFamily: {
         'fontRoboto':['Roboto','Helvetica', 'Arial', 'sans-serif'],
