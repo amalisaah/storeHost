@@ -19,6 +19,7 @@
   box-sizing: border-box;
   font-family: var(--fontPoppins);
   /* border: 1px red solid; */
+  /* text-align: center; */
 }
 html {
   font-size: 16px;

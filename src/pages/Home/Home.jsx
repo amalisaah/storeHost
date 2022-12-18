@@ -19,7 +19,7 @@ const  Home = ()=> {
                 <NavItem value='Log in' className='mr-[39px]' link='/authentication' />
                 <Button value='Register' className='h-10 w-36' link='/authentication/signup' />
             </Header>
-            <div className='pt-[58px]'>
+            <div className='pt-28'>
                 <div className='flex px-[100px]'>
 
                     <div className='w-1/2 ' >

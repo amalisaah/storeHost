@@ -12,7 +12,7 @@ const  SideBar = ()=> {
     const icons=[Dashboard,Profile,Project,Support]
 
     return (
-        <>
+        // <>
             <div className='bg-darkBlue w-[15.5%] min-h-screen text-white fixed'>
                 {items.map((item,index)=>
                     <NavLink to='' className="hover:bg-red-400 active:bg-red-400 " key={index} >
@@ -25,7 +25,7 @@ const  SideBar = ()=> {
                     
                 )}
             </div>
-        </>
+        // </>
     )
 };
 
