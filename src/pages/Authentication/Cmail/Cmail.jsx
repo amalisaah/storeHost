@@ -25,7 +25,8 @@ const  Cmail = (props)=> {
                   {/* { props.hide ? null : */}
                   <>
                     <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} onBlur={props.handleBlur} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
-                    <Submit value='send'/>
+                    <div className='flex justify-center'><Submit value='send'/></div>
+                    
                     </> 
                     {/* } */}
                 </form>

@@ -6,7 +6,7 @@ const  PicFrame = (props)=> {
         <>
             <div className="w-[295px] bg-inherit">
                 <img src={props.src} alt={props.alt} className='rounded-[50%] h-[295px] w-full mb-8' />
-                <div classame="text-center py-[60px] font-fontRoboto ">
+                <div classame="text-left py-[60px] font-fontRoboto ">
                 <p>{props.text}</p>
                 </div>
             </div>

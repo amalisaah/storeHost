@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 const  EmailDiv= (props)=> {
     return (
         <>
-            <div className='check m-auto'>
+            <div className='check m-auto text-center'>
                 <h1 className='text-bgBlue mb-[3.2%] mt-[12%] '>{props.heading}</h1>
                 {/* <p className="text-2xl "> {props.text}</p> */}
                 <p className="text-[20px] "> {props.text}</p>

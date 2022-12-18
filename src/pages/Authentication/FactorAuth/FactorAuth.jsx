@@ -5,18 +5,18 @@ import './FactorAuth.css';
 
 const  FactorAuth = (props)=> {
 
-    function  handleSubmit (e) {
-        e.preventDefault()
-        props.handleSubmit('')
-    };
+    // function  handleSubmit (e) {
+    //     e.preventDefault()
+    //     props.handleSubmit('')
+    // };
     
-    const names=["first","second","third","fourth","fifth","sixth"]
+    // const names=["first","second","third","fourth","fifth","sixth"]
 
     return (
         <>
             <main className='auth'>               
                 <Logo />
-                <EmailDiv heading='Authentication' text='You should receive an email shortly' />
+                <EmailDiv heading='Authentication' text={props.response }/>
                 {/* <div className='box mt-11'> */}
                     {/* <form onSubmit={handleSubmit} > */}
                         {/* <div className='val mb-[4.5%]'>
