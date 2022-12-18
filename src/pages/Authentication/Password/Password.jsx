@@ -29,7 +29,9 @@ const  Password = (props)=> {
                 <form className='' onSubmit={handleSubmit} >
                     <Input type="password" id="pwd" name="newPassword" label='New Password' onChange={props.handleChange} value={props.value.newPassword} onBlur={props.handleBlur} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$' />
                     <Input type="password" id="Confirmpwd" name="confirmPassword" label='Confirm Password' onChange={props.handleChange} value={props.value.confirmPassword} onBlur={props.handleBlur}  />   
-                    <Submit value='save'  />
+                    <div className='flex justify-center'>
+                        <Submit value='save'  />
+                    </div>
                     
                 </form>
             </OuterDiv>
