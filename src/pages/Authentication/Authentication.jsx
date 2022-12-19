@@ -88,16 +88,16 @@ const  Authentication = ()=> {
     const {setUser,user} = useContext(LoginContext)
     const baseUrl='https://storefront-dpqh.onrender.com'
     function handleSubmit(role){
-        console.log('jmm')
+        // console.log('jmm')
         if(!error){            
             (async()=>{
                 try {
                     const url=`${baseUrl}${role}`;
                     const val=value;
                     const response = await axios.post(url,val);
-                    // response.data.id  && setUser(response.data)
+                    response.data.id  && setUser(response.data);
                     setResponse(response.data)
-                    // console.log(response.status) 
+                    console.log(response.data) 
                 } catch (error) {
                     // console.log(error.response.data);
                     setResponse(error.response.data)

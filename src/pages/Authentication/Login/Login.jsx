@@ -17,10 +17,11 @@ const  Login = (props)=> {
         e.preventDefault();
         const path='/login';
         props.handleSubmit(path);
+        console.log(user)
         if(user.id) {
             props.rememberMe ? localStorage.setItem('user',JSON.stringify(user)) : sessionStorage.setItem('user',JSON.stringify(user));
-            console.log(user.id);
-            navigate('/dashboard')
+            // console.log(user.id);
+            // navigate('/home')
         }
     }
   
