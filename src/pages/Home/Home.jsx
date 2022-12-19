@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../../Components/Header";
 import ProfilePic from "../../Components/ProfilePic";
@@ -9,6 +9,14 @@ import Button from "../../Components/Button";
 
 const  Home = ()=> {
 
+    /*Check if User is already logged in*/
+    useEffect(()=>{
+        let temp = localStorage.getItem('user')
+        if (!temp) temp = sessionStorage.getItem('user'); 
+        setUser(JSON.parse(temp))
+        console.log(user,temp)
+
+    },[])
     /* HIDE OR SHOW LOGOUT BUTTON*/
     const [logout,setLogout]= useState(false);
     function toggleLogout(){
@@ -24,23 +32,27 @@ const  Home = ()=> {
         navigate('/authentication/login')
     }
    
+
     
     return (
         <>
-        <Header className={'h-[88px] flex-row-reverse relative'}>
-            <ProfilePic src={team} text='Business Name' alt="user's pic" onClick={toggleLogout} />
+        { user.id ?
+        <>
+        <Header className={'h-[88px] flex-row-reverse fixed'}>
+            <ProfilePic src={team} text={user.firstname || user.bname}   alt="user's pic" onClick={toggleLogout} />
             {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleClick}  /> : null}
         </Header>
-         <div className='flex '>
+         <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
                <Outlet /> {/* displays nav in side bar*/}
             </div>
 
-        </div> 
+        </div> </>
     
             
-        </>
+         : <h1 className="text-center mt-6">Please login first</h1>}
+         </>
     )
 };
 

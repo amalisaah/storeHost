@@ -12,7 +12,7 @@ const  Login = (props)=> {
     
     const navigate = useNavigate()
 
-    const {user} = useContext(LoginContext)
+    const {user,setUser} = useContext(LoginContext)
     function handleSubmit(e){
         e.preventDefault();
         const path='/login';
@@ -21,21 +21,19 @@ const  Login = (props)=> {
         if(user.id) {
             props.rememberMe ? localStorage.setItem('user',JSON.stringify(user)) : sessionStorage.setItem('user',JSON.stringify(user));
             // console.log(user.id);
-            // navigate('/home')
+            navigate('/home')
         }
     }
   
     /*SET REMEMBER ME STATE*/
-    function handleSelect (e) {  
+    function handleSelect () {  
         props.Remember()
     };
 
-    function handleLoad(){
-        alert('loaded')
-    }
 
     return (
         <>
+
             <main className="login flex justify-between h-screen" >
                 
                 <OuterDiv heading='Login'>
