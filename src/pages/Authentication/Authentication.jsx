@@ -78,6 +78,7 @@ const  Authentication = ()=> {
     // const ref = useRef();
     function handleBlur(bol){ 
         setError(bol);  
+
     }
 
 
@@ -88,11 +89,12 @@ const  Authentication = ()=> {
     const {setUser,user} = useContext(LoginContext)
     const baseUrl='https://storefront-dpqh.onrender.com'
     function handleSubmit(role){
-        // console.log('jmm')
+       
         if(!error){            
             (async()=>{
                 try {
                     const url=`${baseUrl}${role}`;
+                    console.log(url);
                     const val=value;
                     const response = await axios.post(url,val);
                     response.data.id  && setUser(response.data);
@@ -137,7 +139,7 @@ const  Authentication = ()=> {
 
             <Route path="/login" element={<Login value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit} Remember={Remember} rememberMe={rememberMe} text={text} />} />
 
-            <Route path='/password-reset' element={<Cmail value={value} handleChange={handleChange} handleBlur={handleBlur} handleSubmit={handleSubmit} hide={hide} changeHide={changeHide} /> } />
+            <Route path='/password-reset' element={<Cmail value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit} hide={hide} changeHide={changeHide} /> } />
             
             <Route path='/reset-password' element={<Password value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit}/>} />
 

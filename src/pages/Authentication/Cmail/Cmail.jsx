@@ -16,6 +16,13 @@ const  Cmail = (props)=> {
         navigate('../auth')
     }
 
+    function handleBlur(e){
+        if (e.target.validity.patternMismatch){
+            props.handleBlur(true);
+            
+        } 
+    }
+
     return (
         <>
             <main className='cmail'>
@@ -24,7 +31,7 @@ const  Cmail = (props)=> {
                 <form className='my-8 m-auto w-[35%]' onSubmit={handleSubmit}>
                   {/* { props.hide ? null : */}
                   <>
-                    <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} onBlur={props.handleBlur} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
+                    <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} onBlur={handleBlur} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
                     <div className='flex justify-center'><Submit value='send'/></div>
                     
                     </> 

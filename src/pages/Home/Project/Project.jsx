@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Select from "../Components/Select";
+import Category from '../../../assets/images/icons/Category.png';
+import arrow from '../../../assets/images/icons/arrow.png';
+
 
 const  Project = ()=> {
     // /* Toggles template options
@@ -30,10 +33,12 @@ const  Project = ()=> {
                     </div> */}
                     <div className='h-[100px] w-[352px] flex justify-around items-center border-solid border border-darkBlue m-6 relative'>
                         <div className='flex items-center text-2xl  '>
-                        <i className='fas fa-shapes' ></i>
+                        
+                        <img src={Category} role='icon' alt='category icon' />
                             <div className='ml-6 '>{value ? value : 'Category'}</div> 
                         </div>
-                        <i className='fas fa-caret-down' onClick={toggleMenu}></i>
+                    
+                        <img src={arrow} role='icon' alt='category icon' className='w-[10px] h-[5px]' onClick={toggleMenu} />
                         {menu ? <Select onClick={handleClick} /> : null} 
                     </div>
                 </div>

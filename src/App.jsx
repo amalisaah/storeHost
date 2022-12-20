@@ -15,6 +15,7 @@ import Finance from './pages/Home/Project/Finance/Finance';
 
 
 
+
 function App() {
   // const [user,setUser] = useState({name:'thor odinson',id:243})
   const [user,setUser] = useState({})
@@ -38,6 +39,7 @@ function App() {
             <Route path='support' element={<Support/>} />
           </Route>
           <Route path='*' element={<h1><Link to='/authentication'> No Page</Link></h1>} />
+          
         </Routes>
       </Router>
       

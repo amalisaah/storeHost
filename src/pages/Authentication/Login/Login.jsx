@@ -38,7 +38,7 @@ const  Login = (props)=> {
                 
                 <OuterDiv heading='Login'>
                 {props.error && <p role='alert' className='text-error' >username or password incorrect</p>}
-                    <form className='' onSubmit={handleSubmit} onLoad={()=>{console.log('load')}} >
+                    <form className='' onSubmit={handleSubmit}  >
                         <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
 
                         <Input type="password" id="pwd" name="password"  label='Password' onChange={props.handleChange} value={props.value.password} />

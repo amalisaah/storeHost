@@ -39,7 +39,7 @@ const  Home = ()=> {
         { user.id ?
         <>
         <Header className={'h-[88px] flex-row-reverse fixed'}>
-            <ProfilePic src={team} text={user.firstname || user.bname}   alt="user's pic" onClick={toggleLogout} />
+            <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" onClick={toggleLogout} />
             {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleClick}  /> : null}
         </Header>
          <div className='flex pt-[88px]'>
