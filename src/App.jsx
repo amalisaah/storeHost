@@ -12,7 +12,7 @@ import Profile from './pages/Home/Profile/Profile';
 import Ecommerce from './pages/Home/Project/Ecommerce/Ecommerce';
 import Blog from './pages/Home/Project/Blog/Blog';
 import Finance from './pages/Home/Project/Finance/Finance';
-
+import Templates1 from './pages/Templates/Blog/Template1/Templates1';
 
 
 
@@ -38,8 +38,8 @@ function App() {
               
             <Route path='support' element={<Support/>} />
           </Route>
-          <Route path='*' element={<h1><Link to='/authentication'> No Page</Link></h1>} />
-          
+          {/* <Route path='*' element={<h1><Link to='/authentication'> No Page</Link></h1>} /> */}
+          <Route path='*' element={<Templates1/>} />
         </Routes>
       </Router>
       

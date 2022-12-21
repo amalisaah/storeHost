@@ -14,11 +14,14 @@
   --hoverBlue: #59AFFF;
   --darkBlue: #00284C;
 
+  /*Templates 1*/
+  --lnkColorB:#15616B;
+  --bgColorB: #4F4F4F;
 }
 * {
   box-sizing: border-box;
   font-family: var(--fontPoppins);
-  /* border: 1px red solid; */
+  /* border: 0.2px red solid; */
   /* text-align: center; */
 }
 html {
