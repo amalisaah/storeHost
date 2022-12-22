@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './Login.css';
 import Submit from "../Components/Submit";
@@ -17,13 +17,23 @@ const  Login = (props)=> {
         e.preventDefault();
         const path='/login';
         props.handleSubmit(path);
-        console.log(user)
+        // !user.id && props.handleBlur(true)
+        
+    }
+  
+    /*SET REMEMBER ME STATE*/
+    function handleSelect () {  
+        props.Remember()
+    };
+
+    /*LOgging in if user exists*/
+    useEffect(()=>{
         if(user.id) {
             props.rememberMe ? localStorage.setItem('user',JSON.stringify(user)) : sessionStorage.setItem('user',JSON.stringify(user));
             // console.log(user.id);
             navigate('/home')
         }
-    }
+    },[user])
   
     /*SET REMEMBER ME STATE*/
     function handleSelect () {  
@@ -37,7 +47,7 @@ const  Login = (props)=> {
             <main className="login flex justify-between h-screen" >
                 
                 <OuterDiv heading='Login'>
-                {props.error && <p role='alert' className='text-error' >username or password incorrect</p>}
+                {props.error && <p role='alert' className='text-error text-center' >username or password incorrect</p>}
                     <form className='' onSubmit={handleSubmit}  >
                         <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
 

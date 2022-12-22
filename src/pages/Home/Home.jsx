@@ -36,7 +36,7 @@ const  Home = ()=> {
     
     return (
         <>
-        { user.id ?
+        { user ?
         <>
         <Header className={'h-[88px] flex-row-reverse fixed'}>
             <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" onClick={toggleLogout} />
@@ -45,7 +45,7 @@ const  Home = ()=> {
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-               <Outlet /> {/* displays nav in side bar*/}
+               <Outlet /> {/* displays selector box in side bar*/}
             </div>
 
         </div> </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Select from "../Components/Select";
 import Category from '../../../assets/images/icons/Category.png';
@@ -11,15 +11,25 @@ const  Project = ()=> {
     function toggleMenu () {
         setMenu(prev=>!prev)
     };
+
     /* Change selected value*/
     const [value,setValue] = useState('')
-    function handleClick(){
-        let pathArray = window.location.pathname.split('/');
-        let len=pathArray.length
-        setValue(pathArray[len-1])
-        console.log(pathArray,value);
-        
+    function handleClick(val){
+        setValue(val)
+        // sessionStorage.setItem('value',JSON.stringify(value))     
     }
+    //get saved value on render
+    // useEffect(()=>{
+    //     let val=sessionStorage.getItem('value');
+    //     val=JSON.parse(val)
+    //     setValue(val)
+    // })
+
+    /* sets id on templates */
+    // const [templateId,setTemplateId] = useState({})
+    // function Number (val){
+    //     setTemplateId(prev=>(...prev,))
+    // }
 
     return (
         <>
@@ -44,6 +54,7 @@ const  Project = ()=> {
                 </div>
                 <div className='border-solid border border-fontGrayW mx-12 '></div>
                 <div className=''>
+                    <h2 className="font-semibold text-2xl m-6">Templates</h2>
                     <Outlet/>
                 </div>
         </>
