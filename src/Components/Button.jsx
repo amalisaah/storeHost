@@ -15,7 +15,7 @@ Button.propTypes = {
     value: PropTypes.string.isRequired,
     target: PropTypes.string,
     className: PropTypes.string,
-    handleClick: PropTypes.func,
+    onClick: PropTypes.func,
     
 }
 
