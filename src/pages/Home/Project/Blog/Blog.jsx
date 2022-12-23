@@ -12,9 +12,10 @@ const  Blog = ()=> {
     const templates=[template1,template2,template3];
     const alts=['Template 1','Template 2','Template 3'];
 
-    function handleClick(){
+    // function handleClick(){
         
-    }
+    // }
+    
 
     return (
         <>

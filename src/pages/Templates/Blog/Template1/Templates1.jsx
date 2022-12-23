@@ -7,6 +7,8 @@ import Button from "../../../../Components/Button";
 import imge1 from "../../../../assets/images/Blog/image2.png"
 import imge3 from "../../../../assets/images/Blog/image3.png";
 import { data } from "./data";
+import NameBox from "../Components/NameBox";
+import { projectNameContext } from "../../../../Context/projectNameContext";
 
 
 const  Templates1 = ()=> {
@@ -20,7 +22,7 @@ const  Templates1 = ()=> {
     //     const temp={}
     //     localStorage.setItem(temp,)
     // })
-    function changeValue(e){
+    function changeValue(e){    
         const id=e.target.id;
         console.log(id)
         setEdit(prev=>({...prev,[id]:e.target.innerText}));
@@ -28,11 +30,15 @@ const  Templates1 = ()=> {
         console.log(edit)
     }
 
+    
+
     /*default nav values*/
     const navs=['Article','Shop','About']
 
     return (
         <>
+        <div className="">
+            <NameBox />
             <Header logo={edit.logo} template={template} changeState={changeValue} >
                 {/* <Link to='' contentEditable={template} onBlur={changeState}>{edit.about}</Link> */}
                 <div className=''>
@@ -43,10 +49,11 @@ const  Templates1 = ()=> {
                 <Button value='Register' className='h-10 w-36' link='/authentication/signup' /> */}
 
             </Header>
-            <main className='px-[5.5%] bg-bgColorb pt-8'>
+            <main className='px-[5.5%] bg-bgColorb pt-8 disabled'>
+                
                 <div className='flex mb-12'>
                     <div className='mr-[2.7%] flex items-center w-[58.7%] '>
-                        <h2 className=" font-bold text-2xl leading-[37.5px]" id='topLeft' contentEditable={template} onBlur={changeValue}>{edit.topLeft}</h2></div>
+                        <h2 className=" font-bold text-2xl leading-[37.5px] text-black" id='topLeft' contentEditable={template} onBlur={changeValue}>{edit.topLeft}</h2></div>
                     <div className='w-[40%]'>
                         <img src={imge1} alt='picture' className="w-full" />
                     </div>
@@ -82,6 +89,7 @@ const  Templates1 = ()=> {
 
                 </div>
             </main>
+        </div>
         </>
     )
 };
