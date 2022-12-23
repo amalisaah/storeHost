@@ -31,7 +31,9 @@ const  Home = ()=> {
         setUser({});
         navigate('/authentication/login')
     }
-   
+    
+    /*Keep track of projects */
+    const [projectName,setProjectName] = useState('mm')
 
     
     return (
@@ -45,7 +47,7 @@ const  Home = ()=> {
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-               <Outlet /> {/* displays selector box in side bar*/}
+               <Outlet  context={[projectName,setProjectName]} /> {/* displays selector box in side bar*/}
             </div>
 
         </div> </>

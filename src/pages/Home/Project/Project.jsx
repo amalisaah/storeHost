@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useOutletContext } from "react-router-dom";
 import Select from "../Components/Select";
 import Category from '../../../assets/images/icons/Category.png';
 import arrow from '../../../assets/images/icons/arrow.png';
@@ -30,6 +30,9 @@ const  Project = ()=> {
     // function Number (val){
     //     setTemplateId(prev=>(...prev,))
     // }
+
+    // const [projectName,setProjectName] = useOutletContext();
+    // console.log(projectName +'lll')
 
     return (
         <>
