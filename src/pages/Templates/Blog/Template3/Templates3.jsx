@@ -1,33 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link,useOutletContext } from "react-router-dom";
 import NavItem from "../../../../Components/NavItem";
 import Header from "../Components/Header";
-import Logo from "../Components/Logo";
 import Button from "../../../../Components/Button";
 import imge1 from "../../../../assets/images/Blog/image2.png"
 import imge3 from "../../../../assets/images/Blog/image3.png";
 import { data } from "./data";
-import NameBox from "../Components/NameBox";
-import { projectNameContext } from "../../../../Context/projectNameContext";
 
 
-const  Templates1 = ()=> {
+
+const  Templates3 = ()=> {
 
     /*Check if webpage is still in templates mode*/
-    const [template,setTemplate] = useState(true);
-    console.log(data)
+    const [template] = useOutletContext();
+    
+
+
     /*Controls editable states*/
-    const [edit,setEdit] = useState(data);
-    // useEffect(()=>{
-    //     const temp={}
-    //     localStorage.setItem(temp,)
-    // })
+    const [edit,setEdit,editRef] = useOutletContext();
+    console.log(editRef.current)
+    useEffect(()=>{
+       setEdit(()=> data)
+    // console.log(projectData.projectName)
+    // setProjectData(prev=>({...prev,[projectName]:data}))
+        // setEdit(()=>projectData.name);
+    },[])
     function changeValue(e){    
         const id=e.target.id;
         console.log(id)
         setEdit(prev=>({...prev,[id]:e.target.innerText}));
         // setEdit(prev=>(...prev,))
-        console.log(edit)
+        // console.log(edit)
     }
 
     
@@ -37,9 +40,9 @@ const  Templates1 = ()=> {
 
     return (
         <>
-        <div className="">
-            <NameBox />
-            <Header logo={edit.logo} template={template} changeState={changeValue} >
+        {editRef.current && <div className="">
+            
+            <Header logo={edit.logo} template={template} changeState={changeValue}  >
                 {/* <Link to='' contentEditable={template} onBlur={changeState}>{edit.about}</Link> */}
                 <div className=''>
                     {navs.map((nav,index)=><NavItem value={nav} className='text-fontRoboto text-lnkColorB text-xl font-normal' onBlur={changeValue}  contentEditable={template} key={index} /> )}
@@ -89,10 +92,11 @@ const  Templates1 = ()=> {
 
                 </div>
             </main>
-        </div>
+        </div>}
+        
         </>
     )
 };
 
 
-export default Templates1
+export default Templates3

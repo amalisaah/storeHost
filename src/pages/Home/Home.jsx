@@ -6,6 +6,7 @@ import { LoginContext } from "../../Context/LoginContext";
 import  team from '../../assets/images/Ellipse3.png';
 import SideBar from "../../Components/SideBar";
 import Button from "../../Components/Button";
+import { projectDataContext } from "../../Context/projectDataContext";
 
 const  Home = ()=> {
 
@@ -17,6 +18,20 @@ const  Home = ()=> {
         console.log(user,temp)
 
     },[])
+    /*Fetch Project Data */
+    const [projectData,setProjectData] = useContext(projectDataContext)
+    useEffect(()=>{
+        console.log(projectData)
+        setProjectData(()=>{
+            const id=user.id;
+            return({
+            id,
+            
+            })
+        })
+    },[])
+
+
     /* HIDE OR SHOW LOGOUT BUTTON*/
     const [logout,setLogout]= useState(false);
     function toggleLogout(){

@@ -26,7 +26,7 @@ const  Blog = ()=> {
                             <img src={template} alt={alts[index]} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' />
                         </Link>
                         {alts[index]}
-                        <Button value="Edit" onClick={()=>{navigate(alts[index])}}/>
+                        <Button value="Edit" onClick={()=>{navigate('/template/blog/'+alts[index])}}/>
                     </div>
                 )}       
                 {/* <div className='absolute'>
