@@ -4,7 +4,8 @@ import useState from 'react-usestateref'
 import './App.css';
 import { LoginContext } from './Context/LoginContext';
 import { projectNameContext } from './Context/projectNameContext';
-import { projectDataContext } from './Context/projectDataContext'
+import { projectDataContext } from './Context/projectDataContext';
+import { projectListContext } from './Context/projectListContext';
 import Authentication from './pages/Authentication/Authentication';
 import LandingPage from './pages/LandingPage/LandingPage';
 import Home from './pages/Home/Home';
@@ -28,35 +29,40 @@ function App() {
 
   const [projectdata,setProjectData,projectDataRef] = useState({})
 
+  /*List of all projects*/
+  const [projectList,setProjectList,projectListRef] = useState([])
+
   return (
     <LoginContext.Provider value={{user,setUser}} >
       <projectNameContext.Provider value={[projectName,setProjectName,projectNameRef]} >
         <projectDataContext.Provider value={[projectdata,setProjectData,projectDataRef]} >
-          <div className="App">
-            <Router>
-              <Routes>
-                <Route path='/' element={<LandingPage/>} />
-                <Route path='/authentication/*' element={<Authentication  />} />
-                <Route path='/home' element={<Home/>} >
-                  <Route path='projects' element={<Project/> } >
-                    <Route path='ecommerce' element={<Ecommerce/>} />
-                    <Route path='Blog' element={<Blog/>} />
-                    <Route path='finance' element={<Finance/>} />
+          <projectListContext.Provider value={[projectList,setProjectList,projectListRef]} >
+            <div className="App">
+              <Router>
+                <Routes>
+                  <Route path='/' element={<LandingPage/>} />
+                  <Route path='/authentication/*' element={<Authentication  />} />
+                  <Route path='/home' element={<Home/>} >
+                    <Route path='projects' element={<Project/> } >
+                      <Route path='ecommerce' element={<Ecommerce/>} />
+                      <Route path='Blog' element={<Blog/>} />
+                      <Route path='finance' element={<Finance/>} />
+                    </Route>
+                    <Route path='dashboard' element={<Dashboard/>} />
+                    <Route path='profile' element={<Profile/>} />
+                        
+                    <Route path='support' element={<Support/>} />
                   </Route>
-                  <Route path='dashboard' element={<Dashboard/>} />
-                  <Route path='profile' element={<Profile/>} />
-                      
-                  <Route path='support' element={<Support/>} />
-                </Route>
-                <Route path='/template' element={<Templates/>} >
-                  <Route path='blog/template 3' element={<Templates3 />} />
-                </Route>
-                  {/* <Route path='*' element={<h1><Link to='/authentication'> No Page</Link></h1>} /> */}
-                <Route path='*' element={<Templates/>} />
-              </Routes>
-            </Router>
-            
-          </div>
+                  <Route path='/template' element={<Templates/>} >
+                    <Route path='blog/blog-3' element={<Templates3 />} />
+                  </Route>
+                    {/* <Route path='*' element={<h1><Link to='/authentication'> No Page</Link></h1>} /> */}
+                  {/* <Route path='*' element={<Templates/>} /> */}
+                </Routes>
+              </Router>
+              
+            </div>
+          </projectListContext.Provider>
         </projectDataContext.Provider>
       </projectNameContext.Provider>
     </LoginContext.Provider>

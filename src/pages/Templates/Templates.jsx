@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import useState from 'react-usestateref';
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import ProfilePic from "../../Components/ProfilePic";
 import  team from '../../assets/images/Ellipse3.png';
 import { LoginContext } from "../../Context/LoginContext";
@@ -9,6 +9,7 @@ import Logo from "../../Components/Logo";
 import NameBox from "./Blog/Components/NameBox";
 import { projectNameContext } from "../../Context/projectNameContext";
 import { projectDataContext } from "../../Context/projectDataContext";
+import { projectListContext } from "../../Context/projectListContext";
 
 
 
@@ -18,39 +19,59 @@ const  Templates = ()=> {
     useEffect(()=>{
         let temp = localStorage.getItem('user')
         if (!temp) temp = sessionStorage.getItem('user'); 
-        setUser(JSON.parse(temp))
+        setUser(prev=>temp && JSON.parse(temp))
         console.log(user,temp)
 
     },[])
 
 
     /*Check if webpage is still in templates mode*/
-    const [template,setTemplate] = useState(false);
+    const [template,setTemplate] = useState(true);
 
 
     /*HANDLE USER CHANGES IN TEMPLATE*/
     const [edit,setEdit,editRef] = useState('');
-    console.log(editRef.current)
 
 
     /*Get Name of project  HANDLE NAME SAVE set data to name as key*/
     const [projectName,setProjectName,projectNameRef] = useContext(projectNameContext);
-    const [projectData,setProjectData,projectDataRef] = useContext(projectDataContext)
-    function handleSubmit (name) {
-        name=[projectNameRef.current]
-        console.log(name)
+    const [projectData,setProjectData,projectDataRef] = useContext(projectDataContext);
+
+    const location = useLocation() //aids in routing to page from recent projects
+    function handleSubmit () {
+        const name=[projectNameRef.current];
+        setEdit(prev=>({...prev,pathName:location.pathname}))
         setProjectData(prev=>({...prev,[name]:editRef.current}));
-        console.log(projectDataRef.current[name]);
-        setProjectName('');
+        console.table(projectDataRef.current)
+        setProjectList(prev=>[...prev,name]); //adds name to project list
         setBox(false)
+        sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
+        sessionStorage.setItem('projectName',JSON.stringify(projectName));
+        
     };
+    
+    useEffect(()=>{
+        let Name = sessionStorage.getItem('projectName');
+        setProjectName((prev)=>Name ? JSON.parse(Name) : prev)
+        let Data = sessionStorage.getItem('projectData');
+        Data = JSON.parse(Data)
+        // console.log(projectNameRef.current);
+        // console.log(Name,'errrhm');
+        setEdit((prev)=> (Data && Name) ?  Data[projectNameRef.current] : prev)
+
+    },[])
 
     /*Display or hide name box*/
     const [box,setBox] = useState(false);
     function handleBoxDisplay () {
-        setBox(prev=>!prev)
+        setBox(prev=>{
+             return !prev
+        });
+        projectNameRef.current && handleSubmit()
     };
 
+    /*List of all projects*/
+    const [projectList,setProjectList,projectListRef] = useContext(projectListContext);
 
 
     /* HIDE OR SHOW LOGOUT BUTTON*/
@@ -73,7 +94,7 @@ const  Templates = ()=> {
 
 
     return (
-        <>            
+       user ? <>            
             <header className={"h-[88px] bg-white w-full z-50 flex justify-between px-[2.4%] items-center fixed " }>
                 <div className='flex w-[25%] items-center justify-between '>
                     <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" onClick={toggleLogout} />
@@ -92,7 +113,7 @@ const  Templates = ()=> {
                 <Outlet context={[edit,setEdit,editRef,template]}/>
             </main>
             
-        </>
+        </> : null
     )
 };
 

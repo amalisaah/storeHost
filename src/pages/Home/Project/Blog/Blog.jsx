@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { projectNameContext } from "../../../../Context/projectNameContext";
 import template1 from "../../../../assets/images/Blog/Template1.png"
 import template2 from "../../../../assets/images/Blog/Template2.png"
 import template3 from "../../../../assets/images/Blog/Template3.png"
@@ -9,12 +10,16 @@ const  Blog = ()=> {
 
     const navigate = useNavigate();
 
+    /*Images of  available templates*/
     const templates=[template1,template2,template3];
-    const alts=['Template 1','Template 2','Template 3'];
+    const alts=['Blog-1','Blog-2','Blog-3'];
 
-    // function handleClick(){
-        
-    // }
+    /*set Name to an empty string to enable new project be started*/
+    const [projectName,setProjectName,projectNameRef] = useContext(projectNameContext);
+    function handleClick(){
+        setProjectName('');
+        sessionStorage.removeItem('projectName')
+    }
     
 
     return (
@@ -26,7 +31,9 @@ const  Blog = ()=> {
                             <img src={template} alt={alts[index]} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' />
                         </Link>
                         {alts[index]}
-                        <Button value="Edit" onClick={()=>{navigate('/template/blog/'+alts[index])}}/>
+                        <Button value="Edit" onClick={()=>{
+                            handleClick();
+                            navigate('/template/blog/'+alts[index])}}/>
                     </div>
                 )}       
                 {/* <div className='absolute'>

@@ -11,16 +11,17 @@ import { data } from "./data";
 
 const  Templates3 = ()=> {
 
-    /*Check if webpage is still in templates mode*/
-    const [template] = useOutletContext();
+   
+    
     
 
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef] = useOutletContext();
-    console.log(editRef.current)
+    const [edit,setEdit,editRef,template] = useOutletContext();
+    // console.log(projectData.current)
     useEffect(()=>{
-       setEdit(()=> data)
+       setEdit(()=> Object.keys(edit).length === 0 && data);
+       console.log(editRef.current,'effect')
     // console.log(projectData.projectName)
     // setProjectData(prev=>({...prev,[projectName]:data}))
         // setEdit(()=>projectData.name);
@@ -40,6 +41,7 @@ const  Templates3 = ()=> {
 
     return (
         <>
+        {/* {console.log(editRef.current)} */}
         {editRef.current && <div className="">
             
             <Header logo={edit.logo} template={template} changeState={changeValue}  >

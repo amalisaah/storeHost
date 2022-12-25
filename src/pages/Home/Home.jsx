@@ -22,10 +22,10 @@ const  Home = ()=> {
     const [projectData,setProjectData] = useContext(projectDataContext)
     useEffect(()=>{
         console.log(projectData)
-        setProjectData(()=>{
+        setProjectData((prev)=>{
             const id=user.id;
-            return({
-            id,
+            return({id,
+            ...prev,
             
             })
         })
@@ -48,7 +48,9 @@ const  Home = ()=> {
     }
     
     /*Keep track of projects */
-    const [projectName,setProjectName] = useState('mm')
+    // const [projectName,setProjectName] = useState('mm')
+
+ 
 
     
     return (
@@ -62,7 +64,7 @@ const  Home = ()=> {
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-               <Outlet  context={[projectName,setProjectName]} /> {/* displays selector box in side bar*/}
+               <Outlet   /> {/* displays selector box in side bar*/}
             </div>
 
         </div> </>

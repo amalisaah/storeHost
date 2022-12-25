@@ -1,12 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { Outlet, useOutletContext } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import Select from "../Components/Select";
 import Category from '../../../assets/images/icons/Category.png';
 import arrow from '../../../assets/images/icons/arrow.png';
+import { projectListContext } from "../../../Context/projectListContext";
+import Button from "../../../Components/Button";
+import desktop from "../../../assets/images/Blog/Template1.png"
+import { projectDataContext } from "../../../Context/projectDataContext";
+import { projectNameContext } from "../../../Context/projectNameContext";
 
 
 const  Project = ()=> {
 
+    const navigate = useNavigate()
+    /*Displays active Projects*/
+    const [projectList,setProjectList] = useContext(projectListContext);
+    const [projectData,setProjectData] = useContext(projectDataContext);
+    // const [projectName,setProjectName] = useContext(projectNameContext)
+    
+    console.log(projectList);
+    useEffect(()=>{
+        let list = sessionStorage.getItem('projectData');
+        list = list && JSON.parse(list);
+        setProjectData(prev=>list ? list : prev)
+        console.log(list)
+        let items = list && Object.keys(list);
+        items=items && items.filter(item=>item!=='id');
+        setProjectList((prev)=>items ? items : prev)
+        console.log(projectList);
+    },[])
+
+    /*Handles selecting a project*/
+    function handleSelect (name) {
+        const path=projectData[name].pathName;        
+        sessionStorage.setItem('projectName',JSON.stringify(name))
+        navigate(path)
+    };
+
+    // const location =useLocation()
+    // console.log(typeof location.pathname)
     /*Toggles Select Box Options*/
     const [categorySel,setCategorySel] = useState(true)
 
@@ -25,12 +57,7 @@ const  Project = ()=> {
         setValue(val)
         // sessionStorage.setItem('value',JSON.stringify(value))     
     }
-    //get saved value on render
-    // useEffect(()=>{
-    //     let val=sessionStorage.getItem('value');
-    //     val=JSON.parse(val)
-    //     setValue(val)
-    // })
+    
 
     /* sets id on templates */
     // const [templateId,setTemplateId] = useState({})
@@ -69,7 +96,16 @@ const  Project = ()=> {
                 <div className=''>
                     <h2 className="font-semibold text-2xl m-6">{categorySel? 'Recent' :'Templates'}</h2>
                     { categorySel ? 
-                        <div className=''>HELOO MOOO</div> 
+                        <div className='w-[full] flex justify-around'>
+                            {projectList.map((project,index)=>
+                                <div className='font-fontRoboto text-xl text-center' key={index} onClick={()=>{handleSelect(project)}}>
+                                    <Link>
+                                        <img src={desktop} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' />
+                                    </Link>
+                                    {project}
+                                </div>
+                            )}                        
+                        </div> 
                     : 
                     // null
                     <Outlet/>}
