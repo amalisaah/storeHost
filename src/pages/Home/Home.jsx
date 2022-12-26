@@ -6,6 +6,7 @@ import { LoginContext } from "../../Context/LoginContext";
 import  team from '../../assets/images/Ellipse3.png';
 import SideBar from "../../Components/SideBar";
 import Button from "../../Components/Button";
+import { projectDataContext } from "../../Context/projectDataContext";
 
 const  Home = ()=> {
 
@@ -17,6 +18,20 @@ const  Home = ()=> {
         console.log(user,temp)
 
     },[])
+    /*Fetch Project Data */
+    const [projectData,setProjectData] = useContext(projectDataContext)
+    useEffect(()=>{
+        console.log(projectData)
+        setProjectData((prev)=>{
+            const id=user.id;
+            return({id,
+            ...prev,
+            
+            })
+        })
+    },[])
+
+
     /* HIDE OR SHOW LOGOUT BUTTON*/
     const [logout,setLogout]= useState(false);
     function toggleLogout(){
@@ -33,7 +48,9 @@ const  Home = ()=> {
     }
     
     /*Keep track of projects */
-    const [projectName,setProjectName] = useState('mm')
+    // const [projectName,setProjectName] = useState('mm')
+
+ 
 
     
     return (
@@ -47,7 +64,7 @@ const  Home = ()=> {
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-               <Outlet  context={[projectName,setProjectName]} /> {/* displays selector box in side bar*/}
+               <Outlet   /> {/* displays selector box in side bar*/}
             </div>
 
         </div> </>

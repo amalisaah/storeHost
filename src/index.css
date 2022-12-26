@@ -11,8 +11,9 @@
   --white: #FFF;
   --bdGreen: green;
   --error: #FF3131;
-  --hoverBlue: #59AFFF;
+  --hoverBlue:#59afff;
   --darkBlue: #00284C;
+  --black: #222;
 
   /*Templates 1*/
   --lnkColorB:#15616B;
