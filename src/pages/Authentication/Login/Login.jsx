@@ -22,9 +22,9 @@ const  Login = (props)=> {
     }
   
     /*SET REMEMBER ME STATE*/
-    function handleSelect () {  
-        props.Remember()
-    };
+    // function handleSelect () {  
+    //     props.Remember()
+    // };
 
     /*LOgging in if user exists*/
     useEffect(()=>{

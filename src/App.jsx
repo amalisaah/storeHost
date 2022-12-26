@@ -23,7 +23,7 @@ import Templates from './pages/Templates/Templates';
 
 function App() {
   // const [user,setUser] = useState({name:'thor odinson',id:243})
-  const [user,setUser] = useState({});
+  const [user,setUser,userRef] = useState({});
 
   const [projectName,setProjectName,projectNameRef] = useState('');
 
@@ -33,7 +33,7 @@ function App() {
   const [projectList,setProjectList,projectListRef] = useState([])
 
   return (
-    <LoginContext.Provider value={{user,setUser}} >
+    <LoginContext.Provider value={{user,setUser,userRef}} >
       <projectNameContext.Provider value={[projectName,setProjectName,projectNameRef]} >
         <projectDataContext.Provider value={[projectdata,setProjectData,projectDataRef]} >
           <projectListContext.Provider value={[projectList,setProjectList,projectListRef]} >
