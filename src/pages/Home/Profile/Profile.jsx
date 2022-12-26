@@ -28,7 +28,7 @@ const  Profile = ()=> {
     function handleSubmit(e) {
         e.preventDefault();
         const path='/dashboard/profile'
-        onSubmit(path) //handleSubmit function in homepage
+        onSubmit(path,value) //handleSubmit function in homepage
     }
     
     /* handles username editing*/

@@ -27,7 +27,6 @@ const  Home = ()=> {
     /*Fetch Project Data */
     const [projectData,setProjectData] = useContext(projectDataContext)
     useEffect(()=>{
-        console.log(user.id)
         setProjectData((prev)=>{
             const id=user.id;
             return({id,
@@ -54,18 +53,21 @@ const  Home = ()=> {
     }
     
 
-      /*Handle Editing in Profile Page*/
-      const [value,setValue] = useState({...user});
+    /*Handle Editing in Profile Page*/
+    const [value,setValue] = useState({...user});
+
+    /*Handle text in support page */
+    const [support,setSupport] = useState({})
 
     /*Keep track of projects */
     // const [projectName,setProjectName] = useState('mm')
-    function handleSubmit(role) {
+    function handleSubmit(role,val) {
         const baseUrl='https://storefront-dpqh.onrender.com';
         (async()=>{
             try {
                 const url=`${baseUrl}${role}`;
-                console.log(url);
-                const val=value;
+                console.log(url,val);
+                // const val=value;
                 const response = await axios.post(url,val);
                 response.data.id  && setUser(response.data);
     //             // setResponse(response.data)
@@ -93,7 +95,7 @@ const  Home = ()=> {
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-               <Outlet  context={[value,setValue,handleSubmit]} /> {/*displays selected page from side bar*/}
+               <Outlet  context={[value,setValue,handleSubmit,support,setSupport]} /> {/*displays selected page from side bar*/}
             </div>
 
         </div> </>

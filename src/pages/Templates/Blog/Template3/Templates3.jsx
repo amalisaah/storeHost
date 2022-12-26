@@ -6,6 +6,8 @@ import Button from "../../../../Components/Button";
 import imge1 from "../../../../assets/images/Blog/image2.png"
 import imge3 from "../../../../assets/images/Blog/image3.png";
 import { data } from "./data";
+import Footer from "../Components/Footer";
+import Logo from "../Components/Logo";
 
 
 
@@ -42,7 +44,7 @@ const  Templates3 = ()=> {
     return (
         <>
         {/* {console.log(editRef.current)} */}
-        {editRef.current && <div className="">
+        {editRef.current && <>
             
             <Header logo={edit.logo} template={template} changeState={changeValue}  >
                 {/* <Link to='' contentEditable={template} onBlur={changeState}>{edit.about}</Link> */}
@@ -94,7 +96,21 @@ const  Templates3 = ()=> {
 
                 </div>
             </main>
-        </div>}
+            <Footer>
+                <div className=''><Logo logo={edit.logo} /></div>
+                <div className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla est purus, ultrices in porttitor
+                    in, accumsan non quam.</div>
+                <div className=''>
+                    <div className=''>
+                        <img src='' alt='' />
+                        <img src='' alt='' />
+                        <img src='' alt='' />
+                    </div>
+                    <div className=''>Customer care</div>
+                    <div className=''></div>
+                </div>
+            </Footer>
+        </>}
         
         </>
     )
