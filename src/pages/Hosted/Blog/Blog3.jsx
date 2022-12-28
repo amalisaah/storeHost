@@ -1,18 +1,16 @@
 import React, { useContext, useEffect } from "react";
-import useState from 'react-usestateref';
 import { Link,useLocation,useOutletContext } from "react-router-dom";
-import NavItem from "../../../../Components/NavItem";
-import Header from "../Components/Header";
-import Button from "../../../../Components/Button";
-import imge1 from "../../../../assets/images/Blog/image2.png"
-import imge3 from "../../../../assets/images/Blog/image3.png";
-import { data } from "./data";
-import Footer from "../Components/Footer";
-import Logo from "../Components/Logo";
+import NavItem from "../../../Components/NavItem";
+import Header from "../../Templates/Blog/Components/Header";
+import Button from "../../../Components/Button";
+import imge1 from "../../../assets/images/Blog/image2.png";
+import imge3 from "../../../assets/images/Blog/image3.png";
+import Footer from "../../Templates/Blog/Components/Footer";
+import Logo from "../../Templates/Blog/Components/Logo";
 
 
 
-const  Templates3 = (props)=> {
+const  Blog3 = (props)=> {
 
     const name=props.name && props.name
     console.log(name)
@@ -23,18 +21,16 @@ const  Templates3 = (props)=> {
 
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef] = useOutletContext() ;
-    // setEdit()
-    // let template= edit && editRef.template
+    const [edit,editRef] = [props.name,props.name] ;
     let template= false
-    console.log(editRef.current)
-    useEffect(()=>{
-       setEdit(()=> Object.keys(edit).length === 0 && data);
-       console.log(editRef.current,'effect')
-    // console.log(projectData.projectName)
-    // setProjectData(prev=>({...prev,[projectName]:data}))
-        // setEdit(()=>projectData.name);
-    },[])
+    
+    // useEffect(()=>{
+    //    setEdit(()=> Object.keys(edit).length === 0 && data);
+    //    console.log(editRef.current,'effect')
+    // // console.log(projectData.projectName)
+    // // setProjectData(prev=>({...prev,[projectName]:data}))
+    //     // setEdit(()=>projectData.name);
+    // },[])
     function changeValue(e){    
         const id=e.target.id;
         console.log(id)
@@ -51,7 +47,7 @@ const  Templates3 = (props)=> {
     return (
         <>
         {/* {console.log(editRef.current)} */}
-        {editRef.current && <>
+        {edit && <>
             
             <Header logo={edit.logo} template={template} changeState={changeValue}  >
                 {/* <Link to='' contentEditable={template} onBlur={changeState}>{edit.about}</Link> */}
@@ -124,4 +120,4 @@ const  Templates3 = (props)=> {
 };
 
 
-export default Templates3
+export default Blog3
