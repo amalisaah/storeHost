@@ -1,27 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Header from "../../Components/Header";
 import ProfilePic from "../../Components/ProfilePic";
 import { LoginContext } from "../../Context/LoginContext";
 import  team from '../../assets/images/Ellipse3.png';
+import arrow from "../../assets/images/icons/arrow.png";
 import SideBar from "../../Components/SideBar";
 import Button from "../../Components/Button";
 import { projectDataContext } from "../../Context/projectDataContext";
 
 const  Home = ()=> {
 
+    const {user,setUser,userRef} = useContext(LoginContext);
+
     /*Check if User is already logged in*/
     useEffect(()=>{
         let temp = localStorage.getItem('user')
         if (!temp) temp = sessionStorage.getItem('user'); 
         setUser(JSON.parse(temp))
-        console.log(user,temp)
+        setValue({...userRef.current})
 
     },[])
+
+
     /*Fetch Project Data */
     const [projectData,setProjectData] = useContext(projectDataContext)
     useEffect(()=>{
-        console.log(projectData)
         setProjectData((prev)=>{
             const id=user.id;
             return({id,
@@ -38,7 +43,7 @@ const  Home = ()=> {
         setLogout(prev=>!prev)
          console.log(logout);
     }
-    const {user,setUser} = useContext(LoginContext)
+    
     const navigate = useNavigate()
     function handleClick(){
         localStorage.clear();
@@ -47,8 +52,34 @@ const  Home = ()=> {
         navigate('/authentication/login')
     }
     
+
+    /*Handle Editing in Profile Page*/
+    const [value,setValue] = useState({...user});
+
+    /*Handle text in support page */
+    const [support,setSupport] = useState({})
+
     /*Keep track of projects */
     // const [projectName,setProjectName] = useState('mm')
+    function handleSubmit(role,val) {
+        const baseUrl='https://storefront-dpqh.onrender.com';
+        (async()=>{
+            try {
+                const url=`${baseUrl}${role}`;
+                console.log(url,val);
+                // const val=value;
+                const response = await axios.post(url,val);
+                response.data.id  && setUser(response.data);
+    //             // setResponse(response.data)
+    //             console.log(response.data) 
+            } catch (error) {
+                console.log(error)
+    //             // setResponse(error.response.data)
+            }
+            
+        })()
+        
+    }
 
  
 
@@ -58,13 +89,13 @@ const  Home = ()=> {
         { user ?
         <>
         <Header className={'h-[88px] flex-row-reverse fixed'}>
-            <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" onClick={toggleLogout} />
+            <ProfilePic src={team} text={user.firstname || user.business} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
             {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleClick}  /> : null}
         </Header>
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-               <Outlet   /> {/* displays selector box in side bar*/}
+               <Outlet  context={[value,setValue,handleSubmit,support,setSupport]} /> {/*displays selected page from side bar*/}
             </div>
 
         </div> </>

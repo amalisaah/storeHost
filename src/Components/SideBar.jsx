@@ -15,7 +15,7 @@ const  SideBar = ()=> {
         // <>
             <div className='bg-darkBlue w-[15.5%] min-h-screen text-white fixed'>
                 {items.map((item,index)=>
-                    <NavLink to={items[index]} className="hover:bg-sideHover active:bg-red-400 " style={({ isActive }) => 
+                    <NavLink to={items[index]} className="hover:bg-sideHover active:bg-[#59AFFF]" style={({ isActive }) => 
                     (isActive ? {background: '#59AFFF'} : null)} key={index} >
                         <div className='mt-8 p-4 h-8 flex items-center pl-10 mb-5 bg-inherit' >
                         <img src={icons[index]} alt={icons[index] + " icon"} className="mr-5 fill-red-400"  />

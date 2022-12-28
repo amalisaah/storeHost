@@ -1,4 +1,5 @@
 export let data={logo:'Logo',
+    template:true,
     topLeft:'The Eminence in Shadow (Kage no Jitsuryokusha ni Naritakute) Chapter 47: Release Date, Raw Scans, Spoilers, Read Online',
     para1:"The Eminence in Shadow which is also known as ‘Kage no Jitsuryokusha ni Naritakute‘ in Japanese is a popular comedy-action series. It follows Cid Kagenou who is Chuuni, which is a character trait just like tsundere used in Japanese media used to describe early teens who have delusions of grandeur and have convinced themselves they have hidden knowledge or secret powers. The term was popularised by Chunibyo & Other Delusions anime series and one of its recent popular examples is the character Fischl from the Genshin Impact Gacha game.",
     para2:"However, in this story’s case, it is the exact opposite. The main character thinks he’s just playing at being chuunibyou, but actually, it’s all real, and everyone else around knows it’s real, but only he doesn’t know that it’s real. And because he’s pretending like it’s real, nobody knows that he doesn’t know that it’s real so nobody tells him that it’s real..",

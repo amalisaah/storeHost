@@ -5,7 +5,7 @@ import template1 from "../../../../assets/images/Blog/Template1.png"
 import template2 from "../../../../assets/images/Blog/Template2.png"
 import template3 from "../../../../assets/images/Blog/Template3.png"
 import desktop from "../../../../assets/images/Blog/Desktop - 1.png"
-import Button from "../../../Authentication/Components/Button";
+import Button from "../../../../Components/Button";
 const  Blog = ()=> {
 
     const navigate = useNavigate();
@@ -31,7 +31,8 @@ const  Blog = ()=> {
                             <img src={template} alt={alts[index]} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' />
                         </Link>
                         {alts[index]}
-                        <Button value="Edit" onClick={()=>{
+                        <div className=''></div>
+                        <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none' onClick={()=>{
                             handleClick();
                             navigate('/template/blog/'+alts[index])}}/>
                     </div>

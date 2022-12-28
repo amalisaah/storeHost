@@ -85,9 +85,9 @@ const  Authentication = ()=> {
 
 
     /*HANDLE FORM SUBMISSION*/
-    const [response,setResponse]=useState('')
-    const {setUser,user} = useContext(LoginContext)
-    const baseUrl='https://storefront-dpqh.onrender.com'
+    const [response,setResponse]=useState('');
+    const {setUser,user} = useContext(LoginContext);
+    const baseUrl='https://storefront-dpqh.onrender.com';
     function handleSubmit(role){
        
         if(!error){            

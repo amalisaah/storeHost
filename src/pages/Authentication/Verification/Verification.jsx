@@ -17,7 +17,7 @@ const  Verification = ()=> {
         (async()=>{
             try {
                 const url='https://storefront-dpqh.onrender.com/verify-email';
-                const response = await axios.post(url,param);
+                const response = await axios.get(url);
                 // response.data.id  && setUser(response.data)
                 // setResponse(response.data)
                 // if (response.status<200)navigate
