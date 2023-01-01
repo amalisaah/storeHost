@@ -19,6 +19,7 @@ const  NameBox = (props)=> {
     return (
         <>
             <form className={'w-[533px] h-[278px] bg-white p-11 font-fontRoboto fixed top-[30%] left-[30%] shadow-2' + props.className} onSubmit={handleSubmit}>
+                {props.duplicate && <p className='text-error  '> Name already exists </p> }
                 <div className='' >
                    <h2 className="font-semibold text-2xl mb-2">Name Box</h2> 
                     <input type='text' id='' placeholder="Untitled" required value={projectName} onChange={handleChange} className="w-full h-[57px] shadow-2 p-5 text-xl focus:border-none" autoFocus />
@@ -36,6 +37,7 @@ NameBox.propTypes={
     buttonText: PropTypes.string,
     className: PropTypes.string,
     title: PropTypes.string,
+    duplicate: PropTypes.bool.required,
     handleSave: PropTypes.func,
 
     

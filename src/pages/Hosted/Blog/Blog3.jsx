@@ -21,7 +21,7 @@ const  Blog3 = (props)=> {
 
 
     /*Controls editable states*/
-    const [edit,editRef] = [props.name,props.name] ;
+    const [edit,editRef] = [props.name,props.name];
     let template= false
     
     // useEffect(()=>{

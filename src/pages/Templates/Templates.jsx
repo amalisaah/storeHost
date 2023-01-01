@@ -11,10 +11,13 @@ import NameBox from "./Blog/Components/NameBox";
 import { projectNameContext } from "../../Context/projectNameContext";
 import { projectDataContext } from "../../Context/projectDataContext";
 import { projectListContext } from "../../Context/projectListContext";
+import { nameUtil } from "../../utils/helperUtils";
 
 
 
 const  Templates = (props)=> {
+
+    
 
     /*Check if User is already logged in*/
     useEffect(()=>{
@@ -38,18 +41,40 @@ const  Templates = (props)=> {
     /*List of all projects*/
     const [projectList,setProjectList,projectListRef] = useContext(projectListContext);
 
+    /*Checks duplicate*/
+    const [duplicate,setDuplicate] = useState(false)
+
     const location = useLocation() //aids in routing to page from recent projects
+    // function handleSubmit () {
+    //     const name=[projectNameRef.current];
+    //     setEdit(prev=>({...prev,pathName:location.pathname}))
+    //     setProjectData(prev=>({...prev,[name]:editRef.current}));
+    //     console.table(projectDataRef.current)
+    //     setProjectList(prev=>[...prev,name]); //adds name to project list
+    //     setBox(false)
+    //     sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
+    //     const path=`/dashboard/projects?uid=${user.id}`
+    //     // props.postData(path,JSON.stringify(projectDataRef.current))
+    //     sessionStorage.setItem('projectName',JSON.stringify(projectName));
+
+        
+    // };
     function handleSubmit () {
-        const name=[projectNameRef.current];
+        // const name=[projectNameRef.current];
+        const name=nameUtil(projectNameRef.current,user);
         setEdit(prev=>({...prev,pathName:location.pathname}))
         setProjectData(prev=>({...prev,[name]:editRef.current}));
         console.table(projectDataRef.current)
         setProjectList(prev=>[...prev,name]); //adds name to project list
-        setBox(false)
+        // setBox(false)
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
+        const path=`/dashboard/projects?uid=${user.id}`
+        // props.postData(path,JSON.stringify(projectDataRef.current))
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
+
         
     };
+
     
     useEffect(()=>{
         let Name = sessionStorage.getItem('projectName');
@@ -132,8 +157,8 @@ const  Templates = (props)=> {
                 
             </header>
             <main className='pt-[100px]'>
-                { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} /> : null }
-                { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} /> : null }
+                { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} /> : null }
+                { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} /> : null }
                 <Outlet context={[edit,setEdit,editRef]}/>
             </main>
             

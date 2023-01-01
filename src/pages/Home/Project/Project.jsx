@@ -95,9 +95,9 @@ const  Project = ()=> {
                 <div className=''>
                     <h2 className="font-semibold text-2xl m-6">{categorySel? 'Recent' :'Templates'}</h2>
                     { categorySel ? 
-                        <div className='w-[full] flex justify-around'>
+                        <div className='w-[full] flex justify-start flex-wrap pl-8'>
                             {projectList.map((project,index)=>
-                                <div className='font-fontRoboto text-xl text-center' key={index} onClick={()=>{handleSelect(project)}}>
+                                <div className='font-fontRoboto text-xl mb-8 text-center' key={index} onClick={()=>{handleSelect(project)}}>
                                     <Link>
                                         <img src={desktop} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' />
                                     </Link>

@@ -26,7 +26,7 @@ const  Templates3 = (props)=> {
     const [edit,setEdit,editRef] = useOutletContext() ;
     // setEdit()
     // let template= edit && editRef.template
-    let template= false
+    let template= true;
     console.log(editRef.current)
     useEffect(()=>{
        setEdit(()=> Object.keys(edit).length === 0 && data);
@@ -103,9 +103,9 @@ const  Templates3 = (props)=> {
 
                 </div>
             </main>
-            <Footer>
-                <div className=''><Logo logo={edit.logo} /></div>
-                <div className=''>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla est purus, ultrices in porttitor
+            <Footer className='h-[221px] text-white flex justify-center'>
+                <div className=' '><Logo className='font-Roboto font-extrabold text-7xl ' logo={edit.logo} /></div>
+                <div className='break-words'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla est purus, ultrices in porttitor
                     in, accumsan non quam.</div>
                 <div className=''>
                     <div className=''>

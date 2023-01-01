@@ -7,7 +7,7 @@ const  Header = (props)=> {
     return (
         <>
             <header className={"h-[58px] bg-white w-full z-50 flex justify-between px-[5.5%] items-center  "+ props.className}>
-                <Logo logo={props.logo} template={props.template} changeState={props.changeState} />
+                <Logo logo={props.logo} template={props.template} changeState={props.changeState} className='text-lnkColorB'  />
                 <div className='flex justify-end items-center'>
                     <div className='inline'>
                         {props.children}

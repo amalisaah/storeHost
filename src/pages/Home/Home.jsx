@@ -57,7 +57,8 @@ const  Home = ()=> {
     const [value,setValue] = useState({...user});
 
     /*Handle text in support page */
-    const [support,setSupport] = useState({})
+    const email=user.email || 'boy'
+    const [support,setSupport] = useState({email})
 
     /*Keep track of projects */
     // const [projectName,setProjectName] = useState('mm')
@@ -71,7 +72,7 @@ const  Home = ()=> {
                 const response = await axios.post(url,val);
                 response.data.id  && setUser(response.data);
     //             // setResponse(response.data)
-    //             console.log(response.data) 
+                console.log(response) 
             } catch (error) {
                 console.log(error)
     //             // setResponse(error.response.data)

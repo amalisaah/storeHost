@@ -9,7 +9,7 @@ const  Support = ()=> {
     function handleChange(e) {
         e.preventDefault();
         const name=e.target.name;
-        setSupport(prev=>({[name]:e.target.value}));
+        setSupport(prev=>({...prev,[name]:e.target.value}));
 
     }
     function handleSubmit(e) {
@@ -17,14 +17,14 @@ const  Support = ()=> {
         const path='/dashboard/support'
         const id=value.id
         setSupport(prev=>({...prev,id}));
-        onSubmit(path,support)
+        onSubmit(path,JSON.stringify(support))
     }
 
     return (
         <>
             <form className='' onSubmit={handleSubmit}>
                 <div className='m-auto w-[95%] h-[382px]'>
-                <textarea className="w-full h-full bg-white  shadow-1 mt-4 p-6 focus:border-solid focus:border-2 focus:outline-none border-darkBlue " name='text' placeholder=" Hello Storefront, I would like to ... " value={support.text || ''} onChange={handleChange} >
+                <textarea className="w-full h-full bg-white  shadow-1 mt-4 p-6 focus:border-solid focus:border-2 focus:outline-none border-darkBlue " name='message' placeholder=" Hello Storefront, I would like to ... " value={support.message || ''} onChange={handleChange} >
                    
                 </textarea>
                 </div>

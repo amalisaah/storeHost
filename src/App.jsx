@@ -21,12 +21,12 @@ import Blog3 from './pages/Hosted/Blog/Blog3';
 import Templates from './pages/Templates/Templates';
 import { useEffect } from 'react';
 import Hosted from './pages/Hosted/Hosted';
-
+import axios from 'axios';
 
 
 function App() {
   // const [user,setUser] = useState({name:'thor odinson',id:243})
-  const [user,setUser,userRef] = useState({});
+  const [user,setUser,userRef] = useState({id:2,email:'amalitech.org',business:'amalitech'});
 
   const [projectName,setProjectName,projectNameRef] = useState('');
 
@@ -45,6 +45,7 @@ function App() {
     let item=sessionStorage.getItem('allHosted');
     setAllHosted(prev=>item ?[...prev,...JSON.parse(item)] : prev);
     console.table(allHostedRef.current);
+    console.table(projectListRef.current);
 
     let data=sessionStorage.getItem('projectData');
     setProjectData(prev=>data && {...JSON.parse(data)})
@@ -60,10 +61,11 @@ function App() {
           const url=`${baseUrl}${path}`;
           console.log(url);
           const val=data;
+          console.log(val);
           const response = await axios.post(url,val);
           console.log(response.data) 
       } catch (error) {
-          console.log(error.response.data);
+          console.log(error);
           // if (error.response.data==='Unauthorized'){setError(true)}
       }     
     })();
