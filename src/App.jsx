@@ -27,7 +27,7 @@ import { hostedDuplicates } from './utils/helperUtils';
 
 function App() {
   // const [user,setUser] = useState({name:'thor odinson',id:243})
-  const [user,setUser,userRef] = useState({id:2,email:'amalitech.org',business:'amalitech'});
+  const [user,setUser,userRef] = useState({});
 
   const [projectName,setProjectName,projectNameRef] = useState('');
 
