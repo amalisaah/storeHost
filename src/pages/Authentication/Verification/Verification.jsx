@@ -10,13 +10,14 @@ const  Verification = ()=> {
 
     // const queryParams = new URLSearchParams(window.location.search)
     const token = window.location.href;
-    const param={token}
+    console.log(token)
+    const param=token.split('?')[1]
     function handleClick(){
-        const param={token};
+        // const param={token};
         console.log(param);   
         (async()=>{
             try {
-                const url='https://storefront-dpqh.onrender.com/verify-email';
+                const url='https://storefront-dpqh.onrender.com/verify-email'+'?'+param;
                 const response = await axios.get(url);
                 // response.data.id  && setUser(response.data)
                 // setResponse(response.data)

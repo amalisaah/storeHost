@@ -22,11 +22,12 @@ import Templates from './pages/Templates/Templates';
 import { useEffect } from 'react';
 import Hosted from './pages/Hosted/Hosted';
 import axios from 'axios';
+import { hostedDuplicates } from './utils/helperUtils';
 
 
 function App() {
   // const [user,setUser] = useState({name:'thor odinson',id:243})
-  const [user,setUser,userRef] = useState({id:2,email:'amalitech.org',business:'amalitech'});
+  const [user,setUser,userRef] = useState({});
 
   const [projectName,setProjectName,projectNameRef] = useState('');
 
@@ -38,17 +39,18 @@ function App() {
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
   function UpdateHosted (site){
-    setAllHosted(prev=>[...prev,[...site]])
+    const temp=hostedDuplicates(allHosted,site);
+    setAllHosted(prev=>temp ? [...prev,[...site]]:prev)
     
   }
   useEffect(()=>{
-    let item=sessionStorage.getItem('allHosted');
+    let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
     setAllHosted(prev=>item ?[...prev,...JSON.parse(item)] : prev);
     console.table(allHostedRef.current);
     console.table(projectListRef.current);
 
-    let data=sessionStorage.getItem('projectData');
-    setProjectData(prev=>data && {...JSON.parse(data)})
+    let data=sessionStorage.getItem('projectData');// FETCH FROM BG**********
+    setProjectData(prev=>data ? {...JSON.parse(data)} : prev)
     console.log(projectDataRef.current)
   },[])
 

@@ -50,7 +50,7 @@ const  Templates3 = (props)=> {
 
     return (
         <>
-        {/* {console.log(editRef.current)} */}
+        {console.log(edit,'YOOO')}
         {editRef.current && <>
             
             <Header logo={edit.logo} template={template} changeState={changeValue}  >
@@ -103,19 +103,8 @@ const  Templates3 = (props)=> {
 
                 </div>
             </main>
-            <Footer className='h-[221px] text-white flex justify-center'>
-                <div className=' '><Logo className='font-Roboto font-extrabold text-7xl ' logo={edit.logo} /></div>
-                <div className='break-words'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla est purus, ultrices in porttitor
-                    in, accumsan non quam.</div>
-                <div className=''>
-                    <div className=''>
-                        <img src='' alt='' />
-                        <img src='' alt='' />
-                        <img src='' alt='' />
-                    </div>
-                    <div className=''>Customer care</div>
-                    <div className=''></div>
-                </div>
+            <Footer logo={edit.logo}>
+                
             </Footer>
         </>}
         
