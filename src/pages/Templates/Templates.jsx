@@ -23,8 +23,9 @@ const  Templates = (props)=> {
     useEffect(()=>{
         let temp = localStorage.getItem('user')
         if (!temp) temp = sessionStorage.getItem('user'); 
-        setUser(prev=>temp && JSON.parse(temp))
+        setUser(prev=>temp ? JSON.parse(temp) : {})
         console.log(user,temp)
+        !userRef.current.id && navigate('/authentication/login')
 
     },[])
     
@@ -42,7 +43,11 @@ const  Templates = (props)=> {
     const [projectList,setProjectList,projectListRef] = useContext(projectListContext);
 
     /*Checks duplicate*/
-    const [duplicate,setDuplicate] = useState(false)
+    const [duplicate,setDuplicate] = useState(false);
+    function checkDuplicate(val){
+        setDuplicate(val)
+        
+    }
 
     const location = useLocation() //aids in routing to page from recent projects
     // function handleSubmit () {
@@ -66,7 +71,7 @@ const  Templates = (props)=> {
         setProjectData(prev=>({...prev,[name]:editRef.current}));
         console.table(projectDataRef.current)
         setProjectList(prev=>[...prev,name]); //adds name to project list
-        // setBox(false)
+        setBox(false)
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
         const path=`/dashboard/projects?uid=${user.id}`
         // props.postData(path,JSON.stringify(projectDataRef.current))
@@ -83,7 +88,8 @@ const  Templates = (props)=> {
         Data = JSON.parse(Data)
         // console.log(projectNameRef.current);
         // console.log(Name,'errrhm');
-        setEdit((prev)=> (Data && Name) ?  Data[projectNameRef.current] : prev)
+        setEdit((prev)=> (Data && Name) ?  Data[projectNameRef.current] : prev);
+        console.log(editRef.current)
 
     },[])
 
@@ -103,7 +109,9 @@ const  Templates = (props)=> {
         handleSubmit();
         setPubBox(false);
         const temp=location.pathname.split('/').at(-1);
-        const hosted= [temp,projectName];
+        const name = nameUtil(projectNameRef.current,user);
+        console.log(name)
+        const hosted= [temp,name];
         props.UpdateHosted(hosted)
         sessionStorage.setItem('allHosted',JSON.stringify(props.allHostedRef.current));
         const path=''
@@ -129,7 +137,7 @@ const  Templates = (props)=> {
     }
 
     /*LOGS USER OUT*/
-    const {user,setUser} = useContext(LoginContext)
+    const {user,setUser,userRef} = useContext(LoginContext)
     const navigate = useNavigate()
     function handleLogout(){
         localStorage.clear();
@@ -142,7 +150,7 @@ const  Templates = (props)=> {
 
 
     return (
-       user ? <>            
+       user.id ? <>            
             <header className={"h-[88px] bg-white w-full z-50 flex justify-between px-[2.4%] items-center fixed " }>
                 <div className='flex w-[25%] items-center justify-between '>
                     <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
@@ -157,8 +165,8 @@ const  Templates = (props)=> {
                 
             </header>
             <main className='pt-[100px]'>
-                { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} /> : null }
-                { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} /> : null }
+                { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
+                { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 <Outlet context={[edit,setEdit,editRef]}/>
             </main>
             

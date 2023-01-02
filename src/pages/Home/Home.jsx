@@ -18,7 +18,7 @@ const  Home = ()=> {
     useEffect(()=>{
         let temp = localStorage.getItem('user')
         if (!temp) temp = sessionStorage.getItem('user'); 
-        setUser(JSON.parse(temp))
+        setUser(prev=>temp ? JSON.parse(temp): prev)
         setValue({...userRef.current})
 
     },[])

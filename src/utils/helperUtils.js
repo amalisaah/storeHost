@@ -8,9 +8,13 @@ function createName(Business,projName) {
     return temp
 }
 
-function preventDuplicates(nameList,name){
+export function preventDuplicates(nameList,name,Business){
+    name=Business['business']+'-'+name
+    console.log(nameList,name)
     const temp=nameList.find(element=>element===name);
-    if (temp) console.log(temp) 
+    if (temp) {
+        return
+    }
     else return name;
 }
 
@@ -18,4 +22,10 @@ export function nameUtil(projName,user,projectList){
     const temp = createName(user.business,projName);
     // return preventDuplicates(projectList,temp)
     return temp;
+}
+
+export function hostedDuplicates(allHosted,hosted){
+    const temp=allHosted.find(element=>element[1]===hosted[1]);
+    if (temp) return 
+    else return hosted
 }
