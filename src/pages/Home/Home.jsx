@@ -87,7 +87,7 @@ const  Home = ()=> {
     
     return (
         <>
-        { user ?
+        { user.id ?
         <>
         <Header className={'h-[88px] flex-row-reverse fixed'}>
             <ProfilePic src={team} text={user.firstname || user.business} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />

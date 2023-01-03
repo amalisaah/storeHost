@@ -3,29 +3,32 @@ import Logo from "../Components/Logo";
 import EmailDiv from "../Components/EmailDiv";
 import Button from "../Components/Button";
 import axios from "axios";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Submit from "../Components/Submit";
+import Alert from "../Components/Alert";
+import Loading from "../../../Components/Loading";
 
-const  Verification = ()=> {
+const  Verification = (props)=> {
 
-    // const queryParams = new URLSearchParams(window.location.search)
+    const navigate = useNavigate()
     const token = window.location.href;
     console.log(token)
     const param=token.split('?')[1]
     function handleClick(){
-        // const param={token};
+        props.handleLoading(true)
         console.log(param);   
         (async()=>{
             try {
                 const url='https://storefront-dpqh.onrender.com/verify-email'+'?'+param;
                 const response = await axios.get(url);
-                // response.data.id  && setUser(response.data)
+                response && props.handleLoading(false);
                 // setResponse(response.data)
-                // if (response.status<200)navigate
-                console.log(response.status) 
+                console.log(response) 
+                response.status===201 && navigate('/authentication/login')
             } catch (error) {
-                // console.log(error.response.data);
-                // setResponse(error.response.data)
+                props.handleLoading(false)
+                console.log(error.response);
+                props.handleResponse(error.response)
                 // if (error.response.data==='Unauthorized'){setError(true)}
             }
             
@@ -36,10 +39,11 @@ const  Verification = ()=> {
     return (
             <main className='auth'>               
                 <Logo />
-                <EmailDiv heading='Authentication' text="click link below to verify email"/>
+                <EmailDiv heading='Authentication' text={props.response.data ? '' : "click link below to verify email"}/>
+                <Alert text={props.response.data} className='text-[24px] ' />
                 <div className='my-8 m-auto w-[35%] flex justify-center'>
                     <Button value='Verify' onClick={handleClick}  />
-                    {/* <Submit value='Verify' handleSubmit={handleClick} link='../login' /> */}
+                    {props.loading ? <div className='w-10 block'> <Loading /> </div> : null }
                 </div>
             </main>
 

@@ -10,9 +10,8 @@ const  Cmail = (props)=> {
     const navigate = useNavigate()
     function handleSubmit(e){
         e.preventDefault();
-        const path='/reset'
-        props.handleSubmit(path);;
-        // props.changeHide();
+        const path='/reset';
+        props.handleSubmit(path);
         navigate('../auth')
     }
 

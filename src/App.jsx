@@ -46,12 +46,12 @@ function App() {
   useEffect(()=>{
     let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
     setAllHosted(prev=>item ?[...prev,...JSON.parse(item)] : prev);
-    console.table(allHostedRef.current);
-    console.table(projectListRef.current);
+    // console.table(allHostedRef.current);
+    // console.table(projectListRef.current);
 
     let data=sessionStorage.getItem('projectData');// FETCH FROM BG**********
     setProjectData(prev=>data ? {...JSON.parse(data)} : prev)
-    console.log(projectDataRef.current)
+    // console.log(projectDataRef.current)
   },[])
 
 
@@ -81,8 +81,7 @@ function App() {
           console.log(url);
           const val=data;
           const response = await axios.get(url);
-          setResponse(response.data)
-          console.log(response.status) 
+          setResponse(response.data) 
       } catch (error) {
           console.log(error.response.staus);
           // if (error.response.data==='Unauthorized'){setError(true)}
@@ -100,7 +99,7 @@ function App() {
                 <Routes>
                   <Route path='/' element={<LandingPage/>} />
                   <Route path='/authentication/*' element={<Authentication  />} />
-                  <Route path='/home' element={<Home/>} >
+                  <Route path='/home' element={<Home/> } >
                     <Route path='projects' element={<Project/> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
@@ -129,7 +128,7 @@ function App() {
                       key={index}>
                     </Route> )}
                   {/* </Route> */}
-                    {/* <Route path='*' element={<h1><Link to='/authentication'> No Page</Link></h1>} /> */}
+                    <Route path='*' element={<h1 className='mx-auto' ><Link to='/authentication'> GO BACK</Link></h1>} />
                   {/* <Route path='*' element={<Templates/>} /> */}
                   
                 </Routes>
