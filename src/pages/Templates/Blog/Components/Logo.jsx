@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const  Logo = (props)=> {
     return (
-        <div className={"logo  text-2xl text-bg font-black "+ props.className } onBlur={props.changeState} ><h2 id='logo' contentEditable={props.template} >{props.logo}</h2> </div>
+        <div className={"logo text-2xl text-bg text-white "+ props.className } onBlur={props.changeState} ><h2 id='logo' contentEditable={props.template} >{props.logo}</h2> </div>
     )
 };
 

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import useState from 'react-usestateref';
 import { Link,useLocation,useOutletContext } from "react-router-dom";
 import NavItem from "../../../../Components/NavItem";
-import Header from "../Components/Header";
+import Header from "../../Components/Header";
 import Button from "../../../../Components/Button";
 import imge1 from "../../../../assets/images/Blog/image2.png"
 import imge3 from "../../../../assets/images/Blog/image3.png";
@@ -14,10 +14,6 @@ import Logo from "../Components/Logo";
 
 const  Templates3 = (props)=> {
 
-    const name=props.name && props.name
-    console.log(name)
-    // console.log(projectDataRef.current[name]) 
-   
     
     
 
@@ -50,13 +46,12 @@ const  Templates3 = (props)=> {
 
     return (
         <>
-        {console.log(edit,'YOOO')}
         {editRef.current && <>
             
-            <Header logo={edit.logo} template={template} changeState={changeValue}  >
-                {/* <Link to='' contentEditable={template} onBlur={changeState}>{edit.about}</Link> */}
+            <Header logo={edit.logo} logoClass='text-lnkColorB' template={template} changeState={changeValue}  >
+                {/* <Link to='' suppressContentEditableWarning contentEditable={template} onBlur={changeState}>{edit.about}</Link> */}
                 <div className=''>
-                    {navs.map((nav,index)=><NavItem value={nav} className='text-fontRoboto text-lnkColorB text-xl font-normal' onBlur={changeValue}  contentEditable={template} key={index} /> )}
+                    {navs.map((nav,index)=><NavItem value={nav} className='text-fontRoboto text-lnkColorB text-xl font-normal' onBlur={changeValue}  suppressContentEditableWarning contentEditable={template} key={index} /> )}
                 </div>
                 {/* <NavItem value="about" className='text-fontRoboto text-lnkColor'/> */}
                 {/* <NavItem value='Log in' className='mr-[39px]' link='/authentication' />
@@ -67,7 +62,7 @@ const  Templates3 = (props)=> {
                 
                 <div className='flex mb-12'>
                     <div className='mr-[2.7%] flex items-center w-[58.7%] '>
-                        <h2 className=" font-bold text-2xl leading-[37.5px] text-black" id='topLeft' contentEditable={template} onBlur={changeValue}>{edit.topLeft}</h2></div>
+                        <h2 className=" font-bold text-2xl leading-[37.5px] text-black" id='topLeft' suppressContentEditableWarning  contentEditable={template} onBlur={changeValue}>{edit.topLeft}</h2></div>
                     <div className='w-[40%]'>
                         <img src={imge1} alt='picture' className="w-full" />
                     </div>
@@ -75,14 +70,14 @@ const  Templates3 = (props)=> {
                 
                 <div className='flex mb-12'>
                     <div className='mr-[2.7%]  w-[58.7%] font-fontRoboto font-normal'>
-                        <p className="  text-base leading-[18.5px] mb-8 " id="para1" contentEditable={template} onBlur={changeValue}>{edit.para1}</p>
+                        <p className="  text-base leading-[18.5px] mb-8 " id="para1" suppressContentEditableWarning contentEditable={template} onBlur={changeValue}>{edit.para1}</p>
 
-                        <p className="  text-base leading-[18.5px] mb-8 " id="para2" contentEditable={template} onBlur={changeValue}> {edit.para2} </p>
+                        <p className="  text-base leading-[18.5px] mb-8 " id="para2" suppressContentEditableWarning contentEditable={template} onBlur={changeValue}> {edit.para2} </p>
 
                         <div className=''>
-                            <h2 className=" font-bold text-2xl leading-[37.5px]" id="head2" contentEditable={template} onBlur={changeValue}> {edit.head2} </h2>
+                            <h2 className=" font-bold text-2xl leading-[37.5px]" id="head2" suppressContentEditableWarning contentEditable={template} onBlur={changeValue}> {edit.head2} </h2>
                             
-                            <p className="  text-base leading-[18.5px] mb-8 "  id="para3" contentEditable={template} onBlur={changeValue}> {edit.para3}
+                            <p className="  text-base leading-[18.5px] mb-8 "  id="para3" suppressContentEditableWarning contentEditable={template} onBlur={changeValue}> {edit.para3}
                             </p>
                         </div>
                     </div>
@@ -98,7 +93,7 @@ const  Templates3 = (props)=> {
                 <div className='w-full'>
                     <img src={imge3} alt='image' className='w-full' />
                 </div>
-                <div className='py-8' id="para4" contentEditable={template} onBlur={changeValue}>
+                <div className='py-8' id="para4" suppressContentEditableWarning contentEditable={template} onBlur={changeValue}>
                      {edit.para4}
 
                 </div>

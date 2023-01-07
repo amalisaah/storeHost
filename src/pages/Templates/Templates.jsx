@@ -158,7 +158,7 @@ const  Templates = (props)=> {
                     <div className='text-black'>Hire a Professional</div>
                 </div>
                 <div className='flex w-[35%] items-center justify-between'>
-                    <Button value="Save" className='text-white bg-darkBlue font-fontRoboto font-semibold w-[125px] h-[45px] rounded-none 'onClick={handleBoxDisplay}  />
+                    <Button value="Save" className='text-white bg-darkBlue font-fontRoboto font-semibold w-[125px] h-[45px] rounded-none mr-4'onClick={handleBoxDisplay}  />
                     <Button value="Publish" className='text-white bg-darkBlue font-fontRoboto font-semibold w-[125px] h-[45px] rounded-none mr-[71px]' onClick={handlePubBoxDisplay}  />
                     <Logo/> 
                 </div>

@@ -20,7 +20,9 @@ module.exports = {
         'lnkColorB': '#15616B',
         'bgColorB': '#4F4F4F',
         'black' : '#222',
-        'sideHover' : '#59afff33'
+        'sideHover' : '#59afff33',
+        'orange' : '#FC7225',
+        
       },
       fontFamily: {
         'fontRoboto':['Roboto','Helvetica', 'Arial', 'sans-serif'],

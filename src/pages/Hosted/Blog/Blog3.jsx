@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link,useLocation,useOutletContext } from "react-router-dom";
 import NavItem from "../../../Components/NavItem";
-import Header from "../../Templates/Blog/Components/Header";
+import Header from "../../Templates/Components/Header";
 import Button from "../../../Components/Button";
 import imge1 from "../../../assets/images/Blog/image2.png";
 import imge3 from "../../../assets/images/Blog/image3.png";

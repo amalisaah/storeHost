@@ -18,6 +18,8 @@
   /*Templates 1*/
   --lnkColorB:#15616B;
   --bgColorB: #4F4F4F;
+  --bgOrange:#FC7225;
+
 }
 * {
   box-sizing: border-box;

@@ -30,6 +30,7 @@ const  Blog = ()=> {
     function showPreview(e) {
         console.log(e.target.parentNode.parentNode.firstElementChild);
         e.target.parentNode.parentNode.firstElementChild.style.display='block';
+        console.log(e.currentTarget);
     }
     function hidePreview(e) {
         e.target.style.display='none';
