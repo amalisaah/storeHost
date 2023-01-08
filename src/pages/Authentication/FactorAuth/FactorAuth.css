@@ -1,0 +1,9 @@
+.box input:not(input[type=submit]) {
+    line-height: 30px;
+    font-size: 1.25rem;
+}
+.box input[type='text']:valid {
+    border: 1px solid var(--bdGreen);
+}
+
+

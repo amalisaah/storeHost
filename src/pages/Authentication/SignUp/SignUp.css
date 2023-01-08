@@ -1,0 +1,67 @@
+
+body {
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+}
+.signPic {
+
+    background-image: url('../resources/images/Desktop1.jpg');
+    transition: all 2s
+}
+.signLogo {
+   
+    line-height: 89.66px;
+
+}
+
+
+form>div {
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 5%;
+}
+
+.nameIn .inputBox:first-child {
+    margin-right: 20px;
+} 
+form input {
+
+    padding: 0%;
+
+    padding: 2px 5px;
+
+}
+
+
+form label {
+    font-size: 0.875em;
+    /* color: var(--fontGrayW); */
+}
+.signUp input[type='submit'] {
+    width: 49%;
+}
+
+
+
+p a {
+    color: var(--bgBlue);
+}
+
+
+@media only screen and (max-width: 885px){
+    .signPic {
+        border-radius: 0 0 0;
+ 
+    }
+    .signUp {
+        width: 50%;
+        margin: auto;
+        /* margin-top: 2px; */
+    }
+    .signLogo {
+        font-size: 2em;
+    }
+    
+}

@@ -1,0 +1,22 @@
+.loginSubmit .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginSubmit .button a {
+    padding-top: 7%;
+}
+.login input[type='submit'] {
+    background-color: var(--white);
+    color: var(--bgBlue);
+}
+.login input[type='submit']:hover {
+    background-color: var(--hoverBlue);
+    color: var(--white);
+}
+
+.login .signPic {
+
+    background-image: url('../resources/images/Desktop1.jpg');
+
+}
