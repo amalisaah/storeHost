@@ -117,8 +117,8 @@ const  Finance1 = ()=> {
                 </div>
                 <div className="flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%]">
                     
-                        {/* <img src='/images/finance/scrabble.png' alt='motivation' className="w-[523px]"/> */}
-                        <img src='blob:http://127.0.0.1:5173/9d054545-facf-4ed7-b76a-80619f230246' alt='motivation' className="w-[523px]"/>
+                        <img src='/images/finance/scrabble.png' alt='motivation' className="w-[523px]"/>
+                        {/* <img src='blob:http://127.0.0.1:5173/9d054545-facf-4ed7-b76a-80619f230246' alt='motivation' className="w-[523px]"/> */}
                     
                     <form className="w-[42.36%]">
                         <h2 id="header4" className="font-ubuntu font-semibold text-xl mb-[17px]">Shoot us a message</h2>

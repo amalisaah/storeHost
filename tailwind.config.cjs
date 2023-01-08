@@ -32,6 +32,22 @@ module.exports = {
         '1': '0px 2px 8px -2px rgba(0, 0, 0, 0.25)',
         '2': '0px 2px 10px -2px rgba(0, 0, 0, 0.25);'
       },
+      keyframes: {
+        keyframes: {
+          fadeOut: {
+            '0%': {
+            opacity: 0
+            },
+            '100%': {
+            opacity: 1
+            }
+          }
+        }
+      },
+      animation: {
+        fadeOut: 'fadeOut 1s ease-in-out',
+      }
+      
     },
   },
   plugins: [],

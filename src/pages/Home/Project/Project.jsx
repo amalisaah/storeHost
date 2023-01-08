@@ -46,14 +46,16 @@ const  Project = ()=> {
     function toggleMenu () {
        setMenu(prev=>!prev)
     };
-    /*Hides options if options is visible on clicking any part of doc*/
-    // function hideMenu(){ //wont work because bubble option to set to true exist as a child of doc
-    //     setMenu(()=>menu==true && false )
-    // }
+    /*Hides options if options is visible on select*/
+    function hideMenu(){ 
+        setMenu(()=>menu==true ? false : true )
+        console.log('heeeeh')
+    }
     /* Change selected value*/
     const [value,setValue] = useState('')
     function handleClick(val){
         setValue(val)
+        hideMenu()
         // sessionStorage.setItem('value',JSON.stringify(value))     
     }
     
@@ -71,22 +73,22 @@ const  Project = ()=> {
         <>
              <div className="" >
                 { categorySel ?
-                    <div className='h-[100px] w-[352px] flex justify-around items-center border-solid border border-darkBlue m-6'>
+                    <div className='h-[100px] w-[352px] flex justify-around items-center border-solid border border-darkBlue m-6 cursor-pointer bg-white' onClick={()=>{setCategorySel(false)}}>
                         <div className='flex items-center text-2xl   '>
                             <i className="fa fa-file mr-4 text-2xl" ></i>
                             New project
                         </div>
-                        <i className="fa fa-plus  mr-4 text-2xl" onClick={()=>{setCategorySel(false)}}></i>
+                        <i className="fa fa-plus  mr-4 text-2xl" ></i>
                     </div> 
                     :
-                    <div className='h-[100px] w-[352px] flex justify-around items-center border-solid border border-darkBlue m-6 relative'>
+                    <div className='h-[100px] w-[352px] flex justify-around items-center border-solid border border-darkBlue m-6 relative cursor-pointer bg-white' onClick={toggleMenu}>
                         <div className='flex items-center text-2xl  '>
                         
                         <img src={Category} role='icon' alt='category icon' />
                             <div className='ml-6 '>{value ? value : 'Category'}</div> 
                         </div>
                     
-                        <img src={arrow} role='icon' alt='category icon' className='w-[15px] h-[8px]' onClick={toggleMenu} />
+                        <img src={arrow} role='icon' alt='category icon' className='w-[15px] h-[8px]'  />
                         {menu ? <Select onClick={handleClick} /> : null} 
                     </div>
                 }
