@@ -20,9 +20,10 @@ const  Blog = ()=> {
 
     /*set Name to an empty string to enable new project be started */
     const [projectName,setProjectName,projectNameRef] = useContext(projectNameContext);
-    function handleClick(){
+    function handleClick(e){
         setProjectName('');
-        sessionStorage.removeItem('projectName')
+        sessionStorage.removeItem('projectName');
+        console.log(e.target.parentNode.        firstElementChild);
     }
 
     /*Control preview of templates */
@@ -38,7 +39,7 @@ const  Blog = ()=> {
 
     return (
         <>
-             {/* <div className='w-[full] flex justify-around'>        
+            {/* <div className='w-[full] flex justify-around'>        
                     <div className='font-fontRoboto text-xl text-center'  >
                          <img src={preview1} alt='review' className="absolute w-5/6 left-[7%] top-[176px]" style={{display:'none'}}/> 
                         <Link>
@@ -75,7 +76,7 @@ const  Blog = ()=> {
                             navigate('/template/blog/'+alts[2])}}/>
                     </div>      
                 
-            </div>  */}
+            </div>   */}
 
             <div className='w-[full] flex justify-around'>
                 {templates.map((template,index)=>
@@ -86,9 +87,10 @@ const  Blog = ()=> {
                         </Link>
                         {alts[index]}
                         <div className=''></div>
-                        <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={()=>{
-                            handleClick();
-                            navigate('/template/blog/'+alts[index])}}/>
+                        <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={
+                            handleClick
+                            // navigate('/template/blog/'+alts[index])
+                        } />
                     </div>
                 )}       
             </div>

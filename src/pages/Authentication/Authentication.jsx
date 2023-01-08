@@ -67,6 +67,7 @@ const  Authentication = ()=> {
     function handleChange(e){
         const name=e.target.name;
         setValue(prev=>({...prev,[name]:e.target.value}));
+        console.log(value);
         if(error){ // to remove error msg
             const isValid=!e.target.validity.patternMismatch
             isValid && setError(false)
@@ -96,7 +97,7 @@ const  Authentication = ()=> {
 
 
     /*HANDLE FORM SUBMISSION*/
-    const [response,setResponse]=useState({});
+    const [response,setResponse,responseRef]=useState({});
     const [loading,setLoading] = useState(false)
     const {setUser,user} = useContext(LoginContext);
     const baseUrl='https://storefront-dpqh.onrender.com';
@@ -159,15 +160,15 @@ const  Authentication = ()=> {
 
     return (
         <Routes>
-            <Route path='/signup' element={<SignUp value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error}  personal={personal} changeForm={changeForm} handleSubmit={handleSubmit} handleCheck={handleCheck} sameRef={sameRef} loading={loading} response={response} text={text} />} />
+            <Route path='/signup' element={<SignUp value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error}  personal={personal} changeForm={changeForm} handleSubmit={handleSubmit} handleCheck={handleCheck} sameRef={sameRef} loading={loading} responseRef={responseRef} reponse={response} text={text} />} />
 
             <Route index element={<Login value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} response={response} handleSubmit={handleSubmit} Remember={Remember} rememberMe={rememberMe} loading={loading} text={text} />} />
 
             <Route path="/login" element={<Login value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} response={response} handleSubmit={handleSubmit} Remember={Remember} rememberMe={rememberMe} loading={loading} text={text} />} />
 
-            <Route path='/password-reset' element={<Cmail value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} response={response} handleSubmit={handleSubmit} hide={hide} changeHide={changeHide} /> } />
+            <Route path='/password-reset' element={<Cmail value={value} handleChange={handleChange} handleBlur={handleBlur} error={error} response={response} handleSubmit={handleSubmit} hide={hide} changeHide={changeHide} loading={loading} /> } />
             
-            <Route path='/reset-password' element={<Password value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error} handleSubmit={handleSubmit} handleCheck={handleCheck} sameRef={sameRef} />} />
+            <Route path='/reset-password' element={<Password value={value}  handleChange={handleChange} handleBlur={handleBlur} error={error} response={response} handleSubmit={handleSubmit} handleCheck={handleCheck} sameRef={sameRef} loading={loading} />} />
 
             <Route path='/auth' element={<FactorAuth value={value} response={response}  handleChange={handleChange} handleSubmit={handleSubmit} /> } />
 

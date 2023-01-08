@@ -8,8 +8,8 @@ import Support from "../assets/images/icons/Support.png";
 
 
 const  SideBar = ()=> {
-    const items=['Dashboard','Profile','Projects','Support']
-    const icons=[Dashboard,Profile,Project,Support]
+    const items=['Dashboard','Projects','Profile','Support']
+    const icons=[Dashboard,Project,Profile,Support]
 
     return (
         // <>

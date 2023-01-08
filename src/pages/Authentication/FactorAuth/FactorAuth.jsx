@@ -17,7 +17,7 @@ const  FactorAuth = (props)=> {
             <main className='auth'>               
                 <Logo />
                 {/* <EmailDiv heading='Authentication' text={props.response.data }/> */}
-                <EmailDiv heading='Authentication' text={props.response.data || "Verification email has been sent to your email account." }/>
+                <EmailDiv heading='Authentication' text="Kindly check your email" />
             </main>
         </>
     )

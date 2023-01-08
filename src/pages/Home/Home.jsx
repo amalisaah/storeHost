@@ -96,7 +96,7 @@ const  Home = ()=> {
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-               <Outlet  context={[value,setValue,handleSubmit,support,setSupport]} /> {/*displays selected page from side bar*/}
+            <Outlet  context={[value,setValue,handleSubmit,support,setSupport]} /> {/*displays selected page from side bar*/}
             </div>
 
         </div> </>

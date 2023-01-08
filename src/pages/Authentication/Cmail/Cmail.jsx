@@ -3,6 +3,7 @@ import EmailDiv from "../Components/EmailDiv";
 import Logo from "../Components/Logo";
 import Input from "../Components/Input";
 import Submit from "../Components/Submit";
+import Loading from "../../../Components/Loading";
 import { useNavigate } from "react-router-dom";
 
 const  Cmail = (props)=> {
@@ -31,6 +32,7 @@ const  Cmail = (props)=> {
                   {/* { props.hide ? null : */}
                   <>
                     <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} onBlur={handleBlur} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
+                    {props.loading ? <Loading /> : null}
                     <div className='flex justify-center'><Submit value='send'/></div>
                     
                     </> 
