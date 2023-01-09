@@ -110,7 +110,7 @@ const  Authentication = ()=> {
                     console.log(url);
                     const val=value;
                     const responded = await axios.post(url,val);
-                    console.log(responded);
+                    console.log(responded.sessionStore);
                     responded && setLoading(false);
                     responded.data.id  && setUser(responded.data);
                     const data=responded.data

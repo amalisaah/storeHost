@@ -46,16 +46,11 @@ const  Project = ()=> {
     function toggleMenu () {
        setMenu(prev=>!prev)
     };
-    /*Hides options if options is visible on select*/
-    function hideMenu(){ 
-        setMenu(()=>menu==true ? false : true )
-        console.log('heeeeh')
-    }
+    
     /* Change selected value*/
     const [value,setValue] = useState('')
     function handleClick(val){
         setValue(val)
-        hideMenu()
         // sessionStorage.setItem('value',JSON.stringify(value))     
     }
     

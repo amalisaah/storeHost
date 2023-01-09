@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import Submit from "../../../../Components/Submit";
-import Input from "../../../Authentication/Components/Input";
-import Footer from "../../Blog/Components/Footer";
-import Header from "../../Components/Header";
-import { data } from "./data";
+import Submit from "../../../Components/Submit";
+import Input from "../../Authentication/Components/Input";
+import Footer from "../../Templates/Blog/Components/Footer";
+import Header from "../../../Components/Header";
+import { data } from "../../Templates/Finance/Finance1/data";
 
 const  Finance1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef] = useOutletContext() ;
+    const [edit,setEdit,editRef] = useState({}) ;
 
-    let template= true;
 
     /*  Set edit to data if no existing changes available*/
     useEffect(()=>{

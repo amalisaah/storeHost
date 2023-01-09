@@ -27,7 +27,8 @@ const  Profile = ()=> {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const path='/dashboard/profile'
+        const endpoint='/dashboard/profile';
+        const path=`${endpoint}?id=${user.id}`;
         onSubmit(path,value) //handleSubmit function in homepage
     }
     

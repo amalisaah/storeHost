@@ -4,7 +4,7 @@ import Submit from "../../../Components/Submit";
 
 const  Support = ()=> {
 
-    const [value,setValue,onSubmit,support,setSupport] = useOutletContext()
+    const [value,setValue,onSubmit,support,setSupport,supportRef] = useOutletContext()
 
     function handleChange(e) {
         e.preventDefault();
@@ -15,17 +15,18 @@ const  Support = ()=> {
     function handleSubmit(e) {
         e.preventDefault();
         const path='/dashboard/support'
-        const id=value.id
-        setSupport(prev=>({...prev,id}));
-        onSubmit(path,JSON.stringify(support))
+        const email=value.email;
+        console.log(email);
+        setSupport(prev=>({...prev,email}));
+        onSubmit(path,supportRef.current)
     }
+    
 
     return (
         <>
             <form className='' onSubmit={handleSubmit}>
                 <div className='m-auto w-[95%] h-[382px]'>
-                <textarea className="w-full h-full bg-white  shadow-1 mt-4 p-6 focus:border-solid focus:border-2 focus:outline-none border-darkBlue " name='message' placeholder=" Hello Storefront, I would like to ... " value={support.message || ''} onChange={handleChange} >
-                   
+                <textarea className="w-full h-full bg-white  shadow-1 mt-4 p-6 focus:border-solid focus:border-2 focus:outline-none border-darkBlue " name='message' placeholder=" Hello Storefront, I would like to ... " value={support.message || ''} onChange={handleChange} >                   
                 </textarea>
                 </div>
                 <div className='ml-8 mt-8'><Submit value={'Send'} className='bg-darkBlue h-10 w-[206px]' /></div>

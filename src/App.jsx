@@ -23,7 +23,8 @@ import { useEffect } from 'react';
 import Hosted from './pages/Hosted/Hosted';
 import axios from 'axios';
 import { hostedDuplicates } from './utils/helperUtils';
-import Finance1 from './pages/Templates/Finance/Finance1/Finance1';
+import FinanceTemp1 from './pages/Templates/Finance/Finance1/Finance1';
+import Finance1 from './pages/Hosted/Finance/Finance1';
 
 
 function App() {
@@ -113,7 +114,7 @@ function App() {
                   </Route>
                   <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} />} >
                     <Route path='blog/blog-3' element={<Templates3 />} />
-                    <Route path='finance/finance-1' element={<Finance1 />} />
+                    <Route path='finance/finance-1' element={<FinanceTemp1 />} />
                   </Route>
                   
                   {/* <Route path='/hosted' element={<Hosted/> } > */}
@@ -124,6 +125,7 @@ function App() {
                         'Blog-1': <h1>naana</h1>,
                         'Blog-2': <h1>naana</h1>,
                         'Blog-3': <Blog3 name={projectDataRef.current[site[1]]} />,
+                        'finance-1':<Finance1 name={projectDataRef.current[site[1]]} />
                       }[site[0]] || <h1>forget the rest</h1>
                       )
                       } 

@@ -22,6 +22,7 @@ module.exports = {
         'black' : '#222',
         'sideHover' : '#59afff33',
         'orange' : '#FC7225',
+        'blur' : '#222222cc'
         
       },
       fontFamily: {

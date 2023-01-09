@@ -6,11 +6,12 @@ import Input from "../../../Authentication/Components/Input";
 import Footer from "../../Blog/Components/Footer";
 import Header from "../../Components/Header";
 import { data } from "./data";
+import Image from "../../../Home/Components/Image";
 
 const  Finance1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef] = useOutletContext() ;
+    const [edit,setEdit,editRef,labelVisible] = useOutletContext() ;
 
     let template= true;
 
@@ -34,19 +35,13 @@ const  Finance1 = ()=> {
     /////////////////////////////////
       /**Handles Picture Change */
     const [picture,setPicture] = useState({});
-    var loadFile = function (event) {
-        // var image = document.getElementById("output");
-        // image.src = URL.createObjectURL(event.target.files[0]);
-        var picture = event.target.files[0];
-        var src     = URL.createObjectURL(picture);
+    function changePic (pic,id) {
 
-  setPicture({
-    picture: picture,
-    src: src
-  });
-        
-        console.log(picture.src)
+        setPicture(prev=>({...prev,[id]:pic}));  
+        console.log(id);                  
       };
+
+
 
       function submit(){
         const data = new FormData() 
@@ -61,6 +56,8 @@ const  Finance1 = ()=> {
         })
  
     }
+
+  
 
     return (
         <>
@@ -101,12 +98,11 @@ const  Finance1 = ()=> {
                             <p id='para2' contentEditable onBlur={onContentBlur}
                             dangerouslySetInnerHTML={sanitize(edit.para2)}/>
                         </div>
-                        {/* //////////////////////// */}
-                        <input id="file" type="file" onChange={loadFile}/>
-                        <img src={picture.src || '/images/finance/Child.png'} alt='Happy Child' id="output" className="w-[517px]" />
+                        <Image src={picture.one ? picture.one.src : '/images/finance/Child.png'} alt='Happy Child' imageId="one" id="fileOne" labelVisible={labelVisible} onChange={changePic} />
                     </div>
+
                     <div className='flex justify-between'>
-                        <img src='/images/finance/House.png' alt='Happy Child' className=' w-[517px] '/>
+                        <Image src={picture.two ? picture.two.src : '/images/finance/House.png'} alt='Happy Child' imageId="two" id="fileTwo" labelVisible={labelVisible} onChange={changePic} />
                         <div className='flex flex-col justify-center w-[43.4%]'>
                             <h2 id="header3" className="font-bold text-[45px] leading-[62.74px] text-black" contentEditable onBlur={onContentBlur}
                             dangerouslySetInnerHTML={sanitize(edit.header3)} />
@@ -116,9 +112,7 @@ const  Finance1 = ()=> {
                     </div>
                 </div>
                 <div className="flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%]">
-                    
-                        <img src='/images/finance/scrabble.png' alt='motivation' className="w-[523px]"/>
-                        {/* <img src='blob:http://127.0.0.1:5173/9d054545-facf-4ed7-b76a-80619f230246' alt='motivation' className="w-[523px]"/> */}
+                        <Image src={picture.three ? picture.three.src : '/images/finance/scrabble.png'} alt='Happy Child' imageId="three" id="fileThree" labelVisible={labelVisible} onChange={changePic} />
                     
                     <form className="w-[42.36%]">
                         <h2 id="header4" className="font-ubuntu font-semibold text-xl mb-[17px]">Shoot us a message</h2>

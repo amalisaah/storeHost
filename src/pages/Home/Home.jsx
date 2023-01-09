@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import useState from "react-usestateref";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../Components/Header";
@@ -57,8 +58,8 @@ const  Home = ()=> {
     const [value,setValue] = useState({...user});
 
     /*Handle text in support page */
-    const email=user.email || 'boy'
-    const [support,setSupport] = useState({email})
+    const email=user.email;
+    const [support,setSupport,supportRef] = useState({email})
 
     /*Keep track of projects */
     // const [projectName,setProjectName] = useState('mm')
@@ -96,7 +97,7 @@ const  Home = ()=> {
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-            <Outlet  context={[value,setValue,handleSubmit,support,setSupport]} /> {/*displays selected page from side bar*/}
+            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef]} /> {/*displays selected page from side bar*/}
             </div>
 
         </div> </>

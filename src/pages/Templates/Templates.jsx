@@ -12,6 +12,8 @@ import { projectNameContext } from "../../Context/projectNameContext";
 import { projectDataContext } from "../../Context/projectDataContext";
 import { projectListContext } from "../../Context/projectListContext";
 import { nameUtil } from "../../utils/helperUtils";
+import Side from "./Components/Side";
+import SideItem from "./Components/SideItem";
 
 
 
@@ -128,6 +130,12 @@ const  Templates = (props)=> {
         projectNameRef.current && handleHosting()
     };
 
+    /*Pics Label Display */
+    const [labelVisible,setLabelVisible] =useState(false);
+    function visibility(bol){
+        setLabelVisible(prev=>!prev)
+    }
+
 
     /* HIDE OR SHOW LOGOUT BUTTON*/
     const [logout,setLogout]= useState(false);
@@ -165,9 +173,16 @@ const  Templates = (props)=> {
                 
             </header>
             <main className='pt-[100px]'>
+                    <Side className=' top-0'>
+                        <SideItem className='text-bgBlue' icon='+'/>
+                        <SideItem className='text-bgBlue text-xl' onClick={visibility} icon= {<i className="fa fa-upload"></i>}/>
+                    </Side>
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
-                <Outlet context={[edit,setEdit,editRef]}/>
+                <div className='ml-[5.4%]'>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible]}/>
+                </div>
+
             </main>
             
         </> : null

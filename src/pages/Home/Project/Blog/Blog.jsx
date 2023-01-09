@@ -23,7 +23,7 @@ const  Blog = ()=> {
     function handleClick(e){
         setProjectName('');
         sessionStorage.removeItem('projectName');
-        console.log(e.target.parentNode.        firstElementChild);
+        // console.log(e.target.parentNode.firstElementChild);
     }
 
     /*Control preview of templates */
