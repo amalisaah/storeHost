@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import DOMPurify from 'dompurify';
+import { sanitize } from "../../../../utils/sanitizeUtils";
 import Submit from "../../../../Components/Submit";
 import Input from "../../../Authentication/Components/Input";
 import Footer from "../../Blog/Components/Footer";
@@ -28,9 +28,7 @@ const  Finance1 = ()=> {
         setEdit(prev=>({...prev,[id]:e.currentTarget.innerHTML}))
     })
 
-    const sanitize = (data) => ({
-        __html: DOMPurify.sanitize(data)
-      })
+    
 
     /////////////////////////////////
       /**Handles Picture Change */

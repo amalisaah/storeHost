@@ -13,7 +13,6 @@ const  Image = (props)=> {
             picture: picture,
             src: src
         }
-        console.log(obj)
         props.onChange(obj,id)
     }
     return (

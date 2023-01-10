@@ -65,3 +65,7 @@ form input:focus {
   border: none;
   outline: 0px;
 }
+.profilePic:hover label {
+  display: flex;
+  background-color: var(--blur);
+}

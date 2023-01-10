@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import ProfilePic from "../../../Components/ProfilePic";
-import pic from "../../../assets/images/Ellipse 15.png";
 import pencil from "../../../assets/images/icons/pencil.png"
 import { LoginContext } from "../../../Context/LoginContext";
 import Input from "../../../Components/Input";
@@ -12,7 +11,7 @@ const  Profile = ()=> {
     const {user,setUser} = useContext(LoginContext);
 
     /*Handle editing*/
-    const [value,setValue,onSubmit]=useOutletContext();
+    const [value,setValue,onSubmit,,,,changePic,profilePic]=useOutletContext();
     function handleChange(e){
         e.preventDefault()
         const name=e.target.name;
@@ -21,7 +20,6 @@ const  Profile = ()=> {
         //     const isValid=!e.target.validity.patternMismatch
         //     isValid && setError(false)
         // }
-        console.log(value)
         
     }
 
@@ -34,13 +32,12 @@ const  Profile = ()=> {
     
     /* handles username editing*/
     function handleClick(){
-        
     }
 
     return (
         <>
             <div className='w-[559px] m-auto '>
-                <ProfilePic src={pic} text={user.business} alt='profile pic' icon={pencil} alternative='edit button' className='h-[226px] w-[226px]' textClass={'text-[32px] leading-[36px] mx-8 '} onClick={handleClick} />    
+                <ProfilePic src={profilePic.src} template={true} text={user.business} alt='profile pic' icon={pencil} alternative='edit button' className='h-[226px] w-[226px] profilePic transition-all duration-1000' textClass={'text-[32px] leading-[36px] mx-8 '} onClick={handleClick} onChange={changePic} id={'pic'} />    
 
                 <form onSubmit={handleSubmit} className='mt-8'>
                     <Input id="email" value={value.email || user.email } label={'Email'} type={'email'} name={'email'}  onChange={handleChange} />
