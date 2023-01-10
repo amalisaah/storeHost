@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './Login.css';
 import Submit from "../Components/Submit";
@@ -7,39 +7,51 @@ import Input from "../Components/Input";
 import Picture from "../Components/Picture";
 import OuterDiv from "../Components/OuterDiv";
 import { LoginContext } from "../../../Context/LoginContext";
+import Alert from "../Components/Alert";
+import Loading from "../../../Components/Loading";
 
 const  Login = (props)=> {
     
     const navigate = useNavigate()
 
-    const {user} = useContext(LoginContext)
+    const {user,setUser} = useContext(LoginContext)
     function handleSubmit(e){
         e.preventDefault();
         const path='/login';
         props.handleSubmit(path);
-        if(user.id) {
-            props.rememberMe ? localStorage.setItem('user',JSON.stringify(user)) : sessionStorage.setItem('user',JSON.stringify(user));
-            console.log(user.id);
-            navigate('/dashboard')
-        }
+        // !user.id && props.handleBlur(true)
+        
     }
   
     /*SET REMEMBER ME STATE*/
-    function handleSelect (e) {  
+    // function handleSelect () {  
+    //     props.Remember()
+    // };
+
+    /*LOgging in if user exists*/
+    useEffect(()=>{
+        if(user.id) {
+            props.rememberMe ? localStorage.setItem('user',JSON.stringify(user)) : sessionStorage.setItem('user',JSON.stringify(user));
+            // console.log(user.id);
+            navigate('/home')
+        }
+    },[user])
+  
+    /*SET REMEMBER ME STATE*/
+    function handleSelect () {  
         props.Remember()
     };
 
-    function handleLoad(){
-        alert('loaded')
-    }
 
     return (
         <>
+
             <main className="login flex justify-between h-screen" >
                 
                 <OuterDiv heading='Login'>
-                {props.error && <p role='alert' className='text-error' >username or password incorrect</p>}
-                    <form className='' onSubmit={handleSubmit} onLoad={()=>{console.log('load')}} >
+                {props.error ? <Alert text={'username or password incorrect'}/> : null}
+                {props.response.status === 404 ? <Alert text={'User does not exist please sign up'}/> : null}
+                    <form className='' onSubmit={handleSubmit}  >
                         <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
 
                         <Input type="password" id="pwd" name="password"  label='Password' onChange={props.handleChange} value={props.value.password} />
@@ -52,6 +64,7 @@ const  Login = (props)=> {
                         <div className='loginSubmit flex justify-between'>
                             {/* <Button value='Forgot Password' link='/authentication/cmail' />   */}
                             <div role='button' className="button leading-5 h-12  text-center w-[45%] rounded-lg bg-white text-bgBlue hover:bg-hoverBlue hover:text-white" > <Link to='/authentication/password-reset' className='leading-5 text-inherit h-full w-full'>Forgot Password</Link> </div>                     
+                            {props.loading ? <Loading /> : null}
                             <Submit value='Log In' />                       
                         </div>
                         <p className="text-center"> Not a member? <Link to='/authentication/signup'>Sign up</Link> </p>

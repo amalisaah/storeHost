@@ -16,21 +16,8 @@ const  FactorAuth = (props)=> {
         <>
             <main className='auth'>               
                 <Logo />
-                <EmailDiv heading='Authentication' text={props.response }/>
-                {/* <div className='box mt-11'> */}
-                    {/* <form onSubmit={handleSubmit} > */}
-                        {/* <div className='val mb-[4.5%]'>
-                            {
-                                names.map((name,index)=>
-                                <input type='text' className="w-[58px] h-[58px] mr-4 rounded-lg text-center "
-                                name={name} maxLength={1} pattern='[0-9]' onChange={props.handleChange}
-                                value={props.value[name] ? props.value[name] :''} required autoFocus={index===0? true:false} key={index} />)
-                            }                    
-                        </div>  */}
-                        {/* <input type='submit' className='h-11 w-[16%] bg-bgBlue rounded-lg border-none text-white' value={'Login'}/> */}
-                        {/* <Submit value={'Check'}  /> */}
-                    {/* </form>    */}
-                {/* </div> */}
+                {/* <EmailDiv heading='Authentication' text={props.response.data }/> */}
+                <EmailDiv heading='Authentication' text={props.response.data || "Verification email has been sent to your email account." }/>
             </main>
         </>
     )

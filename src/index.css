@@ -11,14 +11,18 @@
   --white: #FFF;
   --bdGreen: green;
   --error: #FF3131;
-  --hoverBlue: #59AFFF;
+  --hoverBlue:#59afff;
   --darkBlue: #00284C;
+  --black: #222;
 
+  /*Templates 1*/
+  --lnkColorB:#15616B;
+  --bgColorB: #4F4F4F;
 }
 * {
   box-sizing: border-box;
   font-family: var(--fontPoppins);
-  /* border: 1px red solid; */
+  /* border: 0.2px red solid; */
   /* text-align: center; */
 }
 html {

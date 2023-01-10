@@ -17,10 +17,18 @@ module.exports = {
         'error': '#FF3131',
         'hoverBlue': '#59AFFF',
         'darkBlue': '#00284C',
+        'lnkColorB': '#15616B',
+        'bgColorB': '#4F4F4F',
+        'black' : '#222',
+        'sideHover' : '#59afff33'
       },
       fontFamily: {
         'fontRoboto':['Roboto','Helvetica', 'Arial', 'sans-serif'],
         'fontPoppins':[ 'Poppins','Helvetica','Sans-serif'],
+      },
+      boxShadow: {
+        '1': '0px 2px 8px -2px rgba(0, 0, 0, 0.25)',
+        '2': '0px 2px 10px -2px rgba(0, 0, 0, 0.25);'
       },
     },
   },

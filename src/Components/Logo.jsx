@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const  Logo = (props)=> {
     return (
-        <div className={"logo  text-2xl text-bgBlue font-black " + props.className }><Link to='/' >Storefront</Link> </div>
+        <div className={"logo  text-2xl text-bgBlue font-black " + props.className }><Link to='/home/projects' >Storefront</Link> </div>
     )
 };
 
