@@ -109,8 +109,9 @@ const  Authentication = ()=> {
                     const url=`${baseUrl}${role}`;
                     console.log(url);
                     const val=value;
-                    const responded = await axios.post(url,val);
+                    const responded = await axios.post(url,val,{withCredentials: true,credentials:'include'});
                     console.log(responded.sessionStore);
+                    console.log(responded);
                     responded && setLoading(false);
                     responded.data.id  && setUser(responded.data);
                     const data=responded.data

@@ -70,7 +70,7 @@ const  Home = ()=> {
                 const url=`${baseUrl}${role}`;
                 console.log(url,val);
                 // const val=value;
-                const response = await axios.post(url,val);
+                const response = await axios.post(url,val,{withCredentials: true,credentials:"include"});
                 response.data.id  && setUser(response.data);
     //             // setResponse(response.data)
                 console.log(response) 
