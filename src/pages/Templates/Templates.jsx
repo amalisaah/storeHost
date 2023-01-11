@@ -111,7 +111,8 @@ const  Templates = (props)=> {
         edit.template=false;
         handleSubmit();
         setPubBox(false);
-        const temp=location.pathname.split('/').at(-1);
+        const temp=location.pathname.split('/').at(3);
+        console.log(temp);
         const name = nameUtil(projectNameRef.current,user);
         console.log(name)
         const hosted= [temp,name];
