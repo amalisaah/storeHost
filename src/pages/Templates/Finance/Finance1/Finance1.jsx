@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { Outlet, useOutletContext } from "react-router-dom";
 import { sanitize } from "../../../../utils/sanitizeUtils";
 import Submit from "../../../../Components/Submit";
 import Input from "../../../Authentication/Components/Input";
@@ -7,11 +7,12 @@ import Footer from "../../Blog/Components/Footer";
 import Header from "../../Components/Header";
 import { data } from "./data";
 import Image from "../../../Home/Components/Image";
+import Pages from "../../Components/Pages";
 
 const  Finance1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef,labelVisible] = useOutletContext() ;
+    const [edit,setEdit,editRef,labelVisible,pagesVisible] = useOutletContext() ;
 
     let template= true;
 
@@ -62,6 +63,7 @@ const  Finance1 = ()=> {
             <Header logo={edit.logo} logoClass='text-orange font-bold font-fontRoboto text-[36px]' searchClass='text-orange'>
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="text-orange text-xl font-fontRoboto">Register</span>
             </Header>
+            {pagesVisible ? <Pages pages={['Personal', 'Business']} /> : null}
             <main className='font-fontRoboto'>
                 <div className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]">
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]'>
@@ -77,10 +79,11 @@ const  Finance1 = ()=> {
                             dangerouslySetInnerHTML={sanitize(edit.business)}/>
                     </div>
                 </div>
-                <div className='h-[286px] font-fontRoboto flex justify-evenly items-center bg-orange'>
-                    {/* <div className='rounded-full h-[218px] w-[218px] bg-white font-medium font-fontRoboto text-center flex flex-col justify-center'>
+            <div className='outlet'>
+                {/* <div className='h-[286px] font-fontRoboto flex justify-evenly items-center bg-orange'>
+                    <div className='rounded-full h-[218px] w-[218px] bg-white font-medium font-fontRoboto text-center flex flex-col justify-center'>
                         <i className='fas fa-handshake fa-5x text-orange  mb-4 '></i>Request a  loan
-                    </div> */}
+                    </div>
                     <div className='rounded-full h-[218px] w-[218px] bg-white font-medium text-center flex flex-col justify-center'>
                         <i className='fas fa-landmark fa-5x text-orange  mb-4'></i> open an account
                     </div>
@@ -90,25 +93,18 @@ const  Finance1 = ()=> {
                 </div>
                 <div className='px-[5.5%] py-8'>
                     <div className='flex justify-between'>
-                        <div className='flex flex-col justify-center w-[43.4%]'>
-                            <h2 id="header2" className="font-bold text-[45px] leading-[62.74px] text-black"contentEditable onBlur={onContentBlur}
-                            dangerouslySetInnerHTML={sanitize(edit.header2)}/>
-                            <p id='para2' contentEditable onBlur={onContentBlur}
-                            dangerouslySetInnerHTML={sanitize(edit.para2)}/>
-                        </div>
+                        <Paragraph headerId='header2' header={edit.header2} paraId='para2' para={edit.para2} onBlur={onContentBlur} />
                         <Image src={picture.one ? picture.one.src : '/images/finance/Child.png'} alt='Happy Child' imageId="one" id="fileOne" labelVisible={labelVisible} onChange={changePic} />
                     </div>
 
                     <div className='flex justify-between'>
                         <Image src={picture.two ? picture.two.src : '/images/finance/House.png'} alt='Happy Child' imageId="two" id="fileTwo" labelVisible={labelVisible} onChange={changePic} />
-                        <div className='flex flex-col justify-center w-[43.4%]'>
-                            <h2 id="header3" className="font-bold text-[45px] leading-[62.74px] text-black" contentEditable onBlur={onContentBlur}
-                            dangerouslySetInnerHTML={sanitize(edit.header3)} />
-                            <p id='para3'  contentEditable onBlur={onContentBlur}
-                            dangerouslySetInnerHTML={sanitize(edit.para3)}/>
-                        </div>
+                        <Paragraph headerId='header3' header={edit.header3} paraId='para3' para={edit.para3} onBlur={onContentBlur} />
                     </div>
-                </div>
+                </div> */}
+                <Outlet context={[edit,picture,changePic,onContentBlur,labelVisible]} />
+            </div>
+                
                 <div className="flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%]">
                         <Image src={picture.three ? picture.three.src : '/images/finance/scrabble.png'} alt='Happy Child' imageId="three" id="fileThree" labelVisible={labelVisible} onChange={changePic} />
                     

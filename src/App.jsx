@@ -25,6 +25,8 @@ import axios from 'axios';
 import { hostedDuplicates } from './utils/helperUtils';
 import FinanceTemp1 from './pages/Templates/Finance/Finance1/Finance1';
 import Finance1 from './pages/Hosted/Finance/Finance1';
+import Personal from './pages/Templates/Finance/Finance1/Personal';
+import Business from './pages/Templates/Finance/Finance1/Business';
 
 
 function App() {
@@ -102,6 +104,7 @@ function App() {
                   <Route path='/' element={<LandingPage/>} />
                   <Route path='/authentication/*' element={<Authentication  />} />
                   <Route path='/home' element={<Home/> } >
+                    <Route index element={<Dashboard />} />
                     <Route path='projects' element={<Project/> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
@@ -114,7 +117,10 @@ function App() {
                   </Route>
                   <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} />} >
                     <Route path='blog/blog-3' element={<Templates3 />} />
-                    <Route path='finance/finance-1' element={<FinanceTemp1 />} />
+                    <Route path='finance/finance-1' element={<FinanceTemp1 />} >
+                      <Route path='personal' element={<Personal />}/>
+                      <Route path='business' element={<Business />}/>
+                    </Route>
                   </Route>
                   
                   {/* <Route path='/hosted' element={<Hosted/> } > */}
@@ -125,11 +131,23 @@ function App() {
                         'Blog-1': <h1>naana</h1>,
                         'Blog-2': <h1>naana</h1>,
                         'Blog-3': <Blog3 name={projectDataRef.current[site[1]]} />,
-                        'finance-1':<Finance1 name={projectDataRef.current[site[1]]} />
+                        // 'finance-1': <Finance1 name={projectDataRef.current[site[1]]} />
+                      }[site[0]] 
+                      )
+                      } 
+                      key={index}>
+                        
+                    </Route> )}
+
+                    {allHosted.map((site,index)=>
+                    <Route path={`/${site[1]}`} element={                     
+                      ({
+                        'finance-1': <Finance1 name={projectDataRef.current[site[1]]} />
                       }[site[0]] || <h1>forget the rest</h1>
                       )
                       } 
                       key={index}>
+                        {/* <Route path='personal' element={} /> */}
                     </Route> )}
                   {/* </Route> */}
                     <Route path='*' element={<h1 className='mx-auto' ><Link to='/authentication'> GO BACK</Link></h1>} />

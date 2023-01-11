@@ -10,6 +10,7 @@ import arrow from "../../assets/images/icons/arrow.png";
 import SideBar from "../../Components/SideBar";
 import Button from "../../Components/Button";
 import { projectDataContext } from "../../Context/projectDataContext";
+import { projectNameContext } from "../../Context/projectNameContext";
 
 const  Home = ()=> {
 
@@ -24,7 +25,24 @@ const  Home = ()=> {
 
     },[])
 
+    /* HIDE OR SHOW LOGOUT BUTTON*/
+    const [logout,setLogout]= useState(false);
+    function toggleLogout(){
+        setLogout(prev=>!prev)
+         console.log(logout);
+    }
 
+    const navigate = useNavigate()
+    function handleLogout(){
+        localStorage.clear();
+        sessionStorage.clear();
+        setUser({});
+        navigate('/authentication/login')
+    }
+
+
+
+    /////////////////// PROJECT /////////////////
     /*Fetch Project Data */
     const [projectData,setProjectData] = useContext(projectDataContext)
     useEffect(()=>{
@@ -35,31 +53,7 @@ const  Home = ()=> {
             
             })
         })
-    },[])
-
-
-    /* HIDE OR SHOW LOGOUT BUTTON*/
-    const [logout,setLogout]= useState(false);
-    function toggleLogout(){
-        setLogout(prev=>!prev)
-         console.log(logout);
-    }
-    
-    const navigate = useNavigate()
-    function handleClick(){
-        localStorage.clear();
-        sessionStorage.clear();
-        setUser({});
-        navigate('/authentication/login')
-    }
-    
-
-    /*Handle Editing in Profile Page*/
-    const [value,setValue] = useState({...user});
-
-    /*Handle text in support page */
-    const email=user.email;
-    const [support,setSupport,supportRef] = useState({email})
+    },[])     
 
     /*Keep track of projects */
     // const [projectName,setProjectName] = useState('mm')
@@ -83,6 +77,21 @@ const  Home = ()=> {
         
     }
 
+    /*set Name to an empty string to enable new project be started */
+    const [projectName,setProjectName,projectNameRef] = useContext(projectNameContext);
+    function handleClearName(){
+        setProjectName('');
+        sessionStorage.removeItem('projectName');
+        // console.log(e.target.parentNode.firstElementChild);
+    }
+
+
+
+
+
+
+
+    ///////////  PROFILE  /////////////////
     /*Change Profile Pic*/
     const [profilePic,setProfilePic] = useState({});
     function changePic (pic) {
@@ -91,7 +100,18 @@ const  Home = ()=> {
         setProfilePic(prev=>(pic));  
       };
 
- 
+    /*Handle Editing in Profile Page*/
+    const [value,setValue] = useState({...user});
+
+
+
+
+     //////////// SUPPORT //////////////
+    /*Handle text in support page */
+    const email=user.email;
+    const [support,setSupport,supportRef] = useState({email})
+
+
 
     
     return (
@@ -100,12 +120,12 @@ const  Home = ()=> {
         <>
         <Header className={'h-[88px] flex-row-reverse fixed'}>
             <ProfilePic src={profilePic.src} text={user.firstname || user.business} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
-            {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleClick}  /> : null}
+            {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
         </Header>
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic]} /> {/*displays selected page from side bar*/}
+            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName]} /> {/*displays selected page from side bar*/}
             </div>
 
         </div> </>

@@ -14,6 +14,7 @@ import { projectListContext } from "../../Context/projectListContext";
 import { nameUtil } from "../../utils/helperUtils";
 import Side from "./Components/Side";
 import SideItem from "./Components/SideItem";
+import Pages from "./Components/Pages";
 
 
 
@@ -130,10 +131,16 @@ const  Templates = (props)=> {
         projectNameRef.current && handleHosting()
     };
 
-    /*Pics Label Display */
+    /*Pictures Label Display */
     const [labelVisible,setLabelVisible] =useState(false);
-    function visibility(bol){
+    function picVisibility(){
         setLabelVisible(prev=>!prev)
+    }
+
+    /*Pages Options Display */
+    const [pagesVisible,setPagesVisible] =useState(false);
+    function pagesVisibility(){
+        setPagesVisible(prev=>!prev)
     }
 
 
@@ -175,12 +182,17 @@ const  Templates = (props)=> {
             <main className='pt-[100px]'>
                     <Side className=' top-0'>
                         <SideItem className='text-bgBlue' icon='+'/>
-                        <SideItem className='text-bgBlue text-xl' onClick={visibility} icon= {<i className="fa fa-upload"></i>}/>
+                        <SideItem className='text-bgBlue text-xl' onClick={picVisibility} icon= {<i className="fa fa-upload"></i>}/>
                     </Side>
+                    <Side className=' top-0 right-0'>
+                        <SideItem className='text-bgBlue' onClick={pagesVisibility} icon={<i className="fa fa-copy text-2xl"></i>} />
+                        <SideItem className='text-bgBlue text-xl' onClick={picVisibility} icon= {<i className="fa fa-upload"></i>}/>
+                    </Side>
+                   
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
-                <div className='ml-[5.4%]'>
-                    <Outlet context={[edit,setEdit,editRef,labelVisible]}/>
+                <div className='mx-[5.4%]'>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible]}/>
                 </div>
 
             </main>

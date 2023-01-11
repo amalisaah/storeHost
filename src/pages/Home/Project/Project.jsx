@@ -17,7 +17,7 @@ const  Project = ()=> {
     const [projectData,setProjectData] = useContext(projectDataContext);
     // const [projectName,setProjectName] = useContext(projectNameContext)
     
-    console.log(projectList);
+    // console.log(projectList);
     useEffect(()=>{
         let list = sessionStorage.getItem('projectData');
         list = list && JSON.parse(list);
@@ -28,6 +28,7 @@ const  Project = ()=> {
         setProjectList((prev)=>items ? items : prev)
         console.log(projectList);
     },[])
+
 
     /*Handles selecting a project*/
     function handleSelect (name) {
@@ -61,8 +62,14 @@ const  Project = ()=> {
     //     setTemplateId(prev=>(...prev,))
     // }
 
-    // const [projectName,setProjectName] = useOutletContext();
-    // console.log(projectName +'lll')
+    /*set Name to an empty string to enable new project be started */
+    const [projectName,setProjectName] = useContext(projectNameContext);
+    function handleClearName(){
+        setProjectName('');
+        sessionStorage.removeItem('projectName');
+        // console.log(e.target.parentNode.firstElementChild);
+    }
+
 
     return (
         <>
@@ -104,7 +111,7 @@ const  Project = ()=> {
                         </div> 
                     : 
                     // null
-                    <Outlet/>}
+                    <Outlet context={[handleClearName]} />}
                 </div>
         </>
     )
