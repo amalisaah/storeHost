@@ -67,7 +67,6 @@ const  Authentication = ()=> {
     function handleChange(e){
         const name=e.target.name;
         setValue(prev=>({...prev,[name]:e.target.value}));
-        console.log(value);
         if(error){ // to remove error msg
             const isValid=!e.target.validity.patternMismatch
             isValid && setError(false)
@@ -109,9 +108,7 @@ const  Authentication = ()=> {
                     const url=`${baseUrl}${role}`;
                     console.log(url);
                     const val=value;
-                    const responded = await axios.post(url,val,{withCredentials: true,credentials:'include'});
-                    console.log(responded.sessionStore);
-                    console.log(responded);
+                    const responded = await axios.post(url,val);
                     responded && setLoading(false);
                     responded.data.id  && setUser(responded.data);
                     const data=responded.data

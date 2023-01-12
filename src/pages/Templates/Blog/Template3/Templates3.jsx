@@ -23,7 +23,6 @@ const  Templates3 = (props)=> {
     // setEdit()
     // let template= edit && editRef.template
     let template= true;
-    console.log(editRef.current)
     useEffect(()=>{
        setEdit(()=> Object.keys(edit).length === 0 && data);
        console.log(editRef.current,'effect')

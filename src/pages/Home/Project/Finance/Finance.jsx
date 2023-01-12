@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import preview1 from "../../../../assets/images/Blog/Desktop - 2.jpg";
 import template1 from "../../../../assets/images/Blog/Template1.png";
 import Button from "../../../../Components/Button";
@@ -7,6 +7,7 @@ import Button from "../../../../Components/Button";
 const  Finance = ()=> {
 
     const navigate = useNavigate();
+    const [handleClearName] = useOutletContext();
 
     function showPreview(e) {
         console.log(e.target.parentNode.parentNode.firstElementChild);
@@ -29,7 +30,7 @@ const  Finance = ()=> {
                     finance-1
                     <div className=''></div>
                     <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={()=>{
-                        // handleClick
+                        handleClearName()
                         navigate('/template/finance/finance-1')}
                     } />
                 </div>

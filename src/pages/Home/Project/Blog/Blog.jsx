@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { projectNameContext } from "../../../../Context/projectNameContext";
+// import { useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import template1 from "../../../../assets/images/Blog/Template1.png";
 import template2 from "../../../../assets/images/Blog/Template2.png";
 import template3 from "../../../../assets/images/Blog/Template3.png";
@@ -12,19 +12,20 @@ import Button from "../../../../Components/Button";
 const  Blog = ()=> {
 
     const navigate = useNavigate();
+    const [handleClearName] = useOutletContext();
 
     /*Images of  available templates*/
-    const templates= [template1,template2,template3];
-    const alts= ['Blog-1','Blog-2','Blog-3'];
-    const preview= [preview1,preview2,preview3];
+    const templates = [template1,template2,template3];
+    const alts = ['Blog-1','Blog-2','Blog-3'];
+    const preview = [preview1,preview2,preview3];
 
     /*set Name to an empty string to enable new project be started */
-    const [projectName,setProjectName,projectNameRef] = useContext(projectNameContext);
-    function handleClick(e){
-        setProjectName('');
-        sessionStorage.removeItem('projectName');
-        // console.log(e.target.parentNode.firstElementChild);
-    }
+    // const [projectName,setProjectName,projectNameRef] = useContext(projectNameContext);
+    // function handleClearName(e){
+    //     setProjectName('');
+    //     sessionStorage.removeItem('projectName');
+    //     // console.log(e.target.parentNode.firstElementChild);
+    // }
 
     /*Control preview of templates */
     // const [preview,setPreview] = useState(false);
@@ -49,7 +50,7 @@ const  Blog = ()=> {
                         {alts[0]}
                         <div className=''></div>
                         <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={()=>{
-                            handleClick();
+                            handleClearName();
                             navigate('/template/blog/'+alts[0])}}/>
                     </div>     
 
@@ -61,7 +62,7 @@ const  Blog = ()=> {
                         {alts[1]}
                         <div className=''></div>
                         <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={()=>{
-                            handleClick();
+                            handleClearName();
                             navigate('/template/blog/'+alts[1])}}/>
                     </div>   
 
@@ -73,7 +74,7 @@ const  Blog = ()=> {
                         {alts[2]}
                         <div className=''></div>
                         <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={()=>{
-                            handleClick();
+                            handleClearName();
                             navigate('/template/blog/'+alts[2])}}/>
                     </div>      
                 
@@ -88,10 +89,10 @@ const  Blog = ()=> {
                         </Link>
                         {alts[index]}
                         <div className=''></div>
-                        <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={
-                            handleClick
-                            // navigate('/template/blog/'+alts[index])
-                        } />
+                        <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={()=>{
+                            handleClearName()
+                            navigate('/template/blog/'+alts[index])
+                        }} />
                     </div>
                 )}       
             </div>
