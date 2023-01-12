@@ -27,7 +27,6 @@ const  Templates = (props)=> {
         let temp = localStorage.getItem('user')
         if (!temp) temp = sessionStorage.getItem('user'); 
         setUser(prev=>temp ? JSON.parse(temp) : {})
-        console.log(user,temp)
         !userRef.current.id && navigate('/authentication/login')
 
     },[])
@@ -77,7 +76,7 @@ const  Templates = (props)=> {
         setBox(false)
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
         const path=`/dashboard/projects?uid=${user.id}`
-        // props.postData(path,JSON.stringify(projectDataRef.current))
+        props.postData(path,JSON.stringify(projectDataRef.current))
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
 
         

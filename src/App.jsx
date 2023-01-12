@@ -32,7 +32,7 @@ import Business from './pages/Hosted/Finance/Business';
 
 
 function App() {
-  // axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
   // const [user,setUser] = useState({name:'thor odinson',id:243})
   const [user,setUser,userRef] = useState({});
 

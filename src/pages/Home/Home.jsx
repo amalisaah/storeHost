@@ -40,6 +40,20 @@ const  Home = ()=> {
         navigate('/authentication/login')
     }
 
+    /*hHandles Alerts*/
+    const [ isAlertVisible, setIsAlertVisible ] = useState(false);
+    useEffect(()=> {
+        if (responseRef.current.status===200){
+            // setResp
+        setIsAlertVisible(true);
+
+        const timeOutId=setTimeout(() => {
+            setIsAlertVisible(false);
+        }, 3000);
+        setResponse({})
+    }
+    })
+
 
 
     /////////////////// PROJECT /////////////////
@@ -57,6 +71,9 @@ const  Home = ()=> {
 
     /*Keep track of projects */
     // const [projectName,setProjectName] = useState('mm')
+
+    /*Handle Submission*/
+    const [response,setResponse,responseRef] =useState({})
     function handleSubmit(role,val) {
         const baseUrl='https://storefront-dpqh.onrender.com';
         (async()=>{
@@ -66,11 +83,11 @@ const  Home = ()=> {
                 // const val=value;
                 const response = await axios.post(url,val);
                 response.data.id  && setUser(response.data);
-    //             // setResponse(response.data)
+                setResponse(response)
                 console.log(response) 
             } catch (error) {
                 console.log(error)
-    //             // setResponse(error.response.data)
+                setResponse(error.response.data)
             }
             
         })()
@@ -125,7 +142,7 @@ const  Home = ()=> {
          <div className='flex pt-[88px]'>
             <SideBar />
             <div className='ml-[15.5%] w-full'>
-            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName]} /> {/*displays selected page from side bar*/}
+            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName,isAlertVisible]} /> {/*displays selected page from side bar*/}
             </div>
 
         </div> </>

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useOutletContext } from "react-router-dom";
+import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import Submit from "../../../Components/Submit";
 import Input from "../../Authentication/Components/Input";
 import Footer from "../../Templates/Blog/Components/Footer";
 import Header from "../../../Components/Header";
 import { data } from "../../Templates/Finance/Finance1/data";
-import Image from "../../Home/Components/Image";
-import Pages from "../../Templates/Components/Pages";
+
 
 const  Finance1 = ()=> {
 
@@ -35,8 +34,12 @@ const  Finance1 = ()=> {
                     </div>
                 
                     <div className='z-5 mt-[113px] flex justify-center text-[36px]'>
-                        <button className='w-[353px] h-[100px] font-fontRoboto rounded-l-xl bg-white text-orange' id="btn1"><Link to='./personal'>Personal</Link></button>
-                        <button className='bg-orange w-[353px] font-fontRoboto h-[100px] rounded-r-xl' id="btn2"><Link to='./business'>Business</Link></button>
+                        <NavLink to='./personal' style={({ isActive }) => 
+                    (isActive ? {background: 'var(--bgOrange)', color:'white'} : {background: 'white', color:'var(--bgOrange)'})}><button className='w-[353px] h-[100px] font-fontRoboto rounded-l-xl bg-inherit text-inherit' id="btn1">Personal</button></NavLink>
+
+                        <NavLink to='./business' style={({ isActive }) => 
+                    (isActive ? {background: 'var(--bgOrange)', color:'white'} : {background: 'white', color:'var(--bgOrange)'})}><button className='w-[353px] h-[100px] font-fontRoboto rounded-l-xl bg-inherit text-inherit' id="btn1">Business</button></NavLink>
+                        {/* <button className='bg-orange w-[353px] font-fontRoboto h-[100px] rounded-r-xl' id="btn2"><Link to='./business'>Business</Link></button> */}
                     </div>
                 </div>
                 <div className='outlet'>

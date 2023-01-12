@@ -8,7 +8,7 @@ const  ProfilePic = (props)=> {
         props.onClick()
     }
 
-    function handleChange(event){        
+    function handlePicChange(event){        
         var picture = event.currentTarget.files[0];
         var src     = URL.createObjectURL(picture);
         const obj = {
@@ -28,10 +28,11 @@ const  ProfilePic = (props)=> {
                     <span className="fa fa-camera m-2"></span>
                     <span>Change Image</span>
                 </label>
-                <input  type="file" id={props.id} className='hidden' onChange={props.onChange &&handleChange} accept="image/*" capture='user'/>
+                <input  type="file" id={props.id} className='hidden' onChange={props.onChange && handlePicChange} accept="image/*" capture='user'/>
                 </div>
+
                 <div className="flex items-center text-darkBlue font-fontRoboto ">
-                <p className={"text-darkBlue leading-[19px] font-medium "+props.textClass}contentEditable={props.template} suppressContentEditableWarning >{props.text} </p>
+                <p className={"text-darkBlue leading-[19px] font-medium "+props.textClass} id='business' contentEditable={props.template} suppressContentEditableWarning  onBlur={props.changeText}>{props.text || 'No Name'} </p>
                 <img src={props.icon} alt={props.alternative} className=" text-darkBlue ml-2" onClick={handleClick} />
                 </div>
             </div>
