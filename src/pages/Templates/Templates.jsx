@@ -152,6 +152,12 @@ const  Templates = (props)=> {
     function componentVisibility(){
         setComponentVisible(prev=>!prev)
     }
+    /*Components Options Display */
+    const [colorVisible,setColorVisible] =useState(false);
+    function colorVisibility(){
+        setColorVisible(prev=>!prev)
+    }
+    
 
 
 
@@ -214,7 +220,7 @@ const  Templates = (props)=> {
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 <div className='mx-[5.4%]'>
-                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle]}/>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility]}/>
                 </div>
 
             </main>

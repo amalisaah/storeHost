@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { sanitize } from "../../../../../utils/sanitizeUtils";
 
 const  Paragraph = (props)=> {
@@ -14,5 +15,12 @@ const  Paragraph = (props)=> {
     )
 };
 
+Paragraph.propTypes = {
+    headerId: PropTypes.string.isRequired,
+    paraId: PropTypes.string.isRequired,
+    header: PropTypes.string,
+    para: PropTypes.string,
+    style: PropTypes.object,
+}
 
 export default Paragraph

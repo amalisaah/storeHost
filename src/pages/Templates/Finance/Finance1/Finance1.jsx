@@ -13,7 +13,7 @@ import Components from "../../Components/Components";
 const  Finance1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle] = useOutletContext() ;
+    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility] = useOutletContext() ;
 
     let template= true;
 
@@ -65,7 +65,7 @@ const  Finance1 = ()=> {
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="text-orange text-xl font-fontRoboto">Register</span>
             </Header>
             {pagesVisible ? <Pages pages={['Personal', 'Business']} /> : null}
-            {componentVisible ? <Components style={style} changeStyle={changeStyle} /> : null}
+            {componentVisible ? <Components style={style} changeStyle={changeStyle} colorVisible={colorVisible} colorVisibility={colorVisibility} /> : null}
             <main className='font-fontRoboto'>
                 <div className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]">
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]'>
