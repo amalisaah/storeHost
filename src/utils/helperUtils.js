@@ -8,8 +8,9 @@ function createName(Business,projName) {
     return temp
 }
 
-export function preventDuplicates(nameList,name,Business){
-    name=Business['business']+'-'+name
+export function preventDuplicates(nameList,name,user){
+    let username=user['business'] || user['firstname'];
+    name=username+'-'+name
     console.log(nameList,name)
     const temp=nameList.find(element=>element===name);
     if (temp) {
@@ -18,8 +19,9 @@ export function preventDuplicates(nameList,name,Business){
     else return name;
 }
 
-export function nameUtil(projName,user,projectList){
-    const temp = createName(user.business,projName);
+export function nameUtil(projName,user){
+    const username=user['business'] || user['firstname'];
+    const temp = createName(username,projName);
     // return preventDuplicates(projectList,temp)
     return temp;
 }

@@ -1,20 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import useState from 'react-usestateref';
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, Link } from "react-router-dom";
 import ProfilePic from "../../Components/ProfilePic";
 import arrow from "../../assets/images/icons/arrow.png";
 import  team from '../../assets/images/Ellipse3.png';
 import { LoginContext } from "../../Context/LoginContext";
 import Button from "../../Components/Button";
 import Logo from "../../Components/Logo";
-import NameBox from "./Blog/Components/NameBox";
+import NameBox from "./Components/NameBox";
 import { projectNameContext } from "../../Context/projectNameContext";
 import { projectDataContext } from "../../Context/projectDataContext";
 import { projectListContext } from "../../Context/projectListContext";
 import { nameUtil } from "../../utils/helperUtils";
 import Side from "./Components/Side";
 import SideItem from "./Components/SideItem";
-import Pages from "./Components/Pages";
 
 
 
@@ -76,7 +75,8 @@ const  Templates = (props)=> {
         setBox(false)
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
         const path=`/dashboard/projects?uid=${user.id}`
-        props.postData(path,JSON.stringify(projectDataRef.current))
+        // props.postData(path,JSON.stringify(projectDataRef.current))
+        props.postData(path,projectDataRef.current);
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
 
         
@@ -170,7 +170,7 @@ const  Templates = (props)=> {
                 <div className='flex w-[25%] items-center justify-between '>
                     <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
                     {logout ? <Button value="Logout" className='absolute left-[150px] top-[50px]  text-white bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
-                    <div className='text-black'>Hire a Professional</div>
+                    <div className='text-black cursor-pointer'><Link to='/home/support'>Hire a Professional</Link> </div>
                 </div>
                 <div className='flex w-[35%] items-center justify-between'>
                     <Button value="Save" className='text-white bg-darkBlue font-fontRoboto font-semibold w-[125px] h-[45px] rounded-none mr-4'onClick={handleBoxDisplay}  />

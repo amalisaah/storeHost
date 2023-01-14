@@ -1,23 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import useState from "react-usestateref";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 import Submit from "../../../Components/Submit";
 import Input from "../../Authentication/Components/Input";
 import Footer from "../../Templates/Blog/Components/Footer";
 import Header from "../../../Components/Header";
-import { data } from "../../Templates/Finance/Finance1/data";
+import { projectNameContext } from "../../../Context/projectNameContext";
 
 
-const  Finance1 = ()=> {
+const  Finance1 = (props)=> {
 
     /*Controls editable states*/
     const [edit,setEdit,editRef] = useState({}) ;
+    const [projectName,setProjectName] = useContext(projectNameContext)
 
 
-    /*  Set edit to data if no existing changes available*/
+    /*  Set edit to data associated with projectName*/
     useEffect(()=>{
-        // setEdit(()=> Object.keys(edit).length === 0 && data);
-        setEdit(()=> data);
-       
+        // let Name = sessionStorage.getItem('projectName');
+        const Name=props.name;
+        console.log(props.name);
+        // setProjectName((prev)=>Name ? Name : prev)
+        let Data = sessionStorage.getItem('projectData');
+        Data = JSON.parse(Data);
+        console.log(Data);
+        // console.log(Name);
+        console.log(Data[Name]);
+        // console.log(projectNameRef.current);
+        // console.log(Name,'errrhm');
+        setEdit((prev)=> (Data && Name) ?  Data[Name] : prev);
+        console.log(editRef.current)
+
     },[])
 
 

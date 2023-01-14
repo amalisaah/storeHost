@@ -39,6 +39,7 @@ function App() {
   const [projectName,setProjectName,projectNameRef] = useState('');
 
   const [projectData,setProjectData,projectDataRef] = useState({})
+  console.log(projectDataRef.current)
 
   /*List of all projects*/
   const [projectList,setProjectList,projectListRef] = useState([]);
@@ -50,16 +51,50 @@ function App() {
     setAllHosted(prev=>temp ? [...prev,[...site]]:prev)
     
   }
+
+/**HANDLE Clearing data on LOGOUT */
+function clearData(params) {
+  setUser({});
+  setProjectName('');
+  setProjectData('');
+  setProjectList([]);
+  setResponse('')
+
+}
+
+
+
+////PROJECT//////
+/*Fetching Data on first render*/
   useEffect(()=>{
     let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
     setAllHosted(prev=>item ?[...prev,...JSON.parse(item)] : prev);
     // console.table(allHostedRef.current);
     // console.table(projectListRef.current);
 
-    let data=sessionStorage.getItem('projectData');// FETCH FROM BG**********
-    setProjectData(prev=>data ? {...JSON.parse(data)} : prev)
-    // console.log(projectDataRef.current)
-  },[])
+  
+  if (userRef.current.id){
+    const path=`/dashboard/projects`;
+    getData(path,true);
+    }
+   
+  },[user])
+
+  /*storing all hosted projects  */ //EDIT WHEN BG IS READY
+  useEffect(()=>{
+    //edt to be data of all hosted proj
+    (projectData && Object.keys(projectDataRef.current)>0) ? sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current)): null 
+       
+},[projectDataRef.current])  
+  useEffect(()=>{
+    
+    const temp = sessionStorage.getItem('projectData')
+    setProjectData(temp ? JSON.parse(temp): prev)  
+       
+})  
+
+
+
 
 
   /* DATA POSTING AND DATA GETTING */
@@ -67,7 +102,7 @@ function App() {
   function postData(path,data){
     (async()=>{
       try {
-          const url=`${baseUrl}${path}`;
+          const url=`${baseUrl}${path}?uid=${userRef.current.id}`;
           console.log(url);
           const val=data;
           console.log(val);
@@ -80,20 +115,26 @@ function App() {
     })();
   }
 
-  const [response,setResponse] = useState(null)
-  function getData(path,data){
+  const [response,setResponse,responseRef] = useState('')
+  function getData(path,query){
     (async()=>{
       try {
-          const url=`${baseUrl}${path}`;
+          const url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
           console.log(url);
-          const val=data;
           const response = await axios.get(url);
-          setResponse(response.data) 
+          // const data = response.data
+          setResponse((prev)=> response.data) 
+          setProjectData(prev=>query ? response.data : prev)
       } catch (error) {
-          console.log(error.response.staus);
+          console.log(error.response);
           // if (error.response.data==='Unauthorized'){setError(true)}
       }     
     })();
+  }
+
+  /*Clear response after use to prevent wrong data*/
+  function clearResponse() {
+    setResponse('')
   }
 
   return (
@@ -106,7 +147,7 @@ function App() {
                 <Routes>
                   <Route path='/' element={<LandingPage/>} />
                   <Route path='/authentication/*' element={<Authentication  />} />
-                  <Route path='/home' element={<Home/> } >
+                  <Route path='/home' element={<Home clearData={clearData} getData={getData} responseRef={responseRef} clearResponse={clearResponse} /> } >
                     <Route index element={<Dashboard />} />
                     <Route path='projects' element={<Project/> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />

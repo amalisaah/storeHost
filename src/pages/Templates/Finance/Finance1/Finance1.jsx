@@ -8,6 +8,7 @@ import Header from "../../Components/Header";
 import { data } from "./data";
 import Image from "../../../Home/Components/Image";
 import Pages from "../../Components/Pages";
+import Components from "../../Components/Components";
 
 const  Finance1 = ()=> {
 
@@ -64,12 +65,13 @@ const  Finance1 = ()=> {
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="text-orange text-xl font-fontRoboto">Register</span>
             </Header>
             {pagesVisible ? <Pages pages={['Personal', 'Business']} /> : null}
+            {/* <Components /> */}
             <main className='font-fontRoboto'>
                 <div className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]">
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]'>
                         <h2 id='header1' contentEditable onBlur={onContentBlur}
                             dangerouslySetInnerHTML={sanitize(edit.header1)} className="text-[40px] font-semibold font-fontRoboto text-center mb-5" />
-                        <p className='text-inherit font-normal font-fontRoboto text-xl text-center w-[42%] mx-auto leading-[23px] ' id='para1' contentEditable dangerouslySetInnerHTML={sanitize(edit.para1)} />
+                        <p className='text-inherit font-normal font-fontRoboto text-xl text-center w-[42%] mx-auto leading-[23px] ' id='para1' onBlur={onContentBlur} contentEditable dangerouslySetInnerHTML={sanitize(edit.para1)} />
                     </div>
                 
                     <div className='z-5 mt-[113px] flex justify-center text-[36px]'>

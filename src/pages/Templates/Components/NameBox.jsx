@@ -1,9 +1,9 @@
 import { PropTypes } from "prop-types";
 import React, { useContext } from "react";
-import Submit from "../../../../Components/Submit";
-import { projectNameContext } from "../../../../Context/projectNameContext";
-import { projectListContext } from "../../../../Context/projectListContext";
-import { preventDuplicates } from "../../../../utils/helperUtils";
+import Submit from "../../../Components/Submit";
+import { projectNameContext } from "../../../Context/projectNameContext";
+import { projectListContext } from "../../../Context/projectListContext";
+import { preventDuplicates } from "../../../utils/helperUtils";
 
 const  NameBox = (props)=> {
 
