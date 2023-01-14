@@ -39,7 +39,7 @@ function App() {
   const [projectName,setProjectName,projectNameRef] = useState('');
 
   const [projectData,setProjectData,projectDataRef] = useState({})
-  console.log(projectDataRef.current)
+  
 
   /*List of all projects*/
   const [projectList,setProjectList,projectListRef] = useState([]);
@@ -82,16 +82,16 @@ function clearData(params) {
 
   /*storing all hosted projects  */ //EDIT WHEN BG IS READY
   useEffect(()=>{
-    //edt to be data of all hosted proj
-    (projectData && Object.keys(projectDataRef.current)>0) ? sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current)): null 
+    //edit to be data of all hosted proj
+    (projectData && Object.keys(projectDataRef.current)===0) ? sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current)): null 
        
 },[projectDataRef.current])  
   useEffect(()=>{
     
     const temp = sessionStorage.getItem('projectData')
-    setProjectData(temp ? JSON.parse(temp): prev)  
+    setProjectData(prev =>temp ? JSON.parse(temp): prev)  
        
-})  
+},[])  
 
 
 
@@ -125,6 +125,7 @@ function clearData(params) {
           // const data = response.data
           setResponse((prev)=> response.data) 
           setProjectData(prev=>query ? response.data : prev)
+          console.log(response.data)
       } catch (error) {
           console.log(error.response);
           // if (error.response.data==='Unauthorized'){setError(true)}
@@ -174,8 +175,8 @@ function clearData(params) {
                       ({
                         'Blog-1': <h1>naana</h1>,
                         'Blog-2': <h1>naana</h1>,
-                        'Blog-3': <Blog3 name={projectDataRef.current[site[1]]} />,
-                        'finance-1': <Finance1 name={projectDataRef.current[site[1]]} />
+                        'Blog-3': <Blog3 data={projectDataRef.current[site[1]]} />,
+                        'finance-1': <Finance1 data={projectDataRef.current[site[1]]} />
                       }[site[0]] 
                       )
                       } 

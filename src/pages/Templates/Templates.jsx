@@ -68,7 +68,8 @@ const  Templates = (props)=> {
     function handleSubmit () {
         // const name=[projectNameRef.current];
         const name=nameUtil(projectNameRef.current,user);
-        setEdit(prev=>({...prev,pathName:location.pathname}))
+        setEdit(prev=>({...prev,pathName:location.pathname,projStyle:styleRef.current}))//pathname is to acess template type to aid in rerouting from proect page
+        // setEdit(prev=>({...prev,pathName:location.pathname}))//pathname is to acess template type to aid in rerouting from proect page
         setProjectData(prev=>({...prev,[name]:editRef.current}));
         console.table(projectDataRef.current)
         setProjectList(prev=>[...prev,name]); //adds name to project list
@@ -91,6 +92,9 @@ const  Templates = (props)=> {
         // console.log(projectNameRef.current);
         // console.log(Name,'errrhm');
         setEdit((prev)=> (Data && Name) ?  Data[projectNameRef.current] : prev);
+        // setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current.projStyle] : prev);
+        setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current].projStyle ? Data[projectNameRef.current].projStyle : prev :prev);
+        console.log(styleRef.current)
         console.log(editRef.current)
 
     },[])
@@ -143,6 +147,24 @@ const  Templates = (props)=> {
         setPagesVisible(prev=>!prev)
     }
 
+    /*Components Options Display */
+    const [componentVisible,setComponentVisible] =useState(false);
+    function componentVisibility(){
+        setComponentVisible(prev=>!prev)
+    }
+
+
+
+    /*COMPONENTS STYLING*/
+    const [style,setStyle,styleRef]=useState({});
+    function changeStyle (item,obj){
+        let temp=style[item]
+        temp={...temp,...obj}
+        console.log(temp)
+        setStyle(prev=>({...prev,[item]:temp}))
+    }
+
+
 
     /* HIDE OR SHOW LOGOUT BUTTON*/
     const [logout,setLogout]= useState(false);
@@ -181,7 +203,7 @@ const  Templates = (props)=> {
             </header>
             <main className='pt-[100px]'>
                     <Side className=' top-0'>
-                        <SideItem className='text-bgBlue' icon='+'/>
+                        <SideItem className='text-bgBlue' onClick={componentVisibility} icon='+'/>
                         <SideItem className='text-bgBlue text-xl' onClick={picVisibility} icon= {<i className="fa fa-upload"></i>}/>
                     </Side>
                     <Side className=' top-0 right-0'>
@@ -192,7 +214,7 @@ const  Templates = (props)=> {
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 <div className='mx-[5.4%]'>
-                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible]}/>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle]}/>
                 </div>
 
             </main>

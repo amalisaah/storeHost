@@ -11,27 +11,27 @@ import { projectNameContext } from "../../../Context/projectNameContext";
 const  Finance1 = (props)=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef] = useState({}) ;
-    const [projectName,setProjectName] = useContext(projectNameContext)
+    const [edit] = [props.data];
+    // const [projectName,setProjectName] = useContext(projectNameContext)
 
 
-    /*  Set edit to data associated with projectName*/
-    useEffect(()=>{
-        // let Name = sessionStorage.getItem('projectName');
-        const Name=props.name;
-        console.log(props.name);
-        // setProjectName((prev)=>Name ? Name : prev)
-        let Data = sessionStorage.getItem('projectData');
-        Data = JSON.parse(Data);
-        console.log(Data);
-        // console.log(Name);
-        console.log(Data[Name]);
-        // console.log(projectNameRef.current);
-        // console.log(Name,'errrhm');
-        setEdit((prev)=> (Data && Name) ?  Data[Name] : prev);
-        console.log(editRef.current)
+    // /*  Set edit to data associated with projectName*/
+    // useEffect(()=>{
+    //     // let Name = sessionStorage.getItem('projectName');
+    //     const Name=props.name;
+    //     console.log(props.name);
+    //     // setProjectName((prev)=>Name ? Name : prev)
+    //     let Data = sessionStorage.getItem('projectData');
+    //     Data = JSON.parse(Data);
+    //     console.log(Data);
+    //     // console.log(Name);
+    //     console.log(Data[Name]);
+    //     // console.log(projectNameRef.current);
+    //     // console.log(Name,'errrhm');
+    //     setEdit((prev)=> (Data && Name) ?  Data[Name] : prev);
+    //     console.log(editRef.current)
 
-    },[])
+    // },[])
 
 
     return (
