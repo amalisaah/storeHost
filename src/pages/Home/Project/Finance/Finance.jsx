@@ -1,38 +1,53 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import preview1 from "../../../../assets/images/Blog/Desktop - 2.jpg";
-import template1 from "../../../../assets/images/Blog/Template1.png";
+import preview1 from "../../../../assets/images/Finance/Finance 1.png";
+import template1 from "../../../../assets/images/Finance/icon.png";
 import Button from "../../../../Components/Button";
 
 const  Finance = ()=> {
 
     const navigate = useNavigate();
     const [handleClearName] = useOutletContext();
+    const ref = useRef(null);
+    const hidePreview = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+            let element = document.getElementsByClassName('preview');
+            element[0].style.display='none';
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', hidePreview, true);
+        return () => {
+            document.removeEventListener('click', hidePreview, true);
+        };
+    }, []);
 
     function showPreview(e) {
-        console.log(e.target.parentNode.parentNode.firstElementChild);
-        e.target.parentNode.parentNode.firstElementChild.style.display='block';
-        console.log(e.currentTarget);
+        let element = document.getElementsByClassName('preview')
+        element[0].style.display='block';
     }
 
-    function hidePreview(e) {
-        e.target.style.display='none';
-    }
+   
 
     return (
         <>
             <div className='w-[full] flex justify-start pl-10'>
                 <div className='font-fontRoboto text-xl text-center w-[30%]'  >
-                    <img src={preview1} alt='review' className="absolute w-5/6 left-[7%] top-[176px]" style={{display:'none'}} onMouseLeave={hidePreview} />
+                    <div className='preview' ref={ref} style={{display:'none'}}>
+                        <img src={preview1} alt='review' className=" absolute w-5/6 left-[7%] top-[176px] "  />
+
+                        <Button value="Edit" className=' bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none fixed right-10 bottom-20' onClick={()=>{
+                        handleClearName()
+                        navigate('/template/finance/finance-1')}
+                        } />
+                    </div>
                     <Link>
-                        <img src={template1} alt={'finance'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' onClick={showPreview}/>
+                        <img src={template1} alt={'finance'} className='w-full max-h-[240px] min-w-[28%] border-[#59AFFF] hover:border-2 shadow-1' onClick={showPreview} role='icon'/>
                     </Link>
                     finance-1
                     <div className=''></div>
-                    <Button value="Edit" className='bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none ' onClick={()=>{
-                        handleClearName()
-                        navigate('/template/finance/finance-1')}
-                    } />
+                    
                 </div>
             </div>
         </>

@@ -7,12 +7,12 @@ import ProfilePic from "../../Components/ProfilePic";
 import { LoginContext } from "../../Context/LoginContext";
 import  team from '../../assets/images/Ellipse3.png';
 import arrow from "../../assets/images/icons/arrow.png";
-import SideBar from "../../Components/SideBar";
+import SideBar from "./Components/SideBar";
 import Button from "../../Components/Button";
 import { projectDataContext } from "../../Context/projectDataContext";
 import { projectNameContext } from "../../Context/projectNameContext";
 
-const  Home = ()=> {
+const  Home = (props)=> {
 
     const {user,setUser,userRef} = useContext(LoginContext);
 
@@ -24,7 +24,8 @@ const  Home = ()=> {
         setValue({...userRef.current})
 
     },[])
-
+    
+    
     /* HIDE OR SHOW LOGOUT BUTTON*/
     const [logout,setLogout]= useState(false);
     function toggleLogout(){
@@ -36,7 +37,8 @@ const  Home = ()=> {
     function handleLogout(){
         localStorage.clear();
         sessionStorage.clear();
-        setUser({});
+        // setUser({});
+        props.clearData();
         navigate('/authentication/login')
     }
 
@@ -47,7 +49,7 @@ const  Home = ()=> {
             // setResp
         setIsAlertVisible(true);
 
-        const timeOutId=setTimeout(() => {
+        setTimeout(() => {
             setIsAlertVisible(false);
         }, 3000);
         setResponse({})
@@ -59,15 +61,29 @@ const  Home = ()=> {
     /////////////////// PROJECT /////////////////
     /*Fetch Project Data */
     const [projectData,setProjectData] = useContext(projectDataContext)
-    useEffect(()=>{
-        setProjectData((prev)=>{
-            const id=user.id;
-            return({id,
-            ...prev,
+    // useEffect(()=>{
+    //     setProjectData((prev)=>{
+    //         // const id=user.id;
+    //         return({
+    //         ...prev,
             
-            })
-        })
-    },[])     
+    //         })
+    //     })
+    // },[])  
+
+    /*populating session storage with fetched data on first render*/
+    useEffect(()=>{
+        let temp = sessionStorage.getItem('projectData'); 
+        if ((temp==='""'|| !temp || Object.keys(temp).length === 0)){
+          sessionStorage.setItem('projectData',JSON.stringify(props.responseRef.current))  
+        }      
+    },[props.responseRef.current])   
+
+      /*Toggles Select Box Options*/
+      const [categorySel,setCategorySel] = useState(true);
+      function selectCategory (bol){
+        setCategorySel(bol)
+      }
 
     /*Keep track of projects */
     // const [projectName,setProjectName] = useState('mm')
@@ -115,6 +131,25 @@ const  Home = ()=> {
 
         console.log(pic);                  
         setProfilePic(prev=>(pic));  
+        const endpoint='/dashboard/profile/img';
+        const path=`https://storefront-dpqh.onrender.com${endpoint}?uid=${user.id}`;
+        // onSubmit(pic,value) //handleSubmit function in homepage
+        const data = new FormData() 
+        data.append('tag',pic.picture);
+        console.log(pic.picture);
+        console.log(data);
+        console.log(path);
+        (async()=>{
+            try {
+                const response = await axios.post(path,data);
+            
+                
+                console.log(response) 
+            } catch (error) {
+                console.log(error)
+                
+            }
+        })()
       };
 
     /*Handle Editing in Profile Page*/
@@ -140,9 +175,9 @@ const  Home = ()=> {
             {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
         </Header>
          <div className='flex pt-[88px]'>
-            <SideBar />
+            <SideBar onClick={selectCategory}/>
             <div className='ml-[15.5%] w-full'>
-            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName,isAlertVisible]} /> {/*displays selected page from side bar*/}
+            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName,isAlertVisible,selectCategory,categorySel]} /> {/*displays selected page from side bar*/}
             </div>
 
         </div> </>

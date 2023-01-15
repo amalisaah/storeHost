@@ -6,7 +6,7 @@ import Image from "../../../Home/Components/Image";
 
 const  Business = ()=> {
 
-    const [edit,picture,changePic,onContentBlur,labelVisible] = useOutletContext();
+    const [edit,picture,changePic,onContentBlur,labelVisible,style] = useOutletContext();
     return (
         <>
             <div className='h-[286px] font-fontRoboto flex justify-evenly items-center bg-orange'>
@@ -22,13 +22,13 @@ const  Business = ()=> {
             </div>
             <div className='px-[5.5%] py-8'>
                 <div className='flex justify-between'>
-                    <Paragraph headerId='businessHeader2' header={edit.businessHeader2} paraId='businessPara2' para={edit.businessPara2} onBlur={onContentBlur} />
+                    <Paragraph style={style} headerId='businessHeader2' header={edit.businessHeader2} paraId='businessPara2' para={edit.businessPara2} onBlur={onContentBlur} />
                     <Image src={picture.businessOne ? picture.businessOne.src : '/images/finance/Child.png'} alt='Happy Child' imageId="personalOne" id="fileOne" labelVisible={labelVisible} onChange={changePic} />
                 </div>
 
                 <div className='flex justify-between'>
                     <Image src={picture.businesssTwo ? picture.businessTwo.src : '/images/finance/House.png'} alt='Happy Child' imageId="personalTwo" id="fileTwo" labelVisible={labelVisible} onChange={changePic} />
-                    <Paragraph headerId='businessHeader3' header={edit.businessHeader3} paraId='businessPara3' para={edit.businessPara3} onBlur={onContentBlur} />
+                    <Paragraph style={style} headerId='businessHeader3' header={edit.businessHeader3} paraId='businessPara3' para={edit.businessPara3} onBlur={onContentBlur} />
                 </div>
             </div> 
             

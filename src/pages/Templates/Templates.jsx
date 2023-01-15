@@ -1,20 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import useState from 'react-usestateref';
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, Link } from "react-router-dom";
 import ProfilePic from "../../Components/ProfilePic";
 import arrow from "../../assets/images/icons/arrow.png";
 import  team from '../../assets/images/Ellipse3.png';
 import { LoginContext } from "../../Context/LoginContext";
 import Button from "../../Components/Button";
 import Logo from "../../Components/Logo";
-import NameBox from "./Blog/Components/NameBox";
+import NameBox from "./Components/NameBox";
 import { projectNameContext } from "../../Context/projectNameContext";
 import { projectDataContext } from "../../Context/projectDataContext";
 import { projectListContext } from "../../Context/projectListContext";
 import { nameUtil } from "../../utils/helperUtils";
 import Side from "./Components/Side";
 import SideItem from "./Components/SideItem";
-import Pages from "./Components/Pages";
 
 
 
@@ -52,31 +51,21 @@ const  Templates = (props)=> {
     }
 
     const location = useLocation() //aids in routing to page from recent projects
-    // function handleSubmit () {
-    //     const name=[projectNameRef.current];
-    //     setEdit(prev=>({...prev,pathName:location.pathname}))
-    //     setProjectData(prev=>({...prev,[name]:editRef.current}));
-    //     console.table(projectDataRef.current)
-    //     setProjectList(prev=>[...prev,name]); //adds name to project list
-    //     setBox(false)
-    //     sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
-    //     const path=`/dashboard/projects?uid=${user.id}`
-    //     // props.postData(path,JSON.stringify(projectDataRef.current))
-    //     sessionStorage.setItem('projectName',JSON.stringify(projectName));
 
-        
-    // };
     function handleSubmit () {
         // const name=[projectNameRef.current];
         const name=nameUtil(projectNameRef.current,user);
-        setEdit(prev=>({...prev,pathName:location.pathname}))
+        setEdit(prev=>({...prev,pathName:location.pathname,projStyle:styleRef.current}))//pathname is to acess template type to aid in rerouting from proect page
+        
         setProjectData(prev=>({...prev,[name]:editRef.current}));
         console.table(projectDataRef.current)
-        setProjectList(prev=>[...prev,name]); //adds name to project list
+        // setProjectList(prev=>[...prev,([name,'errrh'])]); //adds name to project list
+        // console.log(projectListRef.current)
         setBox(false)
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
-        const path=`/dashboard/projects?uid=${user.id}`
-        props.postData(path,JSON.stringify(projectDataRef.current))
+        const path=`/dashboard/projects`
+        // props.postData(path,JSON.stringify(projectDataRef.current))
+        props.postData(path,projectDataRef.current);
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
 
         
@@ -87,11 +76,10 @@ const  Templates = (props)=> {
         let Name = sessionStorage.getItem('projectName');
         setProjectName((prev)=>Name ? JSON.parse(Name) : prev)
         let Data = sessionStorage.getItem('projectData');
-        Data = JSON.parse(Data)
-        // console.log(projectNameRef.current);
-        // console.log(Name,'errrhm');
+        Data = JSON.parse(Data);
         setEdit((prev)=> (Data && Name) ?  Data[projectNameRef.current] : prev);
-        console.log(editRef.current)
+        // setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current.projStyle] : prev);
+        setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current].projStyle ? Data[projectNameRef.current].projStyle : prev :prev);
 
     },[])
 
@@ -143,6 +131,30 @@ const  Templates = (props)=> {
         setPagesVisible(prev=>!prev)
     }
 
+    /*Components Options Display */
+    const [componentVisible,setComponentVisible] =useState(false);
+    function componentVisibility(){
+        setComponentVisible(prev=>!prev)
+    }
+    /*Components Options Display */
+    const [colorVisible,setColorVisible] =useState(false);
+    function colorVisibility(){
+        setColorVisible(prev=>!prev)
+    }
+    
+
+
+
+    /*COMPONENTS STYLING*/
+    const [style,setStyle,styleRef]=useState({});
+    function changeStyle (item,obj){
+        let temp=style[item]
+        temp={...temp,...obj}
+        console.log(temp)
+        setStyle(prev=>({...prev,[item]:temp}))
+    }
+
+
 
     /* HIDE OR SHOW LOGOUT BUTTON*/
     const [logout,setLogout]= useState(false);
@@ -170,7 +182,11 @@ const  Templates = (props)=> {
                 <div className='flex w-[25%] items-center justify-between '>
                     <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
                     {logout ? <Button value="Logout" className='absolute left-[150px] top-[50px]  text-white bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
-                    <div className='text-black'>Hire a Professional</div>
+                    <div className='text-black cursor-pointer'><Link to='/home/support'>Hire a Professional</Link> </div>
+                </div>
+                <div className=''>
+                <i className="fa-solid fa-tv pr-4 border-r-2 border-solid border-darkBlue cursor-pointer" onClick={()=>{}}></i>
+                <i className="fa-solid fa-mobile ml-4 cursor-pointer" onClick={()=>{}} ></i>
                 </div>
                 <div className='flex w-[35%] items-center justify-between'>
                     <Button value="Save" className='text-white bg-darkBlue font-fontRoboto font-semibold w-[125px] h-[45px] rounded-none mr-4'onClick={handleBoxDisplay}  />
@@ -181,7 +197,7 @@ const  Templates = (props)=> {
             </header>
             <main className='pt-[100px]'>
                     <Side className=' top-0'>
-                        <SideItem className='text-bgBlue' icon='+'/>
+                        <SideItem className='text-bgBlue' onClick={componentVisibility} icon='+'/>
                         <SideItem className='text-bgBlue text-xl' onClick={picVisibility} icon= {<i className="fa fa-upload"></i>}/>
                     </Side>
                     <Side className=' top-0 right-0'>
@@ -192,7 +208,7 @@ const  Templates = (props)=> {
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 <div className='mx-[5.4%]'>
-                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible]}/>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility]}/>
                 </div>
 
             </main>

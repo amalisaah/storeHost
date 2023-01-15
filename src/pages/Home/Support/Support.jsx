@@ -32,7 +32,7 @@ const  Support = ()=> {
             <form className='' onSubmit={handleSubmit} >
                 {isAlertVisible ? <Alert text='Message sucessfully sent' /> : null}
                 <div className='m-auto w-[95%] h-[382px]'>
-                <textarea className="w-full h-full bg-white  shadow-1 mt-4 p-6 focus:border-solid focus:border-2 focus:outline-none border-darkBlue " name='message' placeholder=" Hello Storefront, I would like to ... " value={support.message || ''} onChange={handleChange} >                   
+                <textarea className="w-full h-full bg-white  shadow-1 mt-4 p-6 focus:border-solid focus:border-2 focus:outline-none border-darkBlue " name='message' placeholder=" Hello Storefront, I would like to ... " value={support.message || ''} onChange={handleChange} required >                   
                 </textarea>
                 </div>
                 <div className='pl-8 mt-8'><Submit value={'Send'} className='bg-darkBlue h-10 w-[206px]' /></div>

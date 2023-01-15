@@ -8,18 +8,18 @@ import Header from "../../Components/Header";
 import { data } from "./data";
 import Image from "../../../Home/Components/Image";
 import Pages from "../../Components/Pages";
+import Components from "../../Components/Components";
 
 const  Finance1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef,labelVisible,pagesVisible] = useOutletContext() ;
+    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility] = useOutletContext() ;
 
-    let template= true;
 
     /*  Set edit to data if no existing changes available*/
     useEffect(()=>{
-        // setEdit(()=> Object.keys(edit).length === 0 && data);
-        setEdit(()=> data);
+        setEdit((prev)=> Object.keys(edit).length === 0 ? data : prev);
+        // setEdit(()=> data);
        
     },[])
 
@@ -64,12 +64,13 @@ const  Finance1 = ()=> {
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="text-orange text-xl font-fontRoboto">Register</span>
             </Header>
             {pagesVisible ? <Pages pages={['Personal', 'Business']} /> : null}
+            {componentVisible ? <Components style={style} changeStyle={changeStyle} colorVisible={colorVisible} colorVisibility={colorVisibility} /> : null}
             <main className='font-fontRoboto'>
                 <div className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]">
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]'>
                         <h2 id='header1' contentEditable onBlur={onContentBlur}
-                            dangerouslySetInnerHTML={sanitize(edit.header1)} className="text-[40px] font-semibold font-fontRoboto text-center mb-5" />
-                        <p className='text-inherit font-normal font-fontRoboto text-xl text-center w-[42%] mx-auto leading-[23px] ' id='para1' contentEditable dangerouslySetInnerHTML={sanitize(edit.para1)} />
+                            dangerouslySetInnerHTML={sanitize(edit.header1)} className="text-[40px] font-semibold font-fontRoboto text-center mb-5" style={style.header} />
+                        <p className='text-inherit font-normal font-fontRoboto text-xl text-center w-[42%] mx-auto leading-[23px] ' id='para1' onBlur={onContentBlur} contentEditable dangerouslySetInnerHTML={sanitize(edit.para1)} />
                     </div>
                 
                     <div className='z-5 mt-[113px] flex justify-center text-[36px]'>
@@ -102,7 +103,7 @@ const  Finance1 = ()=> {
                         <Paragraph headerId='header3' header={edit.header3} paraId='para3' para={edit.para3} onBlur={onContentBlur} />
                     </div>
                 </div> */}
-                <Outlet context={[edit,picture,changePic,onContentBlur,labelVisible]} />
+                <Outlet context={[edit,picture,changePic,onContentBlur,labelVisible,style]} />
             </div>
                 
                 <div className="flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%]">

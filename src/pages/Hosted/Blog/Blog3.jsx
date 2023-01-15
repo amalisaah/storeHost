@@ -12,16 +12,8 @@ import Logo from "../../Templates/Blog/Components/Logo";
 
 const  Blog3 = (props)=> {
 
-    const name=props.name && props.name
-    console.log(name)
-    // console.log(projectDataRef.current[name]) 
-   
-    
-    
-
-
     /*Controls editable states*/
-    const [edit,editRef] = [props.name,props.name];
+    const [edit,editRef] = [props.data,props.data];
     let template= false
     
     // useEffect(()=>{
