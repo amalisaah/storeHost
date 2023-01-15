@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 const  Alert = (props)=> {
     return (
         <>
-           <p role='alert' className={'text-error text-center ' + props.className} >{props.text}</p> 
+           <p role='alert' className={'text-error text-center mb-4 font-fontRoboto text-base ' + props.className} >{props.text}</p> 
         </>
     )
 };

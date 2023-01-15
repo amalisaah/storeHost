@@ -14,10 +14,17 @@
   --hoverBlue:#59afff;
   --darkBlue: #00284C;
   --black: #222;
+  --blur: #222222cc;
 
   /*Templates 1*/
   --lnkColorB:#15616B;
   --bgColorB: #4F4F4F;
+  --bgOrange:#FC7225;
+
+
+  /* --ahhh: #ffffffe6; */
+  background: #f6f6f6cc;
+
 }
 * {
   box-sizing: border-box;
@@ -61,4 +68,8 @@ input[type=submit]:hover {
 form input:focus {
   border: none;
   outline: 0px;
+}
+.profilePic:hover label {
+  display: flex;
+  background-color: var(--blur);
 }

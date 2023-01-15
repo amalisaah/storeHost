@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import useState from "react-usestateref";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../Components/Header";
@@ -6,11 +7,12 @@ import ProfilePic from "../../Components/ProfilePic";
 import { LoginContext } from "../../Context/LoginContext";
 import  team from '../../assets/images/Ellipse3.png';
 import arrow from "../../assets/images/icons/arrow.png";
-import SideBar from "../../Components/SideBar";
+import SideBar from "./Components/SideBar";
 import Button from "../../Components/Button";
 import { projectDataContext } from "../../Context/projectDataContext";
+import { projectNameContext } from "../../Context/projectNameContext";
 
-const  Home = ()=> {
+const  Home = (props)=> {
 
     const {user,setUser,userRef} = useContext(LoginContext);
 
@@ -22,46 +24,72 @@ const  Home = ()=> {
         setValue({...userRef.current})
 
     },[])
-
-
-    /*Fetch Project Data */
-    const [projectData,setProjectData] = useContext(projectDataContext)
-    useEffect(()=>{
-        setProjectData((prev)=>{
-            const id=user.id;
-            return({id,
-            ...prev,
-            
-            })
-        })
-    },[])
-
-
+    
+    
     /* HIDE OR SHOW LOGOUT BUTTON*/
     const [logout,setLogout]= useState(false);
     function toggleLogout(){
         setLogout(prev=>!prev)
          console.log(logout);
     }
-    
+
     const navigate = useNavigate()
-    function handleClick(){
+    function handleLogout(){
         localStorage.clear();
         sessionStorage.clear();
-        setUser({});
+        // setUser({});
+        props.clearData();
         navigate('/authentication/login')
     }
-    
 
-    /*Handle Editing in Profile Page*/
-    const [value,setValue] = useState({...user});
+    /*hHandles Alerts*/
+    const [ isAlertVisible, setIsAlertVisible ] = useState(false);
+    useEffect(()=> {
+        if (responseRef.current.status===200){
+            // setResp
+        setIsAlertVisible(true);
 
-    /*Handle text in support page */
-    const email=user.email || 'boy'
-    const [support,setSupport] = useState({email})
+        setTimeout(() => {
+            setIsAlertVisible(false);
+        }, 3000);
+        setResponse({})
+    }
+    })
+
+
+
+    /////////////////// PROJECT /////////////////
+    /*Fetch Project Data */
+    const [projectData,setProjectData] = useContext(projectDataContext)
+    // useEffect(()=>{
+    //     setProjectData((prev)=>{
+    //         // const id=user.id;
+    //         return({
+    //         ...prev,
+            
+    //         })
+    //     })
+    // },[])  
+
+    /*populating session storage with fetched data on first render*/
+    useEffect(()=>{
+        let temp = sessionStorage.getItem('projectData'); 
+        if ((temp==='""'|| !temp || Object.keys(temp).length === 0)){
+          sessionStorage.setItem('projectData',JSON.stringify(props.responseRef.current))  
+        }      
+    },[props.responseRef.current])   
+
+      /*Toggles Select Box Options*/
+      const [categorySel,setCategorySel] = useState(true);
+      function selectCategory (bol){
+        setCategorySel(bol)
+      }
 
     /*Keep track of projects */
     // const [projectName,setProjectName] = useState('mm')
+
+    /*Handle Submission*/
+    const [response,setResponse,responseRef] =useState({})
     function handleSubmit(role,val) {
         const baseUrl='https://storefront-dpqh.onrender.com';
         (async()=>{
@@ -71,18 +99,71 @@ const  Home = ()=> {
                 // const val=value;
                 const response = await axios.post(url,val);
                 response.data.id  && setUser(response.data);
-    //             // setResponse(response.data)
+                setResponse(response)
                 console.log(response) 
             } catch (error) {
                 console.log(error)
-    //             // setResponse(error.response.data)
+                setResponse(error.response.data)
             }
             
         })()
         
     }
 
- 
+    /*set Name to an empty string to enable new project be started */
+    const [projectName,setProjectName,projectNameRef] = useContext(projectNameContext);
+    function handleClearName(){
+        setProjectName('');
+        sessionStorage.removeItem('projectName');
+        // console.log(e.target.parentNode.firstElementChild);
+    }
+
+
+
+
+
+
+
+    ///////////  PROFILE  /////////////////
+    /*Change Profile Pic*/
+    const [profilePic,setProfilePic] = useState({});
+    function changePic (pic) {
+
+        console.log(pic);                  
+        setProfilePic(prev=>(pic));  
+        const endpoint='/dashboard/profile/img';
+        const path=`https://storefront-dpqh.onrender.com${endpoint}?uid=${user.id}`;
+        // onSubmit(pic,value) //handleSubmit function in homepage
+        const data = new FormData() 
+        data.append('tag',pic.picture);
+        console.log(pic.picture);
+        console.log(data);
+        console.log(path);
+        (async()=>{
+            try {
+                const response = await axios.post(path,data);
+            
+                
+                console.log(response) 
+            } catch (error) {
+                console.log(error)
+                
+            }
+        })()
+      };
+
+    /*Handle Editing in Profile Page*/
+    const [value,setValue] = useState({...user});
+
+
+
+
+     //////////// SUPPORT //////////////
+    /*Handle text in support page */
+    const email=user.email;
+    const [support,setSupport,supportRef] = useState({email})
+
+
 
     
     return (
@@ -90,13 +171,13 @@ const  Home = ()=> {
         { user.id ?
         <>
         <Header className={'h-[88px] flex-row-reverse fixed'}>
-            <ProfilePic src={team} text={user.firstname || user.business} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
-            {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleClick}  /> : null}
+            <ProfilePic src={profilePic.src} text={user.firstname || user.business} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
+            {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
         </Header>
          <div className='flex pt-[88px]'>
-            <SideBar />
+            <SideBar onClick={selectCategory}/>
             <div className='ml-[15.5%] w-full'>
-               <Outlet  context={[value,setValue,handleSubmit,support,setSupport]} /> {/*displays selected page from side bar*/}
+            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName,isAlertVisible,selectCategory,categorySel]} /> {/*displays selected page from side bar*/}
             </div>
 
         </div> </>

@@ -23,15 +23,23 @@ import { useEffect } from 'react';
 import Hosted from './pages/Hosted/Hosted';
 import axios from 'axios';
 import { hostedDuplicates } from './utils/helperUtils';
+import FinanceTemp1 from './pages/Templates/Finance/Finance1/Finance1';
+import PersonalTemp1 from './pages/Templates/Finance/Finance1/Personal';
+import BusinessTemp1 from './pages/Templates/Finance/Finance1/Business';
+import Finance1 from './pages/Hosted/Finance/Finance1';
+import Personal from './pages/Hosted/Finance/Personal';
+import Business from './pages/Hosted/Finance/Business';
 
 
 function App() {
+  axios.defaults.withCredentials = true;
   // const [user,setUser] = useState({name:'thor odinson',id:243})
   const [user,setUser,userRef] = useState({});
 
   const [projectName,setProjectName,projectNameRef] = useState('');
 
   const [projectData,setProjectData,projectDataRef] = useState({})
+  
 
   /*List of all projects*/
   const [projectList,setProjectList,projectListRef] = useState([]);
@@ -43,16 +51,50 @@ function App() {
     setAllHosted(prev=>temp ? [...prev,[...site]]:prev)
     
   }
+
+/**HANDLE Clearing data on LOGOUT */
+function clearData(params) {
+  setUser({});
+  setProjectName('');
+  setProjectData('');
+  setProjectList([]);
+  setResponse('')
+
+}
+
+
+
+////PROJECT//////
+/*Fetching Data on first render*/
   useEffect(()=>{
     let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
     setAllHosted(prev=>item ?[...prev,...JSON.parse(item)] : prev);
     // console.table(allHostedRef.current);
     // console.table(projectListRef.current);
 
-    let data=sessionStorage.getItem('projectData');// FETCH FROM BG**********
-    setProjectData(prev=>data ? {...JSON.parse(data)} : prev)
-    // console.log(projectDataRef.current)
-  },[])
+  
+  if (userRef.current.id){
+    const path=`/dashboard/projects`;
+    getData(path,true);
+    }
+   
+  },[user])
+
+  /*storing all hosted projects  */ //EDIT WHEN BG IS READY
+  useEffect(()=>{
+    //edit to be data of all hosted proj
+    (projectData && Object.keys(projectDataRef.current)===0) ? sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current)): null 
+       
+},[projectDataRef.current])  
+  useEffect(()=>{
+    
+    const temp = sessionStorage.getItem('projectData')
+    setProjectData(prev =>temp ? JSON.parse(temp): prev)  
+       
+},[])  
+
+
+
 
 
   /* DATA POSTING AND DATA GETTING */
@@ -60,7 +102,7 @@ function App() {
   function postData(path,data){
     (async()=>{
       try {
-          const url=`${baseUrl}${path}`;
+          const url=`${baseUrl}${path}?uid=${userRef.current.id}`;
           console.log(url);
           const val=data;
           console.log(val);
@@ -73,20 +115,27 @@ function App() {
     })();
   }
 
-  const [response,setResponse] = useState(null)
-  function getData(path,data){
+  const [response,setResponse,responseRef] = useState('')
+  function getData(path,query){
     (async()=>{
       try {
-          const url=`${baseUrl}${path}`;
+          const url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
           console.log(url);
-          const val=data;
           const response = await axios.get(url);
-          setResponse(response.data) 
+          // const data = response.data
+          setResponse((prev)=> response.data) 
+          setProjectData(prev=>query ? response.data : prev)
+          console.log(response.data)
       } catch (error) {
-          console.log(error.response.staus);
+          console.log(error.response);
           // if (error.response.data==='Unauthorized'){setError(true)}
       }     
     })();
+  }
+
+  /*Clear response after use to prevent wrong data*/
+  function clearResponse() {
+    setResponse('')
   }
 
   return (
@@ -99,7 +148,8 @@ function App() {
                 <Routes>
                   <Route path='/' element={<LandingPage/>} />
                   <Route path='/authentication/*' element={<Authentication  />} />
-                  <Route path='/home' element={<Home/> } >
+                  <Route path='/home' element={<Home clearData={clearData} getData={getData} responseRef={responseRef} clearResponse={clearResponse} /> } >
+                    <Route index element={<Dashboard />} />
                     <Route path='projects' element={<Project/> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
@@ -112,7 +162,12 @@ function App() {
                   </Route>
                   <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} />} >
                     <Route path='blog/blog-3' element={<Templates3 />} />
+                    <Route path='finance/finance-1' element={<FinanceTemp1 />} >
+                      <Route path='personal' element={<PersonalTemp1 />}/>
+                      <Route path='business' element={<BusinessTemp1 />}/>
+                    </Route>
                   </Route>
+                  
                   {/* <Route path='/hosted' element={<Hosted/> } > */}
                     {allHosted.map((site,index)=>
                     <Route path={`/${site[1]}`} element={
@@ -120,14 +175,15 @@ function App() {
                       ({
                         'Blog-1': <h1>naana</h1>,
                         'Blog-2': <h1>naana</h1>,
-                        'Blog-3': <Blog3 name={projectDataRef.current[site[1]]} />,
-                        'kojo': <h1>akos</h1>
-                      }[site[0]] || <h1>forget the rest</h1>
+                        'Blog-3': <Blog3 data={projectDataRef.current[site[1]]} />,
+                        'finance-1': <Finance1 data={projectDataRef.current[site[1]]} />
+                      }[site[0]] 
                       )
                       } 
                       key={index}>
+                        <Route path='personal' element={<Personal /> } />
+                        <Route path='business' element={<Business /> } />
                     </Route> )}
-                  {/* </Route> */}
                     <Route path='*' element={<h1 className='mx-auto' ><Link to='/authentication'> GO BACK</Link></h1>} />
                   {/* <Route path='*' element={<Templates/>} /> */}
                   

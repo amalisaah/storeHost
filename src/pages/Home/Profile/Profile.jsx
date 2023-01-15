@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ProfilePic from "../../../Components/ProfilePic";
-import pic from "../../../assets/images/Ellipse 15.png";
 import pencil from "../../../assets/images/icons/pencil.png"
 import { LoginContext } from "../../../Context/LoginContext";
 import Input from "../../../Components/Input";
@@ -12,34 +11,48 @@ const  Profile = ()=> {
     const {user,setUser} = useContext(LoginContext);
 
     /*Handle editing*/
-    const [value,setValue,onSubmit]=useOutletContext();
+    const [value,setValue,onSubmit,,,,changePic,profilePic]=useOutletContext();
     function handleChange(e){
         e.preventDefault()
-        const name=e.target.name;
+        const name=e.target.id;
         setValue(prev=>({...prev,[name]:e.target.value}));
         // if(error){ // to remove error msg
         //     const isValid=!e.target.validity.patternMismatch
         //     isValid && setError(false)
         // }
-        console.log(value)
         
     }
+    function nameChange(e){
+        const name=e.target.id;
+        console.log(name);
+        setValue(prev=>({...prev,[name]:e.target.innerText}));
+    }
+
+    /*Handle Submission*/
 
     function handleSubmit(e) {
         e.preventDefault();
-        const path='/dashboard/profile'
+        const endpoint='/dashboard/profile';
+        const path=`${endpoint}?id=${user.id}`;
         onSubmit(path,value) //handleSubmit function in homepage
     }
     
+      useEffect(()=>{
+        if (user.id){
+            let temp = localStorage.getItem('user')
+            if (temp) localStorage.setItem('user',JSON.stringify(user)); 
+            else sessionStorage.setItem('user',JSON.stringify(user)); 
+        }
+    },[user])
+
     /* handles username editing*/
     function handleClick(){
-        
     }
 
     return (
         <>
             <div className='w-[559px] m-auto '>
-                <ProfilePic src={pic} text={user.business} alt='profile pic' icon={pencil} alternative='edit button' className='h-[226px] w-[226px]' textClass={'text-[32px] leading-[36px] mx-8 '} onClick={handleClick} />    
+                <ProfilePic src={profilePic.src} template={true} text={user.business || user.firstname} alt='profile pic' icon={pencil} user={user} alternative='edit button' className='h-[226px] w-[226px] profilePic transition-all duration-1000' textClass={'text-[32px] leading-[36px] mx-8 '} onClick={handleClick} onChange={changePic} id={'pic'} changeText={nameChange} />    
 
                 <form onSubmit={handleSubmit} className='mt-8'>
                     <Input id="email" value={value.email || user.email } label={'Email'} type={'email'} name={'email'}  onChange={handleChange} />

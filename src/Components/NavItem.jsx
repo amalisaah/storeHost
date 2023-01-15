@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const  NavItem = (props)=> {
     return (
         <>
-            <div className={"text-fontGray leading-6 inline mr-16 " + props.className} ><Link to={props.link}  contentEditable={props.contentEditable} onBlur={props.onBlur} >{props.value}</Link> </div>
+            <div className={"text-fontGray leading-6 inline mr-16 " + props.className} ><Link to={props.link}  contentEditable={props.contentEditable} suppressContentEditableWarning onBlur={props.onBlur} >{props.value}</Link> </div>
         </>
     )
 };

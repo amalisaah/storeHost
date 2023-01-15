@@ -18,7 +18,7 @@ const  SignUp = (props)=> {
                     <Form value={props.value} handleChange={props.handleChange}
                      handleBlur={props.handleBlur} error={props.error} personal={props.personal} 
                      changeForm={props.changeForm} onSubmit={props.handleSubmit} handleCheck={props.handleCheck}
-                     sameRef={props.sameRef} response={props.response} loading={props.loading} pattern={props.pattern} />
+                     sameRef={props.sameRef} responseRef={props.responseRef} response={props.response} loading={props.loading} pattern={props.pattern} />
                 </div>
             </main>
         </>
