@@ -15,12 +15,11 @@ const  Finance1 = ()=> {
     /*Controls editable states*/
     const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility] = useOutletContext() ;
 
-    let template= true;
 
     /*  Set edit to data if no existing changes available*/
     useEffect(()=>{
-        // setEdit(()=> Object.keys(edit).length === 0 && data);
-        setEdit(()=> data);
+        setEdit((prev)=> Object.keys(edit).length === 0 ? data : prev);
+        // setEdit(()=> data);
        
     },[])
 

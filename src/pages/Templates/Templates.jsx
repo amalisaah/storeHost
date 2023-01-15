@@ -51,31 +51,19 @@ const  Templates = (props)=> {
     }
 
     const location = useLocation() //aids in routing to page from recent projects
-    // function handleSubmit () {
-    //     const name=[projectNameRef.current];
-    //     setEdit(prev=>({...prev,pathName:location.pathname}))
-    //     setProjectData(prev=>({...prev,[name]:editRef.current}));
-    //     console.table(projectDataRef.current)
-    //     setProjectList(prev=>[...prev,name]); //adds name to project list
-    //     setBox(false)
-    //     sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
-    //     const path=`/dashboard/projects?uid=${user.id}`
-    //     // props.postData(path,JSON.stringify(projectDataRef.current))
-    //     sessionStorage.setItem('projectName',JSON.stringify(projectName));
 
-        
-    // };
     function handleSubmit () {
         // const name=[projectNameRef.current];
         const name=nameUtil(projectNameRef.current,user);
         setEdit(prev=>({...prev,pathName:location.pathname,projStyle:styleRef.current}))//pathname is to acess template type to aid in rerouting from proect page
-        // setEdit(prev=>({...prev,pathName:location.pathname}))//pathname is to acess template type to aid in rerouting from proect page
+        
         setProjectData(prev=>({...prev,[name]:editRef.current}));
         console.table(projectDataRef.current)
-        setProjectList(prev=>[...prev,name]); //adds name to project list
+        // setProjectList(prev=>[...prev,([name,'errrh'])]); //adds name to project list
+        // console.log(projectListRef.current)
         setBox(false)
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
-        const path=`/dashboard/projects?uid=${user.id}`
+        const path=`/dashboard/projects`
         // props.postData(path,JSON.stringify(projectDataRef.current))
         props.postData(path,projectDataRef.current);
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
@@ -88,14 +76,10 @@ const  Templates = (props)=> {
         let Name = sessionStorage.getItem('projectName');
         setProjectName((prev)=>Name ? JSON.parse(Name) : prev)
         let Data = sessionStorage.getItem('projectData');
-        Data = JSON.parse(Data)
-        // console.log(projectNameRef.current);
-        // console.log(Name,'errrhm');
+        Data = JSON.parse(Data);
         setEdit((prev)=> (Data && Name) ?  Data[projectNameRef.current] : prev);
         // setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current.projStyle] : prev);
         setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current].projStyle ? Data[projectNameRef.current].projStyle : prev :prev);
-        console.log(styleRef.current)
-        console.log(editRef.current)
 
     },[])
 
@@ -199,6 +183,10 @@ const  Templates = (props)=> {
                     <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
                     {logout ? <Button value="Logout" className='absolute left-[150px] top-[50px]  text-white bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
                     <div className='text-black cursor-pointer'><Link to='/home/support'>Hire a Professional</Link> </div>
+                </div>
+                <div className=''>
+                <i className="fa-solid fa-tv pr-4 border-r-2 border-solid border-darkBlue cursor-pointer" onClick={()=>{}}></i>
+                <i className="fa-solid fa-mobile ml-4 cursor-pointer" onClick={()=>{}} ></i>
                 </div>
                 <div className='flex w-[35%] items-center justify-between'>
                     <Button value="Save" className='text-white bg-darkBlue font-fontRoboto font-semibold w-[125px] h-[45px] rounded-none mr-4'onClick={handleBoxDisplay}  />

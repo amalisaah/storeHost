@@ -18,15 +18,20 @@ const  Project = ()=> {
     // const [projectName,setProjectName] = useContext(projectNameContext)
     
     // console.log(projectList);
-    const [,,,,,,,,,isAlertVisible,selectCategory,categorySel] = useOutletContext()
+    const [,,,,,,,,,isAlertVisible,selectCategory,categorySel] = useOutletContext();
+    const [chooseIcon,setChooseIcon] = useState([]) //keeping track of listed project images
     /*List of project belonging to user*/
     useEffect(()=>{
         let list = sessionStorage.getItem('projectData');
         list = list && JSON.parse(list);
         setProjectData(prev=>list ? list : prev)
         let items = list && Object.keys(list);
-        items=items && items.filter(item=>item!=='id');
+        const Icons=items && items.map(item=>projectData[item]['pathName'].split('/').at(3));
+        setChooseIcon(prev=>Icons ? Icons : prev )
+        console.log(chooseIcon)
         setProjectList((prev)=>items ? items : prev)
+        // console.log(projectData[items[0]]['pathName']);
+        // setProjectList(prev=>[...prev,([name,'errrh'])]);
     },[])
 
 
@@ -100,9 +105,10 @@ const  Project = ()=> {
                     { categorySel ? 
                         <div className='w-[full] flex justify-start flex-wrap pl-8'>
                             {projectList.map((project,index)=>
-                                <div className='font-fontRoboto text-xl w-[32%] mb-9 text-center' key={index} onClick={()=>{handleSelect(project)}}>
+                                <div className='font-fontRoboto text-xl w-[30%] mb-9 mr-3 text-center' key={index} onClick={()=>{handleSelect(project)}}>
                                     <Link>
-                                        <img src={desktop} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' />
+                                        <img src={`/images/projects/${chooseIcon[index]}.png`} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' role='icon' />
+                                        {/* <img src={desktop} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' role='icon' /> */}
                                     </Link>
                                     {project}
                                 </div>
