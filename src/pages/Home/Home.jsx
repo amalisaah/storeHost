@@ -22,6 +22,7 @@ const  Home = (props)=> {
         if (!temp) temp = sessionStorage.getItem('user'); 
         setUser(prev=>temp ? JSON.parse(temp): prev)
         setValue({...userRef.current})
+        console.log(user)
 
     },[])
     
@@ -132,7 +133,7 @@ const  Home = (props)=> {
         console.log(pic);                  
         setProfilePic(prev=>(pic));  
         const endpoint='/dashboard/profile/img';
-        const path=`https://storefront-dpqh.onrender.com${endpoint}?uid=${user.id}`;
+        const path=`https://storefront-dpqh.onrender.com${endpoint}?uid=${userRef.current.id}`;
         // onSubmit(pic,value) //handleSubmit function in homepage
         const data = new FormData() 
         data.append('tag',pic.picture);
@@ -142,7 +143,8 @@ const  Home = (props)=> {
         (async()=>{
             try {
                 const response = await axios.post(path,data);
-            
+                if (response.status===200)
+                    setProfilePic(prev=> response.data ? ({...prev,src:response.data}) : prev)
                 
                 console.log(response) 
             } catch (error) {
@@ -151,6 +153,28 @@ const  Home = (props)=> {
             }
         })()
       };
+
+    //   useEffect(()=>{
+    //         sessionStorage.setItem('profilePic',JSON.stringify(profilePic))
+    //   },[profilePic])
+      useEffect(()=>{
+        if (user.id){
+            console.log(user)
+            const endpoint='/dashboard/profile/img';
+        const path=`https://storefront-dpqh.onrender.com${endpoint}?uid=${user.id}`;
+        
+        (async()=>{
+            try {
+                const response = await axios.get(path);
+                if (response.status===200)
+                    setProfilePic(prev=> response.data ? ({...prev,src:response.data}) : prev)
+                console.log(response) 
+            } catch (error) {
+                console.log(error)
+                
+            }
+        })()}
+      },[user])
 
     /*Handle Editing in Profile Page*/
     const [value,setValue] = useState({...user});
@@ -171,7 +195,7 @@ const  Home = (props)=> {
         { user.id ?
         <>
         <Header className={'h-[88px] flex-row-reverse fixed'}>
-            <ProfilePic src={profilePic.src} text={user.firstname || user.business} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
+            <ProfilePic src={profilePic.data || profilePic.src} text={user.business || user.firstname} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
             {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
         </Header>
          <div className='flex pt-[88px]'>

@@ -4,9 +4,6 @@ import pic from "../assets/images/Ellipse 15.png";
 
 
 const  ProfilePic = (props)=> {
-    function handleClick() {
-        props.onClick()
-    }
 
     function handlePicChange(event){        
         var picture = event.currentTarget.files[0];
@@ -33,7 +30,7 @@ const  ProfilePic = (props)=> {
 
                 <div className="flex items-center text-darkBlue font-fontRoboto ">
                 <p className={"text-darkBlue leading-[19px] font-medium "+props.textClass} id='business' contentEditable={props.template} suppressContentEditableWarning  onBlur={props.changeText}>{props.text || 'No Name'} </p>
-                <img src={props.icon} alt={props.alternative} className=" text-darkBlue ml-2" onClick={handleClick} />
+                <img src={props.icon} alt={props.alternative} className=" text-darkBlue ml-2"  />
                 </div>
             </div>
         </>
@@ -48,7 +45,6 @@ ProfilePic.propTypes = {
     alt: PropTypes.string.isRequired,  
     icon: PropTypes.string.isRequired,    
     alternative: PropTypes.string.isRequired,  
-    onClick: PropTypes.func,
     onChange: PropTypes.func, 
 }
 

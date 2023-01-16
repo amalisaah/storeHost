@@ -53,7 +53,7 @@ function App() {
   }
 
 /**HANDLE Clearing data on LOGOUT */
-function clearData(params) {
+function clearData() {
   setUser({});
   setProjectName('');
   setProjectData('');
