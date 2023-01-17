@@ -5,7 +5,6 @@ import axios from "axios";
 import Header from "../../Components/Header";
 import ProfilePic from "../../Components/ProfilePic";
 import { LoginContext } from "../../Context/LoginContext";
-import  team from '../../assets/images/Ellipse3.png';
 import arrow from "../../assets/images/icons/arrow.png";
 import SideBar from "./Components/SideBar";
 import Button from "../../Components/Button";
@@ -61,6 +60,9 @@ const  Home = (props)=> {
 
     /////////////////// PROJECT /////////////////
     /*Fetch Project Data */
+
+    const allHostedRef=props.allHostedRef;
+
     const [projectData,setProjectData] = useContext(projectDataContext)
     // useEffect(()=>{
     //     setProjectData((prev)=>{
@@ -99,7 +101,7 @@ const  Home = (props)=> {
                 console.log(url,val);
                 // const val=value;
                 const response = await axios.post(url,val);
-                response.data.id  && setUser(response.data);
+                // response.data.id  && setUser(response.data);
                 setResponse(response)
                 console.log(response) 
             } catch (error) {
@@ -159,7 +161,7 @@ const  Home = (props)=> {
     //   },[profilePic])
       useEffect(()=>{
         if (user.id){
-            console.log(user)
+            // console.log(user)
             const endpoint='/dashboard/profile/img';
         const path=`https://storefront-dpqh.onrender.com${endpoint}?uid=${user.id}`;
         
@@ -168,9 +170,9 @@ const  Home = (props)=> {
                 const response = await axios.get(path);
                 if (response.status===200)
                     setProfilePic(prev=> response.data ? ({...prev,src:response.data}) : prev)
-                console.log(response) 
+                // console.log(response) 
             } catch (error) {
-                console.log(error)
+                // console.log(error)
                 
             }
         })()}
@@ -201,10 +203,11 @@ const  Home = (props)=> {
          <div className='flex pt-[88px]'>
             <SideBar onClick={selectCategory}/>
             <div className='ml-[15.5%] w-full'>
-            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName,isAlertVisible,selectCategory,categorySel]} /> {/*displays selected page from side bar*/}
+            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName,isAlertVisible,selectCategory,categorySel,allHostedRef]} /> {/*displays selected page from side bar*/}
             </div>
 
-        </div> </>
+         </div>
+         </>
     
             
          : <h1 className="text-center mt-6">Please login first</h1>}

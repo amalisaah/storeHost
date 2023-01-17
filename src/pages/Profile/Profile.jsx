@@ -1,21 +1,10 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header";
 import ProfilePic from "../../Components/ProfilePic";
-import { LoginContext } from "../../Context/LoginContext";
 import  team from '../../assets/images/Ellipse3.png';
 import SideBar from "../../Components/SideBar";
-import Button from "../../Components/Button";
 
 const  Profile = ()=> {
-    const {user,setUser} = useContext(LoginContext)
-    const navigate = useNavigate()
-    function handleClick(){
-        localStorage.clear();
-        sessionStorage.clear();
-        setUser({});
-        navigate('/authentication/login')
-    }
 
 
     return (

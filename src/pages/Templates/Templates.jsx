@@ -77,9 +77,10 @@ const  Templates = (props)=> {
         setProjectName((prev)=>Name ? JSON.parse(Name) : prev)
         let Data = sessionStorage.getItem('projectData');
         Data = JSON.parse(Data);
-        setEdit((prev)=> (Data && Name) ?  Data[projectNameRef.current] : prev);
+        let len = Object.keys(Data).length
+        setEdit((prev)=> (len && Name) ?  Data[projectNameRef.current] : prev);
         // setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current.projStyle] : prev);
-        setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current].projStyle ? Data[projectNameRef.current].projStyle : prev :prev);
+        setStyle((prev)=> (len && Name) ?  Data[projectNameRef.current].projStyle ? Data[projectNameRef.current].projStyle : prev :prev);
 
     },[])
 
@@ -99,14 +100,13 @@ const  Templates = (props)=> {
         handleSubmit();
         setPubBox(false);
         const temp=location.pathname.split('/').at(3);
-        console.log(temp);
         const name = nameUtil(projectNameRef.current,user);
-        console.log(name)
         const hosted= [temp,name];
         props.UpdateHosted(hosted)
         sessionStorage.setItem('allHosted',JSON.stringify(props.allHostedRef.current));
         const path=''
         // props.postData(path,props.allHostedRef)
+        navigate('/home/projects',{state:{published:true}})
         
     }
 

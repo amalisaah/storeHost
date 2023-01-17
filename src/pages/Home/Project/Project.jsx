@@ -4,46 +4,60 @@ import Select from "../Components/Select";
 import Category from '../../../assets/images/icons/Category.png';
 import arrow from '../../../assets/images/icons/arrow.png';
 import { projectListContext } from "../../../Context/projectListContext";
-import desktop from "../../../assets/images/Blog/Template1.png"
 import { projectDataContext } from "../../../Context/projectDataContext";
 import { projectNameContext } from "../../../Context/projectNameContext";
+import PopUp from "../Components/PopUp";
+import Alert from "../Components/Alert";
 
 
-const  Project = ()=> {
+const  Project = (props)=> {
 
     const navigate = useNavigate()
     /*Displays active Projects*/
-    const [projectList,setProjectList] = useContext(projectListContext);
-    const [projectData,setProjectData] = useContext(projectDataContext);
+    const [projectList,setProjectList,projectListRef] = useContext(projectListContext);
+    const [projectData,setProjectData,projectDataRef] = useContext(projectDataContext);
     // const [projectName,setProjectName] = useContext(projectNameContext)
     
     // console.log(projectList);
-    const [,,,,,,,,,isAlertVisible,selectCategory,categorySel] = useOutletContext();
+    const [,,,,,,,,,isAlertVisible,selectCategory,categorySel,allHostedRef] = useOutletContext();
     const [chooseIcon,setChooseIcon] = useState([]) //keeping track of listed project images
     /*List of project belonging to user*/
     useEffect(()=>{
         let list = sessionStorage.getItem('projectData');
         list = list && JSON.parse(list);
         setProjectData(prev=>list ? list : prev)
-        let items = list && Object.keys(list);
-        const Icons=items && items.map(item=>projectData[item]['pathName'].split('/').at(3));
-        setChooseIcon(prev=>Icons ? Icons : prev )
-        console.log(chooseIcon)
-        setProjectList((prev)=>items ? items : prev)
-        // console.log(projectData[items[0]]['pathName']);
-        // setProjectList(prev=>[...prev,([name,'errrh'])]);
     },[])
+    useEffect(()=>{
+        const len = Object.keys(projectDataRef.current).length;
+        if (len>0){
+            let items = projectData && Object.keys(projectDataRef.current);
+            const Icons=items && items.map(item=>projectDataRef.current[item]['pathName'].split('/').at(3));
+            setChooseIcon(prev=>Icons ? Icons : prev )
+            setProjectList((prev)=>items ? items : prev)
+        }
+    },[projectData])
 
 
     /*Handles selecting a project*/
-    function handleSelect (name) {
-        const path=projectData[name].pathName;        
+    const [path,setPath] = useState({})
+    function handleSelect (name,e) {
+        const path=projectData[name] && projectData[name].pathName;
+        setPath(({path,name}))        
         sessionStorage.setItem('projectName',JSON.stringify(name))
-        navigate(path)
+        // navigate(path)
+        // onselect
+        e.currentTarget.firstChild.style.display='block';
+        // return name
     };
 
-    // const location =useLocation()
-    // console.log(typeof location.pathname)
+    function deleteProject (name){
+        const temp=projectData;
+        delete temp[name]
+        setProjectData(({...temp}))
+        sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current))
+        const path=`/dashboard/projects`;
+        // props.postData(path,projectDataRef.current);///make DELETE REQUEST
+    }
   
 
     // /* Toggles template options visible or hidden
@@ -60,19 +74,14 @@ const  Project = ()=> {
     }
     
 
-    /* sets id on templates */
-    // const [templateId,setTemplateId] = useState({})
-    // function Number (val){
-    //     setTemplateId(prev=>(...prev,))
-    // }
-
     /*set Name to an empty string to enable new project be started */
     const [projectName,setProjectName] = useContext(projectNameContext);
     function handleClearName(){
         setProjectName('');
         sessionStorage.removeItem('projectName');
-        // console.log(e.target.parentNode.firstElementChild);
+       
     }
+    const location = useLocation();
 
 
     return (
@@ -102,21 +111,26 @@ const  Project = ()=> {
                 <div className='border-solid border border-fontGrayW mx-12 '></div>
                 <div className=''>
                     <h2 className="font-semibold text-2xl m-6">{categorySel? 'Recent' :'Templates'}</h2>
+                   { (location.state && location.state.published) ? <Alert text='Your work has been published'/> : null}
                     { categorySel ? 
                         <div className='w-[full] flex justify-start flex-wrap pl-8'>
-                            {projectList.map((project,index)=>
-                                <div className='font-fontRoboto text-xl w-[30%] mb-9 mr-3 text-center' key={index} onClick={()=>{handleSelect(project)}}>
+                            {projectListRef.current.map((project,index)=>
+                                <div className='font-fontRoboto text-xl w-[30%] mb-9 mr-3 text-center relative' key={index} onClick={(e)=>{handleSelect(project,e)}}>
+                                    <PopUp onClick={handleSelect} path={path} allHostedRef={allHostedRef} deleteProject={deleteProject} />
                                     <Link>
                                         <img src={`/images/projects/${chooseIcon[index]}.png`} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' role='icon' />
-                                        {/* <img src={desktop} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' role='icon' /> */}
+                                        
+                                        {project}
+                                        
                                     </Link>
-                                    {project}
                                 </div>
                             )}                        
                         </div> 
                     : 
                     // null
-                    <Outlet context={[handleClearName]} />}
+                    <div className=''>
+                        <Outlet context={[handleClearName]} />
+                    </div>}
                 </div>
         </>
     )

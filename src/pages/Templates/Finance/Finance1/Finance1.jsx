@@ -81,28 +81,7 @@ const  Finance1 = ()=> {
                     </div>
                 </div>
             <div className='outlet'>
-                {/* <div className='h-[286px] font-fontRoboto flex justify-evenly items-center bg-orange'>
-                    <div className='rounded-full h-[218px] w-[218px] bg-white font-medium font-fontRoboto text-center flex flex-col justify-center'>
-                        <i className='fas fa-handshake fa-5x text-orange  mb-4 '></i>Request a  loan
-                    </div>
-                    <div className='rounded-full h-[218px] w-[218px] bg-white font-medium text-center flex flex-col justify-center'>
-                        <i className='fas fa-landmark fa-5x text-orange  mb-4'></i> open an account
-                    </div>
-                    <div className='rounded-full h-[218px] w-[218px] bg-white font-medium text-center flex flex-col justify-center'>
-                        <i className='fas fa-chart-line fa-5x text-orange  mb-4 '></i>Manage your money
-                    </div>
-                </div>
-                <div className='px-[5.5%] py-8'>
-                    <div className='flex justify-between'>
-                        <Paragraph headerId='header2' header={edit.header2} paraId='para2' para={edit.para2} onBlur={onContentBlur} />
-                        <Image src={picture.one ? picture.one.src : '/images/finance/Child.png'} alt='Happy Child' imageId="one" id="fileOne" labelVisible={labelVisible} onChange={changePic} />
-                    </div>
-
-                    <div className='flex justify-between'>
-                        <Image src={picture.two ? picture.two.src : '/images/finance/House.png'} alt='Happy Child' imageId="two" id="fileTwo" labelVisible={labelVisible} onChange={changePic} />
-                        <Paragraph headerId='header3' header={edit.header3} paraId='para3' para={edit.para3} onBlur={onContentBlur} />
-                    </div>
-                </div> */}
+            
                 <Outlet context={[edit,picture,changePic,onContentBlur,labelVisible,style]} />
             </div>
                 

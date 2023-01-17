@@ -47,7 +47,7 @@ function App() {
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
   function UpdateHosted (site){
-    const temp=hostedDuplicates(allHosted,site);
+    const temp=hostedDuplicates(allHostedRef.current,site);
     setAllHosted(prev=>temp ? [...prev,[...site]]:prev)
     
   }
@@ -68,7 +68,7 @@ function clearData() {
 /*Fetching Data on first render*/
   useEffect(()=>{
     let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
-    setAllHosted(prev=>item ?[...prev,...JSON.parse(item)] : prev);
+    setAllHosted(prev=>item ?[...JSON.parse(item)] : prev);
     // console.table(allHostedRef.current);
     // console.table(projectListRef.current);
 
@@ -82,8 +82,8 @@ function clearData() {
 
   /*storing all hosted projects  */ //EDIT WHEN BG IS READY
   useEffect(()=>{
-    //edit to be data of all hosted proj
-    (projectData && Object.keys(projectDataRef.current)===0) ? sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current)): null 
+    //edit to include data of all hosted proj
+     sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current)) 
        
 },[projectDataRef.current])  
   useEffect(()=>{
@@ -103,9 +103,9 @@ function clearData() {
     (async()=>{
       try {
           const url=`${baseUrl}${path}?uid=${userRef.current.id}`;
-          console.log(url);
+          console.log(data,'data');
           const val=data;
-          console.log(val);
+          console.log(val,'post');
           const response = await axios.post(url,val);
           console.log(response.data) 
       } catch (error) {
@@ -137,6 +137,7 @@ function clearData() {
   function clearResponse() {
     setResponse('')
   }
+  console.log(projectDataRef.current)
 
   return (
     <LoginContext.Provider value={{user,setUser,userRef}} >
@@ -148,9 +149,9 @@ function clearData() {
                 <Routes>
                   <Route path='/' element={<LandingPage/>} />
                   <Route path='/authentication/*' element={<Authentication  />} />
-                  <Route path='/home' element={<Home clearData={clearData} getData={getData} responseRef={responseRef} clearResponse={clearResponse} /> } >
+                  <Route path='/home' element={<Home clearData={clearData} getData={getData} responseRef={responseRef} clearResponse={clearResponse} allHostedRef={allHostedRef} /> } >
                     <Route index element={<Dashboard />} />
-                    <Route path='projects' element={<Project/> } >
+                    <Route path='projects' element={<Project postData={postData} /> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
                       <Route path='finance' element={<Finance/>} />
@@ -173,8 +174,6 @@ function clearData() {
                     <Route path={`/${site[1]}`} element={
                       
                       ({
-                        'Blog-1': <h1>naana</h1>,
-                        'Blog-2': <h1>naana</h1>,
                         'Blog-3': <Blog3 data={projectDataRef.current[site[1]]} />,
                         'finance-1': <Finance1 data={projectDataRef.current[site[1]]} />
                       }[site[0]] 
