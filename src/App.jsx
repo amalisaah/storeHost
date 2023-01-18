@@ -137,7 +137,7 @@ function clearData() {
   function clearResponse() {
     setResponse('')
   }
-  console.log(projectDataRef.current)
+  
 
   return (
     <LoginContext.Provider value={{user,setUser,userRef}} >

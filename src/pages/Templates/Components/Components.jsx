@@ -5,10 +5,10 @@ import { GithubPicker } from 'react-color';
 import Arrow from "./Arrow";
 
 const  Components = (props)=> {
-    // console.log(props.style)
+    console.log(props.style)
     function handleClick(item,val) {
         props.changeStyle(item,val);
-        // console.log(val)
+        console.log(val)
     }
     // handleChangeComplete = (color) => {
     //     this.setState({ background: color.hex });
@@ -24,14 +24,14 @@ const  Components = (props)=> {
                 <div className='bg-fontGrayW h-[1px] my-5 '></div>
                 
                 <div className='flex items-center'>
-                    <GithubPicker triangle="hide" width="90%" onChange={(color)=>{handleClick('header',{color:color.hex})}}/>
+                    <GithubPicker triangle="hide" width="90%" onChange={(color)=>{handleClick('col',{color:color.hex})}}/>
                     <Arrow onClick={props.colorVisibility}/>
                 </div>
 
                 <div className='bg-fontGrayW h-[1px] my-5 '></div>
 
                 {props.colorVisible ? <div className='absolute left-[320px] top-[90px]'>
-                    <SketchPicker  onChange={(color)=>{handleClick('header',{color:color.hex})}}/>
+                    <SketchPicker  onChange={(color)=>{handleClick('col',{color:color.hex})}}/>
                 </div>: null}
             </div>
         </>

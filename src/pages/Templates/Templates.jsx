@@ -14,6 +14,7 @@ import { projectListContext } from "../../Context/projectListContext";
 import { nameUtil } from "../../utils/helperUtils";
 import Side from "./Components/Side";
 import SideItem from "./Components/SideItem";
+import Sections from "./Components/Sections";
 
 
 
@@ -154,6 +155,11 @@ const  Templates = (props)=> {
         setStyle(prev=>({...prev,[item]:temp}))
     }
 
+    /*SECTIONS*/ 
+    // const [sections,setSections ]=useState([]);
+    // function addSections(arr){
+    //     setSections(prev=>arr ? arr : [])
+    // }
 
 
     /* HIDE OR SHOW LOGOUT BUTTON*/
@@ -198,17 +204,17 @@ const  Templates = (props)=> {
             <main className='pt-[100px]'>
                     <Side className=' top-0'>
                         <SideItem className='text-bgBlue' onClick={componentVisibility} icon='+'/>
-                        <SideItem className='text-bgBlue text-xl' onClick={picVisibility} icon= {<i className="fa fa-upload"></i>}/>
+                        <SideItem className='text-orange text-xl' onClick={picVisibility} icon= {<i className="fa fa-upload"></i>}/>
                     </Side>
                     <Side className=' top-0 right-0'>
                         <SideItem className='text-bgBlue' onClick={pagesVisibility} icon={<i className="fa fa-copy text-2xl"></i>} />
-                        <SideItem className='text-bgBlue text-xl' onClick={picVisibility} icon= {<i className="fa fa-upload"></i>}/>
+                        <SideItem className='text-orange text-xl'  onClick={picVisibility} icon= {<i className="fa fa-layer-group"></i>}/>
                     </Side>
                    
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 <div className='mx-[5.4%]'>
-                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility]}/>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,]}/>
                 </div>
 
             </main>
