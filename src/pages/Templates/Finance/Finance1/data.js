@@ -15,5 +15,6 @@ export let data = {
     personal: 'Personal',
     business: 'Business',
     footText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla est purus, ultrices in porttitor in, accumsan non quam.',
+    tel: '+233 000 000',
     
 }

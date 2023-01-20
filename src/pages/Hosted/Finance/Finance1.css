@@ -1,0 +1,50 @@
+@media screen and (max-width: 375px) {
+    .fMain {
+        width: 375px;
+
+    }
+    .fHero {
+        width: 375px;
+        height: 476px;
+
+    }
+    main .fButton {
+        height: 39px;
+        font-size: 16px;
+        border-radius:  0px 4px 4px 0px;
+        border-radius:  4px 0px 0px 4px;
+
+    }
+    main .fAccounts {
+        flex-direction: column;
+        font-size: 16px;
+
+    }
+    main .fAccount {
+        height:200px;
+        width: 200px;
+        font-size: 14px;
+        margin: 20px 0;
+
+    }
+    main .fArticle-two {
+        flex-direction: column;
+        align-items: center;
+
+    }
+    main .fArticle-one {
+        flex-direction: column-reverse;
+        align-items: center;
+
+    }
+    main .fArticle {
+        font-size: 16px;
+        width: 100%;
+        
+    }
+    main .fArticle div {
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+    }
+}

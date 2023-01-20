@@ -28,6 +28,7 @@ module.exports = {
       fontFamily: {
         'fontRoboto':['Roboto','Helvetica', 'Arial', 'sans-serif'],
         'fontPoppins':[ 'Poppins','Helvetica','Sans-serif'],
+        'fontOutfit':[ 'Outfit','Helvetica','Sans-serif'],
       },
       boxShadow: {
         '1': '0px 2px 8px -2px rgba(0, 0, 0, 0.25)',

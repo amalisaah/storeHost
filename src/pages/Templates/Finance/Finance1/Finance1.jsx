@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useOutletContext } from "react-router-dom";
 import { sanitize } from "../../../../utils/sanitizeUtils";
 import Submit from "../../../../Components/Submit";
 import Input from "../../../Authentication/Components/Input";
-import Footer from "../../Blog/Components/Footer";
+import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
 import { data } from "./data";
 import Image from "../../../Home/Components/Image";
@@ -14,7 +14,7 @@ import Sections from "../../Components/Sections";
 const  Finance1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sections,addSections] = useOutletContext() ;
+    const [edit,setEdit,,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur] = useOutletContext() ;
 
 
     /*  Set edit to data if no existing changes available*/
@@ -24,11 +24,7 @@ const  Finance1 = ()=> {
        
     },[])
 
-    const onContentBlur = React.useCallback(e => {
-        const id=e.currentTarget.id
-        console.log(id)
-        setEdit(prev=>({...prev,[id]:e.currentTarget.innerHTML}))
-    })
+
 
     
 
@@ -56,19 +52,19 @@ const  Finance1 = ()=> {
         })
  
     }
-    const arr=['Hero','section 1','section 2','section 3','section 4'];
-    // addSections(arr)
+    const arr=['Hero','section 1','section 2','section 3','footer'];
+   
 
   
 
     return (
         <>
-            <Header logo={edit.logo} logoClass='col text-orange font-bold font-fontRoboto text-[36px]' searchClass='col text-orange' >
+            <Header logo={edit.logo} template={true} logoClass='col text-orange font-bold font-fontRoboto text-[36px]' searchClass='col text-orange' onBlur={onContentBlur} style={style}>
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="col text-orange text-xl font-fontRoboto" style={style.col} >Register</span>
             </Header>
             {pagesVisible ? <Pages pages={['Personal', 'Business']} /> : null}
             {componentVisible ? <Components style={style} changeStyle={changeStyle} colorVisible={colorVisible} colorVisibility={colorVisibility} /> : null}
-            {/* <Sections sections={sections} /> */}
+            {sectionsVisible ? <Sections sections={arr}  /> : null}
             <main className='font-fontRoboto'>
                 <div className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]" id='Hero'>
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]' >
@@ -79,9 +75,9 @@ const  Finance1 = ()=> {
                 
                     <div className='z-5 mt-[113px] flex justify-center text-[36px]'  >
                         <button className='w-[353px] h-[100px] font-fontRoboto rounded-l-xl bg-white text-orange' id="personal" contentEditable onBlur={onContentBlur}
-                            dangerouslySetInnerHTML={sanitize(edit.personal)}/>
+                            dangerouslySetInnerHTML={sanitize(edit.personal)} style={style.col ? style.col: {}}/>
                         <button className='bg-orange w-[353px] font-fontRoboto h-[100px] rounded-r-xl' id="business" contentEditable onBlur={onContentBlur}
-                            dangerouslySetInnerHTML={sanitize(edit.business)}/>
+                            dangerouslySetInnerHTML={sanitize(edit.business)} style={style.col ? ({background: style.col.color}) : {}}/>
                     </div>
                 </div>
             <div className='outlet'>
@@ -101,7 +97,7 @@ const  Finance1 = ()=> {
                     </form>
                 </div>
             </main>
-            <Footer logo={edit.logo} text={edit.footText} className='font-outfit' />
+            <Footer logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' template={true} onBlur={onContentBlur} />
         </>
     )
 };

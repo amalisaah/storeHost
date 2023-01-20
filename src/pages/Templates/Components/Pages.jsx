@@ -23,9 +23,7 @@ const  Pages = (props)=> {
 };
 
 Pages.propTypes = {
-    // className : PropTypes.string,
-    pages : PropTypes.array,
-    // logoClass : PropTypes.string,
+    pages : PropTypes.array, 
 }
 
 

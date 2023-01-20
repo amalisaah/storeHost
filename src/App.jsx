@@ -44,6 +44,9 @@ function App() {
   /*List of all projects*/
   const [projectList,setProjectList,projectListRef] = useState([]);
 
+  /*Temporarily stores response*/
+  const [response,setResponse,responseRef] = useState('')
+
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
   function UpdateHosted (site){
@@ -76,6 +79,7 @@ function clearData() {
   if (userRef.current.id){
     const path=`/dashboard/projects`;
     getData(path,true);
+    console.log('ermmm')
     }
    
   },[user])
@@ -91,7 +95,7 @@ function clearData() {
     const temp = sessionStorage.getItem('projectData')
     setProjectData(prev =>temp ? JSON.parse(temp): prev)  
        
-},[])  
+},[responseRef.current])  
 
 
 
@@ -115,7 +119,7 @@ function clearData() {
     })();
   }
 
-  const [response,setResponse,responseRef] = useState('')
+  
   function getData(path,query){
     (async()=>{
       try {

@@ -7,7 +7,7 @@ import Button from "../../../../Components/Button";
 import imge1 from "../../../../assets/images/Blog/image2.png"
 import imge3 from "../../../../assets/images/Blog/image3.png";
 import { data } from "./data";
-import Footer from "../Components/Footer";
+import Footer from "../../Components/Footer";
 import Logo from "../Components/Logo";
 
 
