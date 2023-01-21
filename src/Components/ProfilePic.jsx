@@ -33,7 +33,7 @@ const  ProfilePic = (props)=> {
                 </div>
 
                 <div className="flex items-center text-darkBlue font-fontRoboto ">
-                <p className={"text-darkBlue leading-[19px] font-medium "+props.textClass} id='business' contentEditable={props.template} suppressContentEditableWarning  onBlur={props.changeText}>{props.text || 'No Name'} </p>
+                <p className={"text-darkBlue leading-[19px] font-medium "+props.textClass} id={props.name} contentEditable={props.template} suppressContentEditableWarning  onBlur={props.changeText}>{props.text || 'No Name'} </p>
                 <img src={props.icon} alt={props.alternative} className=" text-darkBlue ml-2" onClick={handleClick}  />
                 </div>
             </div>
@@ -48,6 +48,8 @@ ProfilePic.propTypes = {
     src: PropTypes.string,    
     alt: PropTypes.string.isRequired,  
     icon: PropTypes.string.isRequired,    
+    id: PropTypes.string,
+    name: PropTypes.string.isRequired,
     alternative: PropTypes.string.isRequired,
     onCliick: PropTypes.func, 
     onChange: PropTypes.func, 

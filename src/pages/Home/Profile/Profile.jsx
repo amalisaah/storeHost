@@ -51,7 +51,7 @@ const  Profile = ()=> {
     return (
         <>
             <div className='w-[559px] m-auto '>
-                <ProfilePic src={profilePic.src} template={true} text={user.business || user.firstname} alt='profile pic' icon={pencil} user={user} alternative='edit button' className='h-[226px] w-[226px] profilePic transition-all duration-1000' textClass={'text-[32px] leading-[36px] mx-8 '} onChange={changePic} id={'pic'} changeText={nameChange} />    
+                <ProfilePic src={profilePic.src} template={true} text={user.business || user.firstname} alt='profile pic' icon={pencil} user={user} name={user.business || user.firstname} alternative='edit button' className='h-[226px] w-[226px] profilePic transition-all duration-1000' textClass={'text-[32px] leading-[36px] mx-8 '} onChange={changePic} id={'pic'} changeText={nameChange} />    
 
                 <form onSubmit={handleSubmit} className='mt-8'>
                     <Input id="email" value={value.email || user.email } label={'Email'} type={'email'} name={'email'}  onChange={handleChange} />

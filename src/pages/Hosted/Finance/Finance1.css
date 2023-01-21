@@ -1,4 +1,4 @@
-@media screen and (max-width: 375px) {
+/* @media screen and (max-width: 375px) { */
     .fMain {
         width: 375px;
 
@@ -11,8 +11,14 @@
     main .fButton {
         height: 39px;
         font-size: 16px;
-        border-radius:  0px 4px 4px 0px;
-        border-radius:  4px 0px 0px 4px;
+        width: 40%;
+        border-radius:  4px;
+
+    }
+    main .fButton button {
+        height: 100%;
+        font-size: 16px;
+        /* border-radius:  4px 0px 0px 4px; */
 
     }
     main .fAccounts {
@@ -47,4 +53,70 @@
         width: 100%;
         text-align: center;
     }
-}
+    main .fDivForm img {
+        display: none;
+    }
+    main .fDivForm {
+        background: inherit;
+        display: block;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    main .fDivForm form {
+      display: block; 
+      width: 100%; 
+    }
+    main .fDivForm form h2 {
+      font-size: 24px;
+      font-weight: 500;
+    }
+    header.fHeader { 
+        width: 375px; 
+        /* background: brown; */
+        padding: 0 2px;
+    }
+    header.fHeader .fLogo { 
+        font-size: 36px;
+    }
+    header.fHeader .fSearch { 
+        background: white;
+        /* width: 90%; */
+        width: 350px;
+        position: absolute;
+        top: 80px;
+        /* left: 2%; */
+        left: 0.6%;
+        border-radius: 8px;
+        
+    }
+    header.fHeader .fSearch input { 
+        width: 80%;     
+    }
+    header.fHeader .fSearchButton { 
+        padding: -52px 0;
+        padding-left: 10px;
+        margin: 0;
+        background: inherit;
+        
+    }
+    .fMain img {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    footer.fFooter {
+        width: 375px;
+        height: 373px;
+        display: block;
+        padding: 16px;
+    }
+    footer.fFooter>div {
+        width: 100%;
+        margin-bottom: 40px;
+        
+    }
+    footer.fFooter .fLogo {
+        font-size: 48px;
+    }
+    
+
+/* } */

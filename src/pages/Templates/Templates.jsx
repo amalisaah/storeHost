@@ -193,7 +193,7 @@ const  Templates = (props)=> {
        user.id ? <>            
             <header className={"h-[88px] bg-white w-full z-50 flex justify-between px-[2.4%] items-center fixed " }>
                 <div className='flex w-[25%] items-center justify-between '>
-                    <ProfilePic src={team} text={user.firstname || user.business}   alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
+                    <ProfilePic src={team} text={user.business  || user.firstname }   alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
                     {logout ? <Button value="Logout" className='absolute left-[150px] top-[50px]  text-white bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
                     <div className='text-black cursor-pointer'><Link to='/home/support'>Hire a Professional</Link> </div>
                 </div>

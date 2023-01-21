@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 // import { useState, useEffect } from 'react';
-import useState from 'react-usestateref'
 import './App.css';
+import useState from 'react-usestateref'
+import { useEffect } from 'react';
+import axios from 'axios';
 import { LoginContext } from './Context/LoginContext';
 import { projectNameContext } from './Context/projectNameContext';
 import { projectDataContext } from './Context/projectDataContext';
@@ -19,9 +21,6 @@ import Finance from './pages/Home/Project/Finance/Finance';
 import Templates3 from './pages/Templates/Blog/Template3/Templates3';
 import Blog3 from './pages/Hosted/Blog/Blog3';
 import Templates from './pages/Templates/Templates';
-import { useEffect } from 'react';
-import Hosted from './pages/Hosted/Hosted';
-import axios from 'axios';
 import { hostedDuplicates } from './utils/helperUtils';
 import FinanceTemp1 from './pages/Templates/Finance/Finance1/Finance1';
 import PersonalTemp1 from './pages/Templates/Finance/Finance1/Personal';
