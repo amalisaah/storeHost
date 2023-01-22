@@ -6,7 +6,7 @@ const  Header = (props)=> {
 
     return (
         <>
-            <header className={"h-[70px] bg-white w-full z-50 flex justify-between px-[5.5%] items-center  "+ props.className}>
+            <header className={"h-[70px] bg-white w-full z-5 flex justify-between px-[5.5%] items-center  "+ props.className}>
                 <Logo logo={props.logo} template={props.template} changeState={props.changeState} className={props.logoClass} onBlur={props.onBlur} style={props.style} />
                 <form onSubmit={()=>{}} className={"shadow-1 w-[26%] h-[38px] flex justify-between items-center text-base text-inherit font-fontRoboto text-[#ACACAC] px-4 "+props.searchClass}>
                     <input type="text" placeholder="Search.." name="search" />

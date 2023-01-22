@@ -53,7 +53,7 @@ const  Finance1 = (props)=> {
                     </div>
                 </div>
                 <div className='outlet'>
-                    <Outlet context={[edit]}  />
+                    <Outlet context={[edit,projStyle]}  />
                 </div>
                 <div className="fDivForm flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%]">
                     

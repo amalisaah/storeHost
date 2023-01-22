@@ -1,13 +1,13 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
 
-const  Business = ()=> {
+const  Business = (props)=> {
 
-    const [edit] = useOutletContext();
+    const [edit,projStyle] = useOutletContext();
 
     return (
         <>
-            <div className='fAccounts font-fontRoboto flex justify-evenly items-center bg-orange'>
+            <div className='fAccounts font-fontRoboto flex justify-evenly items-center bg-orange' style={projStyle.col ? {background :projStyle.col.color} : {}}>
                     <div className='fAccount rounded-full h-[218px] w-[218px] bg-white font-semibold font-fontRoboto text-center flex flex-col justify-center'>
                         <i className='fas fa-handshake fa-5x text-orange col mb-4 '></i>Request a  loan
                     </div>

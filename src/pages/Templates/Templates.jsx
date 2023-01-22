@@ -22,7 +22,7 @@ import SideItem from "./Components/SideItem";
 const  Templates = (props)=> {
 
     
-
+    const {user,setUser,userRef} = useContext(LoginContext)
     /*Check if User is already logged in*/
     useEffect(()=>{
         let temp = localStorage.getItem('user')
@@ -75,6 +75,7 @@ const  Templates = (props)=> {
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
         const path=`/dashboard/projects`
         // props.postData(path,JSON.stringify(projectDataRef.current))
+        submitPic()
         props.postData(path,projectDataRef.current);
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
 
@@ -142,34 +143,36 @@ const  Templates = (props)=> {
     };
 
     /*Picture Submission */
-    function submit(){
-        // const pics=Object.keys(pictureRef.current);
-        let url =  'https://storefront-dpqh.onrender.com/';
-        // if (pics.length > 0){
-            // const formData = new FormData()
-        //     for (const id of pics){
-        //         formData.append([id], picture[id].picture)
-        //     }
-        // console.log(formData)
-        // axios.post(url, formData, { 
-        //     headers: {
-        //         'Content-Type':'multipart/form-data'
-        //     }
-        // }).then(res => { 
-        //     console.log(res);
-        // }).catch(error =>{
-        //     console.log(error)
+    function submitPic(){
+        const pics=Object.keys(pictureRef.current);
+        let url =  `https://storefront-dpqh.onrender.com/uploads/${projectNameRef.current}?uid=${user.id}`;
+        if (pics.length > 0){
+            const formData = new FormData()
+            for (const id of pics){
+                formData.append([id], picture[id].picture)
+            }
+            console.log(url)
+            axios.post(url, formData, { 
+                headers: {
+                    'Content-Type':'multipart/form-data'
+                }
+            }).then(res => { 
+                console.log(res);
+            }).catch(error =>{
+                console.log(error)
+            })
+        }
+        // console.log(picture)
+        // axios.post(url,picture).then(res=>{
+        //     console.log(res)
+        // }).catch(err=>{
+        //     console.log(err)
         // })
-        console.log(picture)
-        axios.post(url,picture).then(res=>{
-            console.log(res)
-        }).catch(err=>{
-            console.log(err)
-        })
         
         
        
     }
+   
 
     /*Pages Options Display */
     const [pagesVisible,setPagesVisible] =useState(false);
@@ -183,15 +186,20 @@ const  Templates = (props)=> {
         setComponentVisible(prev=>!prev)
     }
     /*Components Options Display */
-    const [colorVisible,setColorVisible] =useState(false);
-    function colorVisibility(){
-        setColorVisible(prev=>!prev)
+    const [colorVisible,setColorVisible] =useState({visible:false});
+    function colorVisibility(selector){
+        setColorVisible(prev=>({visible:!prev.visible,selector:selector}))
     }
     /*Sections Options Display */ 
     const [sectionsVisible,setSectionsVisible ]=useState(false);
     function sectionsVisibility(){
         setSectionsVisible(prev=>!prev)
-    }   
+    }
+    /*Mobile View Display */
+    const [mobile,setMobile] = useState(false);
+    function mobileView(bool) {
+        setMobile(bool)
+    }  
 
 
 
@@ -202,6 +210,7 @@ const  Templates = (props)=> {
         temp={...temp,...obj}
         console.log(temp)
         setStyle(prev=>({...prev,[item]:temp}))
+        console.log(style)
     }
 
 
@@ -214,7 +223,7 @@ const  Templates = (props)=> {
     }
 
     /*LOGS USER OUT*/
-    const {user,setUser,userRef} = useContext(LoginContext)
+    
     const navigate = useNavigate()
     function handleLogout(){
         localStorage.clear();
@@ -235,8 +244,8 @@ const  Templates = (props)=> {
                     <div className='text-black cursor-pointer'><Link to='/home/support'>Hire a Professional</Link> </div>
                 </div>
                 <div className=''>
-                <i className="fa-solid fa-tv pr-4 border-r-2 border-solid border-darkBlue cursor-pointer" onClick={()=>{}}></i>
-                <i className="fa-solid fa-mobile ml-4 cursor-pointer" onClick={()=>{}} ></i>
+                <i className="fa-solid fa-tv pr-4 border-r-2 border-solid border-darkBlue cursor-pointer" onClick={()=>{mobileView(false)}}></i>
+                <i className="fa-solid fa-mobile ml-4 cursor-pointer" onClick={()=>{mobileView(true)}} ></i>
                 </div>
                 <div className='flex w-[35%] items-center justify-between'>
                     <Button value="Save" className='text-white bg-darkBlue font-fontRoboto font-semibold w-[125px] h-[45px] rounded-none mr-4'onClick={handleBoxDisplay}  />
@@ -258,7 +267,7 @@ const  Templates = (props)=> {
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 <div className='mx-[5.4%]'>
-                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange]}/>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile]}/>
                 </div>
 
             </main>

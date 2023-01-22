@@ -1,6 +1,7 @@
-@media screen and (max-width: 375px) {
+
     .fMain {
         width: 375px;
+        margin:auto;
 
     }
     .fHero {
@@ -24,6 +25,7 @@
     main .fAccounts {
         flex-direction: column;
         font-size: 16px;
+        height: auto;
 
     }
     main .fAccount {
@@ -47,6 +49,19 @@
         font-size: 16px;
         width: 100%;
         
+    }
+    #personalOne,#personalTwo,#businessOne,#businessTwo {
+       width: 370px;
+       margin: 20px auto;
+        
+    }
+    .fMain .section {
+        width: 100%;
+        padding: 0%;
+    }
+    .fMain div.para {
+        width: 100%;
+        padding: 0%;
     }
     main .fArticle div {
         font-size: 16px;
@@ -74,6 +89,7 @@
         width: 375px; 
         /* background: brown; */
         padding: 0 2px;
+        margin: auto;
     }
     header.fHeader .fLogo { 
         font-size: 36px;
@@ -85,7 +101,7 @@
         position: absolute;
         top: 80px;
         /* left: 2%; */
-        left: 0.6%;
+        left: 3%;
         border-radius: 8px;
         
     }
@@ -108,6 +124,7 @@
         height: 373px;
         display: block;
         padding: 16px;
+        margin:auto;
     }
     footer.fFooter>div {
         width: 100%;
@@ -119,4 +136,4 @@
     }
     
 
-}
+/* } */
