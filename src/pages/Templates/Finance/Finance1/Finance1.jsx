@@ -10,6 +10,7 @@ import Image from "../../../Home/Components/Image";
 import Pages from "../../Components/Pages";
 import Components from "../../Components/Components";
 import Sections from "../../Components/Sections";
+import ImageInput from "../../../Home/Components/ImageInput";
 
 const  Finance1 = ()=> {
 
@@ -34,7 +35,7 @@ const  Finance1 = ()=> {
     function changePic (pic,id) {
 
         setPicture(prev=>({...prev,[id]:pic}));  
-        console.log(id);                  
+        console.log(picture);                  
       };
 
 
@@ -66,7 +67,10 @@ const  Finance1 = ()=> {
             {componentVisible ? <Components style={style} changeStyle={changeStyle} colorVisible={colorVisible} colorVisibility={colorVisibility} /> : null}
             {sectionsVisible ? <Sections sections={arr}  /> : null}
             <main className='font-fontRoboto'>
-                <div className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]" id='Hero'>
+                <div style={{background:picture.Hero ?`url(${picture.Hero.src}`: 'url(/images/finance/background.png)',backgroundRepeat: 'no-repeat',backgroundSize:
+            'cover'}}  className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-no-repeat bg-cover relative "   >
+                    <div  id='Hero' className=' w-full h-full absolute '></div>
+                <ImageInput src={picture.three ? picture.three.src : '/images/finance/scrabble.png'} alt='Happy Child' imageId="Hero" id="bg" labelVisible={labelVisible} onChange={changePic} />
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]' >
                         <h2 id='header1' contentEditable onBlur={onContentBlur}
                             dangerouslySetInnerHTML={sanitize(edit.header1)} className="text-[40px] font-semibold font-fontRoboto text-center mb-5" style={style.header} />

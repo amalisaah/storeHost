@@ -49,7 +49,7 @@ ProfilePic.propTypes = {
     alt: PropTypes.string.isRequired,  
     icon: PropTypes.string.isRequired,    
     id: PropTypes.string,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     alternative: PropTypes.string.isRequired,
     onCliick: PropTypes.func, 
     onChange: PropTypes.func, 
