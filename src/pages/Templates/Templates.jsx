@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useEffect } from "react";
 import useState from 'react-usestateref';
+import axios from "axios";
 import { Outlet, useLocation, useNavigate, Link } from "react-router-dom";
 import ProfilePic from "../../Components/ProfilePic";
 import arrow from "../../assets/images/icons/arrow.png";
@@ -134,6 +135,42 @@ const  Templates = (props)=> {
         setLabelVisible(prev=>!prev)
     }
 
+    /*Handles Picture changes*/
+    const [picture,setPicture,pictureRef] = useState({});
+    function handlePicChange (pic,id) {
+        setPicture(prev=>({...prev,[id]:pic}));                   
+    };
+
+    /*Picture Submission */
+    function submit(){
+        // const pics=Object.keys(pictureRef.current);
+        let url =  'https://storefront-dpqh.onrender.com/';
+        // if (pics.length > 0){
+            // const formData = new FormData()
+        //     for (const id of pics){
+        //         formData.append([id], picture[id].picture)
+        //     }
+        // console.log(formData)
+        // axios.post(url, formData, { 
+        //     headers: {
+        //         'Content-Type':'multipart/form-data'
+        //     }
+        // }).then(res => { 
+        //     console.log(res);
+        // }).catch(error =>{
+        //     console.log(error)
+        // })
+        console.log(picture)
+        axios.post(url,picture).then(res=>{
+            console.log(res)
+        }).catch(err=>{
+            console.log(err)
+        })
+        
+        
+       
+    }
+
     /*Pages Options Display */
     const [pagesVisible,setPagesVisible] =useState(false);
     function pagesVisibility(){
@@ -221,7 +258,7 @@ const  Templates = (props)=> {
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 <div className='mx-[5.4%]'>
-                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur]}/>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange]}/>
                 </div>
 
             </main>

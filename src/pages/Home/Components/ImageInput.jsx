@@ -17,7 +17,7 @@ const  ImageInput = (props)=> {
 
     return (       
         <>
-           <label style={props.labelVisible ? {} : {display:'none'}} className=" absolute top-0 z-2 bg-blur w-full h-full flex justify-center items-center text-3xl bg-blur cursor-pointer text-white" htmlFor={props.id}>
+           <label style={props.labelVisible ? {} : {display:'none'}} className=" absolute top-0 z-2 w-full h-full flex justify-center items-center text-3xl bg-blur cursor-pointer text-white" htmlFor={props.id}>
                     <span className="fa fa-camera m-2"></span>
                     <span>Change Image</span>
                 </label>

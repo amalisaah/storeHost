@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Outlet, useOutletContext } from "react-router-dom";
 import { sanitize } from "../../../../utils/sanitizeUtils";
 import Submit from "../../../../Components/Submit";
@@ -15,7 +15,7 @@ import ImageInput from "../../../Home/Components/ImageInput";
 const  Finance1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur] = useOutletContext() ;
+    const [edit,setEdit,,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange] = useOutletContext() ;
 
 
     /*  Set edit to data if no existing changes available*/
@@ -31,28 +31,12 @@ const  Finance1 = ()=> {
 
     /////////////////////////////////
       /**Handles Picture Change */
-    const [picture,setPicture] = useState({});
-    function changePic (pic,id) {
-
-        setPicture(prev=>({...prev,[id]:pic}));  
-        console.log(picture);                  
-      };
+    function changePic (pic,id) {  
+        handlePicChange(pic,id)               
+    };
 
 
-
-      function submit(){
-        const data = new FormData() 
-        data.append('file', picture)
-        console.warn(picture);
-        let url =  'https://storefront-dpqh.onrender.com/';
- 
-        axios.post(url, data, { // receive two parameter endpoint url ,form data 
-        })
-        .then(res => { // then print response status
-            console.warn(res);
-        })
- 
-    }
+    /*Sections*/
     const arr=['Hero','section 1','section 2','section 3','footer'];
    
 
@@ -67,7 +51,7 @@ const  Finance1 = ()=> {
             {componentVisible ? <Components style={style} changeStyle={changeStyle} colorVisible={colorVisible} colorVisibility={colorVisibility} /> : null}
             {sectionsVisible ? <Sections sections={arr}  /> : null}
             <main className='font-fontRoboto'>
-                <div style={{background:picture.Hero ?`url(${picture.Hero.src}`: 'url(/images/finance/background.png)',backgroundRepeat: 'no-repeat',backgroundSize:
+                <div style={{backgroundImage:picture.Hero ?`url(${picture.Hero.src}`: 'url(/images/finance/background.png)',backgroundRepeat: 'no-repeat',backgroundSize:
             'cover'}}  className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-no-repeat bg-cover relative "   >
                     <div  id='Hero' className=' w-full h-full absolute '></div>
                 <ImageInput src={picture.three ? picture.three.src : '/images/finance/scrabble.png'} alt='Happy Child' imageId="Hero" id="bg" labelVisible={labelVisible} onChange={changePic} />
