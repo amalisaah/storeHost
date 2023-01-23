@@ -119,10 +119,11 @@ function clearData() {
   }
 
   
-  function getData(path,query){
+  function getData(path,query,queryVal){
     (async()=>{
       try {
-          const url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
+          let url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
+          url= queryVal ? `${url}&${queryVal}` : url;
           console.log(url);
           const response = await axios.get(url);
           // const data = response.data
@@ -154,7 +155,7 @@ function clearData() {
                   <Route path='/authentication/*' element={<Authentication  />} />
                   <Route path='/home' element={<Home clearData={clearData} getData={getData} responseRef={responseRef} clearResponse={clearResponse} allHostedRef={allHostedRef} /> } >
                     <Route index element={<Dashboard />} />
-                    <Route path='projects' element={<Project postData={postData} /> } >
+                    <Route path='projects' element={<Project postData={postData} getData={getData} /> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
                       <Route path='finance' element={<Finance/>} />
