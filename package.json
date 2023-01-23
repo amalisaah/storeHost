@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material-tailwind/react": "^1.2.5",
     "@types/dompurify": "^2.4.0",
     "axios": "^1.2.1",
     "dompurify": "^2.4.2",
