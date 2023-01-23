@@ -1,69 +1,66 @@
 import React, { useContext, useEffect } from "react";
 import useState from "react-usestateref";
-import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
+import './Finance1.css';
+import { Link, NavLink, Outlet } from "react-router-dom";
 import Submit from "../../../Components/Submit";
 import Input from "../../Authentication/Components/Input";
-import Footer from "../../Templates/Blog/Components/Footer";
-import Header from "../../../Components/Header";
-import { projectNameContext } from "../../../Context/projectNameContext";
+import Footer from "../../Templates/Components/Footer";
+import Header from "../../Templates/Components/Header";
+import { createSyle } from "../../../utils/styleUtils";
 
 
 const  Finance1 = (props)=> {
 
     /*Controls editable states*/
     const [edit] = [props.data];
-    // const [projectName,setProjectName] = useContext(projectNameContext)
-
-
-    // /*  Set edit to data associated with projectName*/
-    // useEffect(()=>{
-    //     // let Name = sessionStorage.getItem('projectName');
-    //     const Name=props.name;
-    //     console.log(props.name);
-    //     // setProjectName((prev)=>Name ? Name : prev)
-    //     let Data = sessionStorage.getItem('projectData');
-    //     Data = JSON.parse(Data);
-    //     console.log(Data);
-    //     // console.log(Name);
-    //     console.log(Data[Name]);
-    //     // console.log(projectNameRef.current);
-    //     // console.log(Name,'errrhm');
-    //     setEdit((prev)=> (Data && Name) ?  Data[Name] : prev);
-    //     console.log(editRef.current)
-
-    // },[])
+  
+    let projStyle = edit.projStyle ? edit.projStyle :{};
+    useEffect(()=>{
+       
+        const styles = createSyle(projStyle)
+        console.log(styles)
+        const head=document.head;
+        const style = document.createElement('style');
+        style.innerHTML = styles;
+        head.appendChild(style)
+        console.log(head)
+        
+        return ()=>{
+            head.removeChild(style)
+        }
+    },[])
 
 
     return (
-        <>
-            <Header logo={edit.logo} logoClass='text-orange font-bold font-fontRoboto text-[36px]' searchClass='text-orange'>
-                <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="text-orange text-xl font-fontRoboto">Register</span>
+        <> 
+            <Header logo={edit.logo} className=' fHeader' logoClass='col text-orange font-bold font-fontRoboto text-[36px] fLogo' searchButtonClass='col text-orange fSearchButton' searchClass='fSearch'>
+                <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="col text-orange text-xl font-fontRoboto">Register</span>
             </Header>
-            <main className='font-fontRoboto'>
-                <div className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]">
+            <main className='font-fontRoboto fMain'>
+                <div className="fHero h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]">
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]'>
-                        <h2 id='header1' className="text-[40px] font-semibold font-fontRoboto text-center mb-5">{edit.header1}</h2>
+                        <h2 id='header1' className="header text-[40px] font-semibold leading-[48.8px] font-fontRoboto text-center mb-5">{edit.header1}</h2>
                         <p className='text-inherit font-normal font-fontRoboto text-xl text-center w-[42%] mx-auto leading-[23px] ' id='para1'>{edit.para1} </p>
                     </div>
                 
-                    <div className='z-5 mt-[113px] flex justify-center text-[36px]'>
-                        <NavLink to='./personal' style={({ isActive }) => 
-                    (isActive ? {background: 'var(--bgOrange)', color:'white'} : {background: 'white', color:'var(--bgOrange)'})}><button className='w-[353px] h-[100px] font-fontRoboto rounded-l-xl bg-inherit text-inherit' id="btn1">Personal</button></NavLink>
+                    <div className=' z-5 mt-[113px] flex justify-center text-[36px] w-full '>
+                        <NavLink to='./personal' className='rounded-l-xl w-[27%] fButton' style={({ isActive }) => 
+                    (isActive ? {background : projStyle.col ? ( projStyle.col.color) : 'var(--bgOrange)', color:'white'} : {background: 'white', color : projStyle.col ? ( projStyle.col.color) :'var(--bgOrange)'})}><button className=' w-full h-[100px] font-fontRoboto rounded-l-xl bg-inherit text-inherit ' id="btn1">Personal</button></NavLink>
 
-                        <NavLink to='./business' style={({ isActive }) => 
-                    (isActive ? {background: 'var(--bgOrange)', color:'white'} : {background: 'white', color:'var(--bgOrange)'})}><button className='w-[353px] h-[100px] font-fontRoboto rounded-l-xl bg-inherit text-inherit' id="btn1">Business</button></NavLink>
+                        <NavLink to='./business' className='rounded-r-xl w-[27%] fButton' style={({ isActive }) => 
+                    (isActive ? {background: projStyle.col ? ( projStyle.col.color) :'var(--bgOrange)', color:'white'} : {background: 'white', color : projStyle.col ? ( projStyle.col.color) :'var(--bgOrange)'})}><button className=' w-full h-[100px] font-fontRoboto rounded-r-xl bg-inherit text-inherit' id="btn2">Business</button></NavLink>
                         {/* <button className='bg-orange w-[353px] font-fontRoboto h-[100px] rounded-r-xl' id="btn2"><Link to='./business'>Business</Link></button> */}
                     </div>
                 </div>
                 <div className='outlet'>
-                    <Outlet context={[edit]}  />
+                    <Outlet context={[edit,projStyle]}  />
                 </div>
-                <div className="flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%]">
+                <div className="fDivForm flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%]">
                     
                         <img src='/images/finance/scrabble.png' alt='motivation' className="w-[523px]"/>
                     
                     <form className="w-[42.36%]">
-                        <h2 id="header4" className="font-ubuntu font-semibold text-xl mb-[17px]">Shoot us a message</h2>
+                        <h2 id="header4" className="font-ubuntu font-semibold text-xl mb-[17px] header">Shoot us a message</h2>
                         <Input type='text' id='name' label="name" name="name" placeholder='type name here' onChange={()=>{}} />
                         <Input type='email' id='email' label="email" name="email" placeholder='example@storefront.com' onChange={()=>{}} />
                         <textarea className="w-full h-[226px] rounded-lg bg-white  shadow-1 mt-4 p-6 focus:border-solid focus:border-2 focus:outline-none border-darkBlue " name='message' placeholder=" Hello Storefront, I would like to ... " value={ ''} onChange={()=>{}} ></textarea>
@@ -71,7 +68,7 @@ const  Finance1 = (props)=> {
                     </form>
                 </div>
             </main>
-            <Footer logo={edit.logo} className='font-outfit' />
+            <Footer logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' className=' fFooter' logoClass='fLogo' />
         </>
     )
 };

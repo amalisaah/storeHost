@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 // import { useState, useEffect } from 'react';
-import useState from 'react-usestateref'
 import './App.css';
+import useState from 'react-usestateref'
+import { useEffect } from 'react';
+import axios from 'axios';
 import { LoginContext } from './Context/LoginContext';
 import { projectNameContext } from './Context/projectNameContext';
 import { projectDataContext } from './Context/projectDataContext';
@@ -19,9 +21,6 @@ import Finance from './pages/Home/Project/Finance/Finance';
 import Templates3 from './pages/Templates/Blog/Template3/Templates3';
 import Blog3 from './pages/Hosted/Blog/Blog3';
 import Templates from './pages/Templates/Templates';
-import { useEffect } from 'react';
-import Hosted from './pages/Hosted/Hosted';
-import axios from 'axios';
 import { hostedDuplicates } from './utils/helperUtils';
 import FinanceTemp1 from './pages/Templates/Finance/Finance1/Finance1';
 import PersonalTemp1 from './pages/Templates/Finance/Finance1/Personal';
@@ -43,6 +42,9 @@ function App() {
 
   /*List of all projects*/
   const [projectList,setProjectList,projectListRef] = useState([]);
+
+  /*Temporarily stores response*/
+  const [response,setResponse,responseRef] = useState('')
 
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
@@ -76,6 +78,7 @@ function clearData() {
   if (userRef.current.id){
     const path=`/dashboard/projects`;
     getData(path,true);
+    console.log('ermmm')
     }
    
   },[user])
@@ -91,7 +94,7 @@ function clearData() {
     const temp = sessionStorage.getItem('projectData')
     setProjectData(prev =>temp ? JSON.parse(temp): prev)  
        
-},[])  
+},[responseRef.current])  
 
 
 
@@ -115,11 +118,12 @@ function clearData() {
     })();
   }
 
-  const [response,setResponse,responseRef] = useState('')
-  function getData(path,query){
+  
+  function getData(path,query,queryVal){
     (async()=>{
       try {
-          const url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
+          let url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
+          url= queryVal ? `${url}&${queryVal}` : url;
           console.log(url);
           const response = await axios.get(url);
           // const data = response.data
@@ -137,7 +141,7 @@ function clearData() {
   function clearResponse() {
     setResponse('')
   }
-  console.log(projectDataRef.current)
+  
 
   return (
     <LoginContext.Provider value={{user,setUser,userRef}} >
@@ -151,7 +155,7 @@ function clearData() {
                   <Route path='/authentication/*' element={<Authentication  />} />
                   <Route path='/home' element={<Home clearData={clearData} getData={getData} responseRef={responseRef} clearResponse={clearResponse} allHostedRef={allHostedRef} /> } >
                     <Route index element={<Dashboard />} />
-                    <Route path='projects' element={<Project postData={postData} /> } >
+                    <Route path='projects' element={<Project postData={postData} getData={getData} /> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
                       <Route path='finance' element={<Finance/>} />

@@ -12,7 +12,8 @@ import Alert from "../Components/Alert";
 
 const  Project = (props)=> {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    
     /*Displays active Projects*/
     const [projectList,setProjectList,projectListRef] = useContext(projectListContext);
     const [projectData,setProjectData,projectDataRef] = useContext(projectDataContext);
@@ -52,11 +53,13 @@ const  Project = (props)=> {
 
     function deleteProject (name){
         const temp=projectData;
+        console.log(name)
         delete temp[name]
         setProjectData(({...temp}))
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current))
         const path=`/dashboard/projects`;
-        // props.postData(path,projectDataRef.current);///make DELETE REQUEST
+        const queryVal=`name=${name}`;
+        props.getData(path,true,queryVal);///make DELETE REQUEST
     }
   
 

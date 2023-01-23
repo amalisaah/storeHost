@@ -5,7 +5,7 @@ import Header from "../../Templates/Components/Header";
 import Button from "../../../Components/Button";
 import imge1 from "../../../assets/images/Blog/image2.png";
 import imge3 from "../../../assets/images/Blog/image3.png";
-import Footer from "../../Templates/Blog/Components/Footer";
+import Footer from "../../Templates/Components/Footer";
 import Logo from "../../Templates/Blog/Components/Logo";
 
 
