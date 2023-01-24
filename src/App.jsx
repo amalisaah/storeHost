@@ -175,7 +175,6 @@ function clearData() {
                     </Route>
                   </Route>
 
-                  
                   {/* <Route path='/hosted' element={<Hosted/> } > */}
                     {allHosted.map((site,index)=>
                     <Route path={`/${site[1]}`} element={
