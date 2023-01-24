@@ -1,6 +1,6 @@
 import React, {useContext, useEffect,} from "react";
 import useState from "react-usestateref";
-import {Routes,Route, useLocation, } from 'react-router-dom';
+import {Routes,Route, useLocation, Navigate } from 'react-router-dom';
 import axios from "axios";
 import { LoginContext } from "../../Context/LoginContext";
 import Cmail from "./Cmail/Cmail";
@@ -172,7 +172,7 @@ const  Authentication = ()=> {
 
             <Route path='/verify-email/' element={<Verification loading={loading} handleLoading={handleLoading} handleResponse={handleResponse} response={response} />} />
 
-            <Route path='/*' element={<h1><a href='/'>GO BACK</a></h1>} />
+            <Route path='*' element={<Navigate replace to='/login' />} />
         </Routes>
     )
 };

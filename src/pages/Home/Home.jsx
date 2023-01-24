@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import useState from "react-usestateref";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../Components/Header";
 import ProfilePic from "../../Components/ProfilePic";
@@ -189,7 +189,12 @@ const  Home = (props)=> {
     const email=user.email;
     const [support,setSupport,supportRef] = useState({email})
 
-
+    // const history = useHistory()
+    // useEffect(()=>{
+    //     if (!user.id) {
+    //         history.push('/authentication')
+    //     }
+    // },[user,history])
 
     
     return (
@@ -207,10 +212,10 @@ const  Home = (props)=> {
             </div>
 
          </div>
-         </>
-    
-            
-         : <h1 className="text-center mt-6">Please login first</h1>}
+         </>            
+         : 
+        <Navigate replace to='/authentication' />
+         }
          </>
     )
 };
