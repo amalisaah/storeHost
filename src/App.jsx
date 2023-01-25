@@ -121,17 +121,35 @@ function clearData() {
   }
 
   
-  function getData(path,query,queryVal){
+  function getData(path,query){
     (async()=>{
       try {
           let url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
-          url= queryVal ? `${url}&${queryVal}` : url;
           console.log(url);
           const response = await axios.get(url);
           // const data = response.data
           setResponse((prev)=> response.data) 
           setProjectData(prev=>query ? response.data : prev)
           console.log(response.data)
+      } catch (error) {
+          console.log(error.response);
+          // if (error.response.data==='Unauthorized'){setError(true)}
+      }     
+    })();
+  }
+
+  /*Deleting Projects*/
+  function deleteProject(name){
+    (async()=>{
+      try {
+          let path = '/dasboard/projects'
+          let url= `${baseUrl}${path}?uid=${userRef.current.id}&name=${name}`
+          console.log(url);
+          const response = await axios.delete(url);
+          // const data = response.data
+          setResponse((prev)=> response.data) 
+          setProjectData(prev=>query ? response.data : prev)
+          console.log(response)
       } catch (error) {
           console.log(error.response);
           // if (error.response.data==='Unauthorized'){setError(true)}
@@ -157,7 +175,7 @@ function clearData() {
                   <Route path='/authentication/*' element={<Authentication  />} />
                   <Route path='/home' element={<Home clearData={clearData} getData={getData} responseRef={responseRef} clearResponse={clearResponse} allHostedRef={allHostedRef} /> } >
                     <Route index element={<Dashboard />} />
-                    <Route path='projects' element={<Project postData={postData} getData={getData} /> } >
+                    <Route path='projects' element={<Project postData={postData} getData={getData} deleteProject={deleteProject} /> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
                       <Route path='finance' element={<Finance/>} />

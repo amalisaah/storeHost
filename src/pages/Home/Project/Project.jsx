@@ -59,7 +59,7 @@ const  Project = (props)=> {
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current))
         const path=`/dashboard/projects`;
         const queryVal=`name=${name}`;
-        props.getData(path,true,queryVal);///make DELETE REQUEST
+        props.deleteProject(name)
     }
   
 

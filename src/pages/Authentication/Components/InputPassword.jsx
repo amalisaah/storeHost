@@ -35,8 +35,6 @@ InputPassword.propTypes = {
     pattern: PropTypes.string,
     id: PropTypes.string.isRequired,
     handleChange: PropTypes.func,
-    show: PropTypes.bool.isRequired,
-    showPassword: PropTypes.func.isRequired,
 }
 
 export default InputPassword
