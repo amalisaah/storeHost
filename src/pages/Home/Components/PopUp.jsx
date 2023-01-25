@@ -9,10 +9,15 @@ const  PopUp = (props)=> {
     const ref = useRef();
 
     const hidePreview = (event) => {
-        if (ref.current && !ref.current.contains(event.target)) {
+        console.log(ref.current && ref.current.contains(event.target))
+        if(ref.current && ref.current.contains(event.target)){
+            ref.current.role='popup'
+        }
+        // if (ref.current && !ref.current.contains(event.target)) {
             let elements = document.getElementsByClassName('preview');
             Array.prototype.map.call(elements,element=>{element.style.display='none'})
-        }
+        // }
+        
     };
 
     useEffect(() => {
@@ -28,8 +33,6 @@ const  PopUp = (props)=> {
     }
     function handleDelete(e) {
         props.deleteProject(props.path.name);
-        // e.target.parentNode.style.display='none';
-        // console.log(e.target.parentNode);
     }
 
     return (

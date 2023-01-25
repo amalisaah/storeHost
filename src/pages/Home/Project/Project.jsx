@@ -45,10 +45,17 @@ const  Project = (props)=> {
         const path=projectData[name] && projectData[name].pathName;
         setPath(({path,name}))        
         sessionStorage.setItem('projectName',JSON.stringify(name))
-        // navigate(path)
-        // onselect
-        e.currentTarget.firstChild.style.display='block';
-        // return name
+        const target = e.currentTarget.firstChild;
+        // target.style.display='block';
+        if (target.role){
+            target.role='';
+            target.style.display='none';
+        }else{
+            // target.style.role='popup';
+            target.style.display='block';
+        }
+        
+        
     };
 
     function deleteProject (name){
