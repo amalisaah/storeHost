@@ -30,7 +30,6 @@ const  Home = (props)=> {
     const [logout,setLogout]= useState(false);
     function toggleLogout(){
         setLogout(prev=>!prev)
-         console.log(logout);
     }
 
     const navigate = useNavigate()

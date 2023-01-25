@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import './Password.css';
-import Input from "../Components/Input";
+import InputPassword from "../Components/InputPassword";
 import Submit from "../Components/Submit";
 import OuterDiv from "../Components/OuterDiv";
 import { useNavigate } from "react-router";
@@ -46,13 +46,17 @@ const  Password = (props)=> {
                 {props.response.status===404 ? <p className="text-error text-center text-2xl ">Link has expired</p> :
                  <form className='' onSubmit={handleSubmit} >
                     {props.sameRef.current ? null : <Alert text={'passwords do not match'} /> }
-                    <Input type="password" id="pwd" name="password" label='New Password' onChange={props.handleChange} value={props.value.password} onBlur={props.handleBlur} pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$' />
-                    <Input type="password" id="Confirmpwd" name="password2" label='Confirm Password' onChange={props.handleChange} value={props.value.password2} onBlur={props.handleCheck}  />   
+                    {/* <Input type="password" id="pwd" name="password" label='New Password' onChange={props.handleChange} value={props.value.password} onBlur={props.handleBlur} pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$' /> */}
+                    <InputPassword id="pwd" name='password' label='New Password' handleChange={props.handleChange} value={props.value.password} onBlur={props.handleBlur} pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$' />
+                    {/* <Input type="password" id="Confirmpwd" name="password2" label='Confirm Password' onChange={props.handleChange} value={props.value.password2} onBlur={props.handleCheck}  />    */}
+                    <InputPassword id="Confirmpwd" name="password2"  label='Confirm Password' handleChange={props.handleChange} value={props.value.password2} onBlur={props.handleCheck}  />
                     {props.loading ? <Loading /> : null}
                     <div className='flex justify-center'>
                         <Submit value='save'  />
                     </div>
-                    
+                    {/*  */}
+                {/* <Input type="password" id="pwd2" name="password2"  label='Confirm Password' onChange={props.handleChange} value={props.value.password2} onBlur={handleCheck}  /> */}
+                {/*  */}
                 </form>}
             </OuterDiv>
         </main>

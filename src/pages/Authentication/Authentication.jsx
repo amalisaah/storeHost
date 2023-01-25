@@ -50,10 +50,6 @@ const  Authentication = ()=> {
         
     
             
-     /*PATTERN*/
-    // const pattern={ mail:'^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$',
-    //                 pwd:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-    //             }
   
     /*CHANGE FORM BTN PERSONAL AND BUSINESS*/
     const [personal,setPersonal]=useState(true)
@@ -92,7 +88,11 @@ const  Authentication = ()=> {
         setSame(bol)
     }
 
-
+    /*Show OR Hide Password */
+    // const [show,setShow] = useState(false);
+    // function showPassword() {
+    //     setShow(prev=>!prev)
+    // }
 
 
     /*HANDLE FORM SUBMISSION*/
@@ -106,9 +106,10 @@ const  Authentication = ()=> {
             (async()=>{
                 try {
                     const url=`${baseUrl}${role}`;
-                    console.log(url);
+                    console.log(url,value);
                     const val=value;
                     const responded = await axios.post(url,val);
+                    console.log(responded)
                     responded && setLoading(false);
                     responded.data.id  && setUser(responded.data);
                     const data=responded.data
@@ -123,7 +124,7 @@ const  Authentication = ()=> {
                 }
                 
             })();
-            setValue({})
+
         }
         
     }

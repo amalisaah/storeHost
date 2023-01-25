@@ -22,6 +22,7 @@ Input.propTypes = {
     label: PropTypes.string.isRequired,
     pattern:PropTypes.string,
     handleBlur:PropTypes.func,
+    onChange:PropTypes.func,
 }
 
 export default Input
