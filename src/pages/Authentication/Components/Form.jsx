@@ -4,6 +4,7 @@ import Submit from './Submit';
 import Input from "./Input";
 import Loading from "../../../Components/Loading";
 import Alert from "./Alert";
+import InputPassword from "./InputPassword";
 
 const  Form = (props)=> {
 
@@ -61,13 +62,15 @@ const  Form = (props)=> {
                 {/* <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email} onBlur={handleBlur} pattern={pattern.mail}  /> */}
                 <Input type="email" id="email" name="email"  label='Email' onChange={props.handleChange} value={props.value.email}  pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'  />
                  {props.error ? 
-                <div className='w-[268px] h-[108px] bg-[#ffffffcc] p-3 font-fontPoppins text-[#858585] text-sm border border-solid border-fontGrayW absolute right-[11.5%] top-[40.5%] rounded animate-fadeOut'>
+                <div className='w-[268px] h-[108px] bg-[#ffffffcc] p-3 font-fontPoppins text-[#858585] text-sm z-10 border border-solid border-fontGrayW absolute right-[11.5%] top-[40.5%] rounded animate-fadeOut '>
                     
                     Passwords must contain at least 8 characters, including UPPERCASE, lowercase letters, number and a special character(@#$%^&*?)
                     
                 </div> : null}
-                <Input type="password" id="pwd" name="password"  label='Password' onChange={props.handleChange} value={props.value.password} onBlur={handleBlur} pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$' />
-                <Input type="password" id="pwd2" name="password2"  label='Confirm Password' onChange={props.handleChange} value={props.value.password2} onBlur={handleCheck}  />
+                {/* <Input type="password" id="pwd" name="password"  label='Password' onChange={props.handleChange} value={props.value.password} onBlur={handleBlur} pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$' /> */}
+                <InputPassword id="pwd" name='password' label='Password' handleChange={props.handleChange} value={props.value.password} onBlur={handleBlur} pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$' />
+                {/* <Input type="password" id="pwd2" name="password2"  label='Confirm Password' onChange={props.handleChange} value={props.value.password2} onBlur={handleCheck}  /> */}
+                <InputPassword id="pwd2" name="password2"  label='Confirm Password' handleChange={props.handleChange} value={props.value.password2} onBlur={handleCheck}  />
                 <div className='flex justify-center'> <Submit value='Create Account' className='hover:bg-hoverBlue w-[49%]' /> </div>
 
                 {props.loading ? <Loading /> : null}

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import useState from "react-usestateref";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../Components/Header";
 import ProfilePic from "../../Components/ProfilePic";
@@ -30,7 +30,6 @@ const  Home = (props)=> {
     const [logout,setLogout]= useState(false);
     function toggleLogout(){
         setLogout(prev=>!prev)
-         console.log(logout);
     }
 
     const navigate = useNavigate()
@@ -189,13 +188,19 @@ const  Home = (props)=> {
     const email=user.email;
     const [support,setSupport,supportRef] = useState({email})
 
-
+    // const history = useHistory()
+    // useEffect(()=>{
+    //     if (!user.id) {
+    //         history.push('/authentication')
+    //     }
+    // },[user,history])
 
     
     return (
         <>
         { user.id ?
         <>
+        <div className='absolute w-full h-full bg- blur-[100px]'></div>
         <Header className={'h-[88px] flex-row-reverse fixed '}>
             <ProfilePic src={profilePic.data || profilePic.src} text={user.business || user.firstname} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
             {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
@@ -207,10 +212,10 @@ const  Home = (props)=> {
             </div>
 
          </div>
-         </>
-    
-            
-         : <h1 className="text-center mt-6">Please login first</h1>}
+         </>            
+         : 
+        <Navigate replace to='/authentication' />
+         }
          </>
     )
 };

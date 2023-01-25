@@ -2,12 +2,16 @@ import React from "react";
 import Header from "../../Components/Header";
 import NavItem from "../../Components/NavItem";
 import PicFrame from "../../Components/PicFrame";
-import  team from '../../assets/images/Ellipse3.png';
+import  team1 from '../../assets/images/Ellipse 1.png';
+import  team2 from '../../assets/images/Ellipse3.png';
+import  team3 from '../../assets/images/Ellipse 4.png';
 import Button from "../../Components/Button";
 import  laptop from '../../assets/images/laptop.png';
 import  phone from '../../assets/images/phone.png';
 import frame from '../../assets/images/Frame 10.png';
 import webpage from '../../assets/images/webpage.png';
+
+
 const  LandingPage = ()=> {
 
     const table=['Landing page','Eccomerce','Blogs','Portfolio','Hiring']
@@ -16,7 +20,7 @@ const  LandingPage = ()=> {
         <>
         <div className='page relative min-h-screen'>
             <Header className={'fixed'}>
-                <NavItem value='Log in' className='mr-[39px]' link='/authentication' />
+                <NavItem value='Log in' className='mr-[39px] hover:text-xl hover:font-semibold' link='/authentication' />
                 <Button value='Register' className='h-10 w-36' link='/authentication/signup' />
             </Header>
             <div className='pt-28'>
@@ -26,20 +30,20 @@ const  LandingPage = ()=> {
                         <div className='font-fontPoppins font-black text-7xl leading-[110px] text-left '>More than just templates</div>
 
                         <div className='font-fontRoboto text-xl leading-6 text-left mt-9 pb-9'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</div>
-                        <div className='flex justify-start'><Button value="Get Started" className='h-[58px] w-[190px] rounded-xl mt-8 ' /></div>        
+                        <div className='flex justify-start'><Button value="Get Started" link='authentication/signup' className='h-[58px] w-[190px] rounded-xl mt-8 ' /></div>        
                     </div>
 
-                    <div className='w-1/2 relative'>
-                        <img src={laptop} alt='laptop' className="w-full" />
-                        <img src={phone} alt='phone' className="absolute top-[90px] right-[10px] h-1/2" />
+                    <div className='w-1/2 relative flex '>
+                        <img src={laptop} alt='laptop' className="w-full relative top-[-110px] self-start " />
+                        <img src={phone} alt='phone' className="absolute top-[0px] right-[10px] h-1/2" />
                     </div> 
                 </div>
                 <div className='px-[100px]'>
                     <h2 className="font-semibold text-[40px] leading-15 text-left mb-8 ">Meet The Team</h2>
                     <div className='flex justify-between pb-12'>
-                    <PicFrame src={team} alt='teamate 1' text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti.' />
-                    <PicFrame src={team} alt='teamate 1' text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis.' />
-                    <PicFrame src={team} alt='teamate 1' text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per.' />
+                    <PicFrame src={team1} alt='teamate 1' text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti.' />
+                    <PicFrame src={team2} alt='teamate 1' text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis.' />
+                    <PicFrame src={team3} alt='teamate 1' text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per.' />
                     </div>
                 </div>
 
