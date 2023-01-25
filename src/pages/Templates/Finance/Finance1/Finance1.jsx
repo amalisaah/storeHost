@@ -84,14 +84,17 @@ const  Finance1 = ()=> {
             <Header logo={edit.logo} template={true} className='fHeader relative' logoClass='col text-orange font-bold font-fontRoboto text-[36px] fLogo' searchClass='col text-orange fSearch' searchButtonClass='col text-orange fSearchButton' onBlur={onContentBlur} style={style}>
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="col text-orange text-xl font-fontRoboto" style={style.col} >Register</span>
             </Header>
+
             {pagesVisible ? <Pages pages={['Personal', 'Business']} /> : null}
             {componentVisible ? <Components style={style} changeStyle={changeStyle} colorVisible={colorVisible} colorVisibility={colorVisibility} /> : null}
             {sectionsVisible ? <Sections sections={arr}  /> : null}
+            
             <main className='font-fontRoboto fMain'>
                 <div style={{backgroundImage:picture.Hero ?`url(${picture.Hero.src}`: 'url(/images/finance/background.png)',backgroundRepeat: 'no-repeat',backgroundSize:
             'cover'}}  className="h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-no-repeat bg-cover relative fHero "   >
-                    <div  id='Hero' className=' w-full h-full absolute '></div>
-                <ImageInput src={picture.three ? picture.three.src : '/images/finance/scrabble.png'} alt='Happy Child' imageId="Hero" id="bg" labelVisible={labelVisible} onChange={changePic} />
+
+                    <div  id='Hero' className=' w-full h-full absolute -z-10'></div>
+                    <ImageInput id="bg" labelVisible={labelVisible} onChange={changePic} />
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]' >
                         <h2 id='header1' contentEditable onBlur={onContentBlur}
                             dangerouslySetInnerHTML={sanitize(edit.header1)} className="text-[40px] font-semibold font-fontRoboto text-center mb-5" style={style.header} />
@@ -105,10 +108,10 @@ const  Finance1 = ()=> {
                             dangerouslySetInnerHTML={sanitize(edit.business)} style={style.col ? ({background: style.col.color}) : {}}/>
                     </div>
                 </div>
-            <div className='outlet'>
-            
-                <Outlet context={[edit,picture,changePic,onContentBlur,labelVisible,style]} />
-            </div>
+                <div className='outlet'>
+                
+                    <Outlet context={[edit,picture,changePic,onContentBlur,labelVisible,style]} />
+                </div>
                 
                 <div className="flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%] fDivForm" id="section 3">
                         <Image src={picture.three ? picture.three.src : '/images/finance/scrabble.png'} alt='Happy Child' imageId="three" id="fileThree" labelVisible={labelVisible} onChange={changePic} />
