@@ -80,7 +80,6 @@ function clearData() {
   if (userRef.current.id){
     const path=`/dashboard/projects`;
     getData(path,true);
-    console.log('ermmm')
     }
    
   },[user])

@@ -64,8 +64,11 @@ const  Templates = (props)=> {
 
     function handleSubmit () {
         // const name=[projectNameRef.current];
+        submitPic()
         const name=nameUtil(projectNameRef.current,user);
-        setEdit(prev=>({...prev,pathName:location.pathname,projStyle:styleRef.current}))//pathname is to acess template type to aid in rerouting from proect page
+        setEdit(prev=>(
+            {...prev,pathName:location.pathname,projStyle:styleRef.current,picture:pictureRef.current}
+            ))//pathname is to acess template type to aid in rerouting from proect page
         
         setProjectData(prev=>({...prev,[name]:editRef.current}));
         console.table(projectDataRef.current)
@@ -75,7 +78,7 @@ const  Templates = (props)=> {
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
         const path=`/dashboard/projects`
         // props.postData(path,JSON.stringify(projectDataRef.current))
-        submitPic()
+        
         props.postData(path,projectDataRef.current);
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
 
@@ -157,22 +160,39 @@ const  Templates = (props)=> {
                     'Content-Type':'multipart/form-data'
                 }
             }).then(res => { 
-                console.log(res);
+                // console.log(res);
+                //
+                const data=res.data
+                console.log(data)
+                setPicture(prev=>({...prev,...data}))
             }).catch(error =>{
                 console.log(error)
             })
         }
-        // console.log(picture)
+        // console.log(picture) 
         // axios.post(url,picture).then(res=>{
         //     console.log(res)
         // }).catch(err=>{
         //     console.log(err)
-        // })
-        
-        
+        // })       
        
-    }
-   
+    } 
+
+    useEffect(()=>{
+        user.id &&
+        (async()=>{
+            try {
+                let url =  `https://storefront-dpqh.onrender.com/uploads/${projectNameRef.current}?uid=${user.id}`;
+                console.log(url);
+                const response = await axios.get(url);
+                setPicture(prev=> response.data)
+            } catch (error) {
+                console.log(error.response);
+                // if (error.response.data==='Unauthorized'){setError(true)}
+            }     
+          })();
+    },[user])
+    
 
     /*Pages Options Display */
     const [pagesVisible,setPagesVisible] =useState(false);

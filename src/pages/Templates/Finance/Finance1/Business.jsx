@@ -23,11 +23,11 @@ const  Business = ()=> {
             <div className='px-[5.5%] py-8 ' id="section 2">
                 <div className='flex justify-between fArticle-one section'>
                     <Paragraph style={style} headerId='businessHeader2' header={edit.businessHeader2} paraId='businessPara2' para={edit.businessPara2} onBlur={onContentBlur} />
-                    <Image src={picture.businessOne ? picture.businessOne.src : '/images/finance/Child.png'} alt='Happy Child' imageId="personalOne" id="fileOne" labelVisible={labelVisible} onChange={changePic} />
+                    <Image src={picture.businessOne ? picture.businessOne.src : '/images/finance/Office.png'} alt='Office' imageId="businessOne" id="fileOneB" labelVisible={labelVisible} onChange={changePic} />
                 </div>
 
                 <div className='flex justify-between fArticle-two section'>
-                    <Image src={picture.businesssTwo ? picture.businessTwo.src : '/images/finance/House.png'} alt='Happy Child' imageId="personalTwo" id="fileTwo" labelVisible={labelVisible} onChange={changePic} />
+                    <Image src={picture.businessTwo ? picture.businessTwo.src : '/images/finance/Pepper.png'} alt='Pepper' imageId="businessTwo" id="fileTwoB" labelVisible={labelVisible} onChange={changePic} />
                     <Paragraph style={style} headerId='businessHeader3' header={edit.businessHeader3} paraId='businessPara3' para={edit.businessPara3} onBlur={onContentBlur} />
                 </div>
             </div> 

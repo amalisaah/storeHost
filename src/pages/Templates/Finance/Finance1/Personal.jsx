@@ -10,9 +10,6 @@ const  Personal = ()=> {
     return (
         <>
             <div className='h-[286px] font-fontRoboto flex justify-evenly items-center bg-orange fAccounts' id="section 1" style={style.col ? {background :style.col.color} : {}}>
-                {/* <div className='rounded-full h-[218px] w-[218px] bg-white font-medium font-fontRoboto text-center flex flex-col justify-center'>
-                    <i className='fas fa-handshake fa-5x text-orange  mb-4 '></i>Request a  loan
-                </div> */}
                 <div className='rounded-full h-[218px] w-[218px] bg-white font-medium text-center flex flex-col justify-center fAccount'>
                     <i className='fas fa-landmark fa-5x text-orange  mb-4' style={style.col}></i> open an account
                 </div>
