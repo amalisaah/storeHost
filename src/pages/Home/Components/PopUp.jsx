@@ -9,7 +9,6 @@ const  PopUp = (props)=> {
     const ref = useRef();
 
     const hidePreview = (event) => {
-        console.log(ref.current && ref.current.contains(event.target))
         if(ref.current && ref.current.contains(event.target)){
             ref.current.role='popup'
         }

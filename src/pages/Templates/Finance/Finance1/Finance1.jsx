@@ -76,7 +76,6 @@ const  Finance1 = ()=> {
     /*Sections*/
     const arr=['Hero','section 1','section 2','section 3','footer'];
    
-
   
 
     return (
@@ -114,6 +113,7 @@ const  Finance1 = ()=> {
                 </div>
                 
                 <div className="flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%] fDivForm" id="section 3">
+                        {/* <Image src= "https://storefront-dpqh.onrender.com/uploads/Desk.jpg" alt='Happy Child' imageId="three" id="fileThree" labelVisible={labelVisible} onChange={changePic} /> */}
                         <Image src={picture.three ? picture.three.src : '/images/finance/scrabble.png'} alt='Happy Child' imageId="three" id="fileThree" labelVisible={labelVisible} onChange={changePic} />
                     
                     <form className="w-[42.36%]" id="form">
