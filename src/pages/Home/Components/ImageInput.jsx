@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const  ImageInput = (props)=> {
 
     function handleChange(event){
-        console.log(event.currentTarget.parentNode.firstChild.id)
         var picture = event.currentTarget.files[0];
         var src     = URL.createObjectURL(picture);
         const id = event.currentTarget.parentNode.firstChild.id;
@@ -21,7 +20,7 @@ const  ImageInput = (props)=> {
                     <span className="fa fa-camera m-2"></span>
                     <span>Change Image</span>
                 </label>
-                <input id={props.id} type="file" onChange={handleChange} className='hidden'/> 
+                <input id={props.id} type="file" accept="image/*" onChange={handleChange} className='hidden'/> 
         </>
     )
 };

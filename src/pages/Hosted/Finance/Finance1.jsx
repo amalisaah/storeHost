@@ -15,6 +15,7 @@ const  Finance1 = (props)=> {
     const [edit] = [props.data];
   
     let projStyle = edit.projStyle ? edit.projStyle :{};
+    let picture = edit.picture ? edit.picture: {};
     useEffect(()=>{
        
         const styles = createSyle(projStyle)
@@ -37,7 +38,8 @@ const  Finance1 = (props)=> {
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="col text-orange text-xl font-fontRoboto">Register</span>
             </Header>
             <main className='font-fontRoboto fMain'>
-                <div className="fHero h-[556px] text-white font-fontRoboto flex flex-col justify-center bg-[url('/images/finance/background.png')]">
+                <div className="fHero h-[556px] text-white font-fontRoboto flex flex-col justify-center" style={{backgroundImage:picture.Hero ?`url(${picture.Hero.src}`: 'url(/images/finance/background.png)',backgroundRepeat: 'no-repeat',backgroundSize:
+            'cover'}}>
                     <div className='z-5 flex flex-col items-center justify-center mt-[120px]'>
                         <h2 id='header1' className="header text-[40px] font-semibold leading-[48.8px] font-fontRoboto text-center mb-5">{edit.header1}</h2>
                         <p className='text-inherit font-normal font-fontRoboto text-xl text-center w-[42%] mx-auto leading-[23px] ' id='para1'>{edit.para1} </p>
@@ -53,11 +55,11 @@ const  Finance1 = (props)=> {
                     </div>
                 </div>
                 <div className='outlet'>
-                    <Outlet context={[edit,projStyle]}  />
+                    <Outlet context={[edit,projStyle,picture]}  />
                 </div>
                 <div className="fDivForm flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%]">
                     
-                        <img src='/images/finance/scrabble.png' alt='motivation' className="w-[523px]"/>
+                        <img src={picture.three ? picture.three.src : '/images/finance/scrabble.png'}  alt='motivation' className="w-[523px]"/>
                     
                     <form className="w-[42.36%]">
                         <h2 id="header4" className="font-ubuntu font-semibold text-xl mb-[17px] header">Shoot us a message</h2>
