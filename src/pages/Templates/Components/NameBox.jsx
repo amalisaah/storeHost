@@ -24,7 +24,7 @@ const  NameBox = (props)=> {
 
     return (
         <>
-            <form className={'w-[533px] h-[278px] bg-white p-11 font-fontRoboto fixed top-[30%] left-[30%] shadow-2' + props.className} onSubmit={handleSubmit}>
+            <form className={'w-[533px] h-[278px] bg-white p-11 font-fontRoboto fixed top-[30%] left-[30%] shadow-2 z-10 ' + props.className} onSubmit={handleSubmit}>
                 
                 <div className='' >
                    <h2 className="font-semibold text-2xl mb-2">Name Box</h2> 
