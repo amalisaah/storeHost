@@ -20,11 +20,11 @@ const  Personal = ()=> {
             <div className='px-[5.5%] py-8' id="section 2">
                 <div className='flex justify-between fArticle-one'>
                     <Paragraph style={style} headerId='personalHeader2' header={edit.personalHeader2} paraId='personalPara2' para={edit.personalPara2} onBlur={onContentBlur} />
-                    <Image src={picture.personalOne ? picture.personalOne.src : '/images/finance/Child.png'} alt='Happy Child' imageId="personalOne" id="fileOne" labelVisible={labelVisible} onChange={changePic} />
+                    <Image className='w-[517px]'   src={picture.personalOne ? picture.personalOne.src : '/images/finance/Child.png'} alt='Happy Child' imageId="personalOne" id="fileOne" labelVisible={labelVisible} onChange={changePic} />
                 </div>
 
                 <div className='flex justify-between fArticle-two'>
-                    <Image src={picture.personalTwo ? picture.personalTwo.src : '/images/finance/House.png'} alt='Happy Child' imageId="personalTwo" id="fileTwo" labelVisible={labelVisible} onChange={changePic} />
+                    <Image className='w-[517px]'   src={picture.personalTwo ? picture.personalTwo.src : '/images/finance/House.png'} alt='Happy Child' imageId="personalTwo" id="fileTwo" labelVisible={labelVisible} onChange={changePic} />
                     <Paragraph style={style} headerId='personalHeader3' header={edit.personalHeader3} paraId='personalPara3' para={edit.personalPara3} onBlur={onContentBlur} />
                 </div>
             </div> 
