@@ -1,10 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import useState from 'react-usestateref';
 import { Link,useLocation,useOutletContext } from "react-router-dom";
 import NavItem from "../../../../Components/NavItem";
 import Header from "../../Components/Header";
 import Button from "../../../../Components/Button";
-import imge3 from "../../../../assets/images/Blog/image3.png";
 import { data } from "./data";
 import Footer from "../../Components/Footer";
 import Pages from "../../Components/Pages";
@@ -92,7 +90,7 @@ const  Templates3 = (props)=> {
 
                 </div>
                 <div className='w-full' id="section 3">
-                    <Image className='w-full' src={picture.three ? picture.three.src : '/images/Blog/Blog 3/image3.png'} alt='Happy Child' imageId="three" id="fileThree" labelVisible={labelVisible} onChange={changePic} />
+                    <Image className='w-full' src={picture.two ? picture.two.src : '/images/Blog/Blog 3/image3.png'} alt='Happy Child' imageId="two" id="fileTwo" labelVisible={labelVisible} onChange={changePic} />
                 </div>
                 <div className='py-8' id="para4" suppressContentEditableWarning contentEditable={template} onBlur={changeValue}>
                      {edit.para4}
