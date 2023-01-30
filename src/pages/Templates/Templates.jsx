@@ -39,8 +39,8 @@ const  Templates = (props)=> {
 
     const onContentBlur = useCallback(e => {
         const id=e.currentTarget.id
-        console.log(edit)
-        setEdit(prev=>({...prev,[id]:e.currentTarget.innerHTML}))
+        setEdit(prev=>({...prev,[id]:e.currentTarget.innerText}))
+        console.log(id,'\n',edit)
     })
 
 

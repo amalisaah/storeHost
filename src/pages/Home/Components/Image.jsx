@@ -8,8 +8,8 @@ const  Image = (props)=> {
 
     return (
         <>
-            <div className={'w-[517px] relative '+props.className} >
-                <img src={props.src} alt={props.alt} id={props.imageId} className="w-[517px] object-cover " />
+            <div className={'relative '+props.className} >
+                <img src={props.src} alt={props.alt} id={props.imageId} className="w-full object-cover " />
                 <ImageInput labelVisible={props.labelVisible} id={props.id} onChange={props.onChange} />
             </div>
         </>

@@ -1,7 +1,7 @@
 /* Appends name to project name*/ 
 function createName(username,projName) {
-    username=username.toLowerCase();
-    projName=projName.toLowerCase();
+    username=username.toLowerCase().trim();
+    projName=projName.toLowerCase().trim();
     projName=projName.split('-');
     console.log(projName)
     if (projName.length>1) return projName.join('-') 

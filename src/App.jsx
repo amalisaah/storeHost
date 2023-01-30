@@ -141,16 +141,14 @@ function clearData() {
   function deleteProject(name){
     (async()=>{
       try {
-          let path = '/dasboard/projects'
+          let path = '/dashboard/projects'
           let url= `${baseUrl}${path}?uid=${userRef.current.id}&name=${name}`
           console.log(url);
           const response = await axios.delete(url);
-          // const data = response.data
-          setResponse((prev)=> response.data) 
-          setProjectData(prev=>query ? response.data : prev)
-          console.log(response)
+          setProjectData(prev=>response.data)
+          console.log(response.data)
       } catch (error) {
-          console.log(error.response);
+          console.log(error);
           // if (error.response.data==='Unauthorized'){setError(true)}
       }     
     })();
@@ -185,7 +183,7 @@ function clearData() {
                     <Route path='support' element={<Support/>} />
                   </Route>
                   <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} />} >
-                    <Route path='blog/blog-3' element={<Templates3 />} />
+                    <Route path='blog/blog-3/*' element={<Templates3 />} />
                     <Route path='finance/finance-1' element={<FinanceTemp1 />} >
                       <Route path='personal' element={<PersonalTemp1 />}/>
                       <Route path='business' element={<BusinessTemp1 />}/>
@@ -206,7 +204,7 @@ function clearData() {
                         <Route path='personal' element={<Personal /> } />
                         <Route path='business' element={<Business /> } />
                     </Route> )}
-                    <Route path='*' element={<Navigate replace to='/' />} />
+                    {/* <Route path='*' element={<Navigate replace to='/' />} /> */}
                     {/* <Route path='*' element={<h1 className='mx-auto' ><Link to='/authentication'> GO BACK</Link></h1>} /> */}
                   {/* <Route path='*' element={<Templates/>} /> */}
                   
