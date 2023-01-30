@@ -20,6 +20,7 @@ import Blog from './pages/Home/Project/Blog/Blog';
 import Finance from './pages/Home/Project/Finance/Finance';
 import Templates3 from './pages/Templates/Blog/Template3/Templates3';
 import Blog3 from './pages/Hosted/Blog/Blog3';
+import Templates1 from './pages/Templates/Blog/Template1/Templates1';
 import Templates from './pages/Templates/Templates';
 import { hostedDuplicates } from './utils/helperUtils';
 import FinanceTemp1 from './pages/Templates/Finance/Finance1/Finance1';
@@ -183,6 +184,7 @@ function clearData() {
                     <Route path='support' element={<Support/>} />
                   </Route>
                   <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} />} >
+                    <Route path='blog/blog-1/*' element={<Templates1 />} />
                     <Route path='blog/blog-3/*' element={<Templates3 />} />
                     <Route path='finance/finance-1' element={<FinanceTemp1 />} >
                       <Route path='personal' element={<PersonalTemp1 />}/>

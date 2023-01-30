@@ -6,18 +6,18 @@ import { sanitize } from "../../../utils/sanitizeUtils";
 const  Footer = (props)=> {
     return (
         <>
-            <footer className={"bg-black w-full h-[221px] font-Roboto text-white flex justify-around items-center  " + props.className} id='footer'>
+            <footer className={"bg-black w-full h-[221px] text-center font-Roboto text-white flex justify-around items-center  " + props.className} id='footer'>
              <  div className=' '><Logo className={' font-extrabold text-7xl text-white '+ props.logoClass} logo={props.logo} /></div>
                     <div className='break-words w-[30%] font-light text-lg font-fontOutfit' id={props.textId} contentEditable={props.template} onBlur={props.onBlur}
                             dangerouslySetInnerHTML={sanitize(props.text)}/>
                     <div className='flex flex-col items-end'>
-                        <div className=''>
+                        <div className={' '+props.socialClass}>
                             <a href="#" className="fa fa-facebook m-2 bg-white text-black text-xl w-6 text-center"></a>
                             <a href="#" className="fa fa-instagram m-2 text-xl w-6 text-center"></a>
                             <a href="#" className="fa fa-twitter m-2 text-xl w-6 text-center"></a>
                         </div>
-                    <div className='font-fontOutfit font-light text-[18px]'>Customer care</div>
-                    <div className='font-fontOutfit'> <a href="#" className="fas fa-phone m-2 text-xl w-6 text-center"></a><span id={props.telId} contentEditable={props.template} onBlur={props.onBlur}
+                    <div className={'font-fontOutfit font-light text-[18px] '+props.customerClass}>Customer care</div>
+                    <div className={'font-fontOutfit '+props.teleClass}> <a href="#" className="fas fa-phone m-2 text-xl w-6 text-center"></a><span id={props.telId} contentEditable={props.template} onBlur={props.onBlur}
                             dangerouslySetInnerHTML={sanitize(props.tel)}/></div>
                 </div>
             </footer>        
@@ -27,6 +27,9 @@ const  Footer = (props)=> {
 
 Footer.propTypes={
     className: PropTypes.string,
+    socialClass: PropTypes.string,
+    teleClass: PropTypes.string,
+    customerClass: PropTypes.string,
     logoClass : PropTypes.string,
     text: PropTypes.string,
     textId: PropTypes.string,
