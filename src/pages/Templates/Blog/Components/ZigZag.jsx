@@ -6,7 +6,7 @@ const  ZigZag = (props)=> {
     
     return (
         <>
-            <div className='my-10 h-[400px] flex justify-between '>
+            <div className='my-[50px] h-[400px] flex justify-between '>
                 {props.children}
             </div>
         </>

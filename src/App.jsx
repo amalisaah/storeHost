@@ -21,6 +21,7 @@ import Finance from './pages/Home/Project/Finance/Finance';
 import Templates3 from './pages/Templates/Blog/Template3/Templates3';
 import Blog3 from './pages/Hosted/Blog/Blog3';
 import Templates1 from './pages/Templates/Blog/Template1/Templates1';
+import Blog1 from './pages/Hosted/Blog/Blog1';
 import Templates from './pages/Templates/Templates';
 import { hostedDuplicates } from './utils/helperUtils';
 import FinanceTemp1 from './pages/Templates/Finance/Finance1/Finance1';
@@ -197,6 +198,7 @@ function clearData() {
                     <Route path={`/${site[1]}`} element={
                       
                       ({
+                        'Blog-1': <Blog1 data={projectDataRef.current[site[1]]} />,
                         'Blog-3': <Blog3 data={projectDataRef.current[site[1]]} />,
                         'finance-1': <Finance1 data={projectDataRef.current[site[1]]} />
                       }[site[0]] 
