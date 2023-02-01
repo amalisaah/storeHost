@@ -22,7 +22,8 @@ Image.propTypes = {
     alt: PropTypes.string.isRequired,    
     id: PropTypes.string.isRequired,    
     imageId: PropTypes.string.isRequired,
-    onChange: PropTypes.func    
+    onChange: PropTypes.func,
+    labelVisible: PropTypes.bool,     
 }
 
 export default Image
