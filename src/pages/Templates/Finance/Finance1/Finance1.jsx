@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Outlet, useOutletContext } from "react-router-dom";
 import { sanitize } from "../../../../utils/sanitizeUtils";
-import Submit from "../../../../Components/Submit";
-import Input from "../../../Authentication/Components/Input";
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
 import { data } from "./data";
@@ -11,6 +9,7 @@ import Pages from "../../Components/Pages";
 import Components from "../../Components/Components";
 import Sections from "../../Components/Sections";
 import ImageInput from "../../../Home/Components/ImageInput";
+import MessageForm from "../../Components/MessageForm";
 
 
 const  Finance1 = ()=> {
@@ -115,14 +114,8 @@ const  Finance1 = ()=> {
                 <div className="flex justify-between items-center bg-[url('/images/finance/bgGradient.png')] h-[696px] px-[5.5%] fDivForm" id="section 3">
                         
                         <Image className='w-[517px]'   src={picture.three ? picture.three.src : '/images/finance/scrabble.png'} alt='Happy Child' imageId="three" id="fileThree" labelVisible={labelVisible} onChange={changePic} />
+                        <MessageForm />
                     
-                    <form className="w-[42.36%]" id="form">
-                        <h2 id="header4" className="font-ubuntu font-semibold text-xl mb-[17px]">Shoot us a message</h2>
-                        <Input type='text' id='name' label="name" name="name" placeholder='type name here' onChange={()=>{}} />
-                        <Input type='email' id='email' label="email" name="email" placeholder='example@storefront.com' onChange={()=>{}} />
-                        <textarea className="w-full h-[226px] rounded-lg bg-white  shadow-1 mt-4 p-6 focus:border-solid focus:border-2 focus:outline-none border-darkBlue " name='message' placeholder=" Hello Storefront, I would like to ... " value={ ''} onChange={()=>{}} ></textarea>
-                        <Submit value='Submit' className='text-white bg-black rounded-lg w-[148px]'/>
-                    </form>
                 </div>
             </main>
             <Footer logoClass='fLogo' className=' fFooter' logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' template={true} onBlur={onContentBlur} />
