@@ -19,7 +19,7 @@ import { sanitize } from "../../../../utils/sanitizeUtils";
 const  Templates1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile] = useOutletContext() ; ;
+    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile] = useOutletContext() ;
     
     let template= true;
     useEffect(()=>{
