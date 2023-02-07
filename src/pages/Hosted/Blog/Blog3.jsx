@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link,useLocation,useOutletContext } from "react-router-dom";
+import axios from "axios";
 import NavItem from "../../../Components/NavItem";
 import Header from "../../Templates/Components/Header";
 import Button from "../../../Components/Button";
@@ -16,6 +16,24 @@ const  Blog3 = (props)=> {
 
     let projStyle = edit.projStyle ? edit.projStyle :{};
     let picture = edit.picture ? edit.picture: {};
+
+    useEffect(()=>{
+        (async()=>{
+            try {
+                const baseUrl = 'https://storefront-dpqh.onrender.com';
+                const temp=location.pathname.split('/').at(1);
+                let path = '/store'
+                let url= `${baseUrl}${path}/${temp}`
+                console.log(url);
+                const response = await axios.get(url);
+                console.log(response)
+            } catch (error) {
+                console.log(error);
+            }     
+          })();
+        
+    
+    },[])
     
     useEffect(()=>{
        

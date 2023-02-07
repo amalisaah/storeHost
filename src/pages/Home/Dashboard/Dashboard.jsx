@@ -1,29 +1,28 @@
 import React, { useContext } from "react";
 import './Dashboard.css';
-import ProfilePic from "../../../Components/ProfilePic";
-import pic from "../../../assets/images/Ellipse 15.png";
-import { LoginContext } from "../../../Context/LoginContext";
-import Input from "../../../Components/Input";
 
 
 
-const  Dashboard = ()=> {
 
-    const views = ['Sites Created','Views','Orders','Earnings'];
-    const table = [1,2,3,4,5,6,]
+const  Dashboard = ({dashboard})=> {
 
+    const heading = ['Sites Created','Views','Orders','Earnings'];
+    const item = (dashboard && dashboard.summary) ? Object.keys(dashboard.summary) : [] ;
+    const summary = dashboard && dashboard.summary;
+    const table = [{vendor:'sammy',id:101254,items:121,commision:10}];
+    // const table = dashboard ? dashboard.vendors : [];
 
     return (
         <>
             <div className="flex justify-around">
-                {views.map((view,index)=>
+                {heading.map((view,index)=>
                     <div className='w-[274px] border-solid border-2 border-darkBlue h-[125px] px-5 py-2 shadow-1 text-center' key={index}>
                         <h2 className="font-fontPoppins text-2xl font-semibold mb-2">{view}</h2>
                         <div className='h-[1px] bg-fontGrayW'></div>
-                        <div className='font-fontRoboto text-2xl font-normal pt-2'>GHC 240</div>
+                        <div className='font-fontRoboto text-2xl font-normal pt-2'>{summary ? summary[item[index]]: '-' }</div>
                         <div className='flex justify-between text-sm mt-2'>
-                            <div className='text-fontGrayW '>From last period</div>
-                            <div className='text-[#18BB14]'>12.56%</div>
+                            {/* <div className='text-fontGrayW '>From last period</div>
+                            <div className='text-[#18BB14]'>12.56%</div> */}
                         </div>
                     </div>
                 )}
@@ -42,12 +41,13 @@ const  Dashboard = ()=> {
                     <tbody>
                         {table.map((item,index)=>
                             <tr key={index}>
-                                <td>James Cottage</td>
-                                <td>ID</td>
-                                <td>items</td>
-                                <td>Commision</td>
+                                <td>{item.vendor}</td>
+                                <td>{item.id} </td>
+                                <td>{item.items}</td>
+                                <td>{item.commision}</td>
                             </tr>
                         )}
+                        
                     </tbody>
                 </table>
             </div>

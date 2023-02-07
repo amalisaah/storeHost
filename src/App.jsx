@@ -51,6 +51,9 @@ function App() {
   /*Temporarily stores response*/
   const [response,setResponse,responseRef] = useState('')
 
+  /*Dashboard values */
+  const [dashboard,setDashboard] = useState({})
+
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
   function UpdateHosted (site,name,path){
@@ -87,7 +90,7 @@ function clearData() {
 /*Fetching Data on first render*/
   useEffect(()=>{
     const path=`/hstores`;
-    getData(path);
+    getData(path,false,true);
     
    
   },[])
@@ -120,6 +123,24 @@ function clearData() {
 },[responseRef.current])  
 
 
+////////DASHBOARD ///////////////////////////////
+  
+useEffect(()=>{
+
+  if (userRef.current.id){
+    const path=`/dashboard`;
+    getData(path,true,false,true);
+  }
+  
+  },[user])
+
+  useEffect(()=>{
+  
+  const item=JSON.stringify(dashboard)
+  sessionStorage.setItem('dashboard',item)
+  
+  },[dashboard])
+
 
 
 
@@ -142,7 +163,7 @@ function clearData() {
   }
 
   
-  function getData(path,query){
+  function getData(path,query,host,dash){
     (async()=>{
       try {
           let url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
@@ -150,8 +171,9 @@ function clearData() {
           const response = await axios.get(url);
           // const data = response.data
           setResponse((prev)=> response.data) 
-          setProjectData(prev=>query ? response.data : prev)
-          setAllHosted(prev=>!query ? response.data : prev)
+          setProjectData(prev=>(query && !dash) ? response.data : prev);
+          setAllHosted(prev=>(!query && host) ? response.data : prev);
+          setDashboard(prev=>response.data.summary ? response.data : prev)  ///DASHBOARD
           console.log(response.data)
       } catch (error) {
           console.log(error.response);
@@ -182,7 +204,7 @@ function clearData() {
     setResponse('')
   }
   
-
+ 
   return (
     <LoginContext.Provider value={{user,setUser,userRef}} >
       <projectNameContext.Provider value={[projectName,setProjectName,projectNameRef]} >
@@ -194,13 +216,13 @@ function clearData() {
                   <Route path='/' element={<LandingPage/>} />
                   <Route path='/authentication/*' element={<Authentication  />} />
                   <Route path='/home' element={<Home clearData={clearData} responseRef={responseRef} clearResponse={clearResponse} allHostedRef={allHostedRef} /> } >
-                    <Route index element={<Dashboard />} />
+                    <Route index element={<Dashboard dashboard={dashboard} />} />
                     <Route path='projects' element={<Project postData={postData} deleteProject={deleteProject} /> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
                       <Route path='finance' element={<Finance/>} />
                     </Route>
-                    <Route path='dashboard' element={<Dashboard/>} />
+                    <Route path='dashboard' element={<Dashboard dashboard={dashboard} />} />
                     <Route path='profile' element={<Profile/>} />
                         
                     <Route path='support' element={<Support/>} />
@@ -214,23 +236,6 @@ function clearData() {
                       <Route path='business' element={<BusinessTemp1 />}/>
                     </Route>
                   </Route>
-
-                  {/* <Route path='/hosted' element={<Hosted/> } > */}
-                    {/* {allHosted.map((site,index)=>
-                    <Route path={`/${site[1]}`} element={
-                      
-                      ({
-                        'Blog-1': <Blog1 data={projectDataRef.current[site[1]]} />,
-                        'Blog-2': <Blog2 data={projectDataRef.current[site[1]]} />,
-                        'Blog-3': <Blog3 data={projectDataRef.current[site[1]]} />,
-                        'finance-1': <Finance1 data={projectDataRef.current[site[1]]} />
-                      }[site[0]] 
-                      )
-                      } 
-                      key={index}>
-                        <Route path='personal' element={<Personal /> } />
-                        <Route path='business' element={<Business /> } />
-                    </Route> )} */}
                     {allHosted.map((site,index)=>
                     <Route path={site.store} element={
                       

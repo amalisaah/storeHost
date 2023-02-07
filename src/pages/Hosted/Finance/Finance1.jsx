@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import useState from "react-usestateref";
+import axios from "axios";
 import './Finance1.css';
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Submit from "../../../Components/Submit";
@@ -35,6 +36,24 @@ const  Finance1 = (props)=> {
         return ()=>{
             head.removeChild(style)
         }
+    },[])
+
+    useEffect(()=>{
+        (async()=>{
+            try {
+                const baseUrl = 'https://storefront-dpqh.onrender.com';
+                const temp=location.pathname.split('/').at(1);
+                let path = '/store'
+                let url= `${baseUrl}${path}/${temp}`
+                console.log(url);
+                const response = await axios.get(url);
+                console.log(response)
+            } catch (error) {
+                console.log(error);
+            }     
+          })();
+        
+    
     },[])
 
 

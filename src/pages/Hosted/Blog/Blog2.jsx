@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import axios from "axios";
 import Button from "../../../Components/Button";
 import Logo from "../../Templates/Blog/Components/Logo";
 import SearchBar from "../../Templates/Components/SearchBar";
@@ -14,6 +15,25 @@ const  Blog2 = (props)=> {
   
     let projStyle = edit.projStyle ? edit.projStyle :{};
     let picture = edit.picture ? edit.picture: {};
+
+    useEffect(()=>{
+        (async()=>{
+            try {
+                const baseUrl = 'https://storefront-dpqh.onrender.com';
+                const temp=location.pathname.split('/').at(1);
+                let path = '/store'
+                let url= `${baseUrl}${path}/${temp}`
+                console.log(url);
+                const response = await axios.get(url);
+                console.log(response)
+            } catch (error) {
+                console.log(error);
+            }     
+          })();
+        
+    
+    },[])
+
     useEffect(()=>{
        
         const styles = createSyle(projStyle)
