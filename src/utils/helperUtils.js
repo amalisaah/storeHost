@@ -3,7 +3,7 @@ function createName(username,projName) {
     username=username.toLowerCase().trim();
     projName=projName.toLowerCase().trim();
     projName=projName.split('-');
-    console.log(projName)
+    // console.log(projName)
     if (projName.length>1) return projName.join('-') 
     const temp = username + '-' + projName.join('-') +'';
     return temp
@@ -13,7 +13,7 @@ function createName(username,projName) {
 export function preventDuplicates(nameList,name,user){
     let username=user['business'] || user['firstname'];
     name=username+'-'+name
-    console.log(nameList,name)
+    // console.log(nameList,name)
     const temp=nameList.find(element=>element===name);
     if (temp) {
         return
@@ -38,7 +38,7 @@ export function hostedDuplicates(allHosted,hosted){
 
 /*Checks if site is Hosted*/
 export function checkExistence(allHosted,name){
-    const temp=allHosted.find(element=>element[1]===name);
+    const temp=allHosted.find(element=>element['store']===name);
     if (temp) return true
     return false
 }

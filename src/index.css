@@ -45,6 +45,23 @@ body {
   color: var(--fontGray);
   /* background-color: red; */
 }
+::-ms-reveal {
+  display: none;
+}
+::-ms-fill {
+  display: none;
+}
+/* :-webkit-autofill,:-webkit-autofill:hover,:-webkit-autofill:focus,main input.minput:-internal-autofill-selected {
+  background-color: -internal-light-dark(rgb(232, 240, 254), rgba(86, 126, 70, 0.4)) !important;
+} */
+
+/* input.minput:-internal-autofill-selected {
+  appearance: menulist-button;
+  background-image: none !important;
+  background-color: -internal-light-dark(rgb(217, 222, 230), rgba(1, 7, 15, 0.4)) !important;
+  color: fieldtext !important;
+} */
+
 h1 {
   font-family: Poppins,Helvetica,Sans-serif ;
   font-size: 3rem;

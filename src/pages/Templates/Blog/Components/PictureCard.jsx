@@ -26,13 +26,13 @@ const  PictureCard = (props)=> {
 PictureCard.propTypes={
     className : PropTypes.string,
     title : PropTypes.string,
-    titleId : PropTypes.string.isRequired,
+    titleId : PropTypes.string,
     left : PropTypes.string,
-    leftId : PropTypes.string.isRequired,
+    leftId : PropTypes.string,
     right : PropTypes.string,
-    rightId : PropTypes.string.isRequired,
+    rightId : PropTypes.string,
     description : PropTypes.string,
-    descId : PropTypes.string.isRequired,
+    descId : PropTypes.string,
 }
 
 export default PictureCard

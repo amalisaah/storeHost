@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import useState from "react-usestateref";
+import axios from "axios";
 import './Finance1.css';
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Submit from "../../../Components/Submit";
@@ -9,13 +10,19 @@ import Header from "../../Templates/Components/Header";
 import { createSyle } from "../../../utils/styleUtils";
 
 
+
 const  Finance1 = (props)=> {
 
     /*Controls editable states*/
-    const [edit] = [props.data];
+    const [edit,setEdit] = useState({})
+    // const [edit] = [props.data]
   
-    let projStyle = edit.projStyle ? edit.projStyle :{};
-    let picture = edit.picture ? edit.picture: {};
+    let projStyle = (edit && edit.projStyle) ? edit.projStyle :{};
+    let picture = (edit && edit.picture) ? edit.picture: {};
+    useEffect(()=>{
+        setEdit(prev=>props.data ? props.data : prev)
+    },[props.data])
+    
     useEffect(()=>{
        
         const styles = createSyle(projStyle)
@@ -31,10 +38,31 @@ const  Finance1 = (props)=> {
         }
     },[])
 
+    useEffect(()=>{
+        (async()=>{
+            try {
+                const baseUrl = 'https://storefront-dpqh.onrender.com';
+                const temp=location.pathname.split('/').at(1);
+                let path = '/store'
+                let url= `${baseUrl}${path}/${temp}`
+                console.log(url);
+                const response = await axios.get(url);
+                console.log(response)
+            } catch (error) {
+                console.log(error);
+            }     
+          })();
+        
+    
+    },[])
+
 
     return (
-        <> 
-            <Header logo={edit.logo} className=' fHeader' logoClass='col text-orange font-bold font-fontRoboto text-[36px] fLogo' searchButtonClass='col text-orange fSearchButton' searchClass='fSearch'>
+        
+             <> 
+            { edit ?
+                <>
+                <Header logo={edit.logo} className=' fHeader' logoClass='col text-orange font-bold font-fontRoboto text-[36px] fLogo' searchButtonClass='col text-orange fSearchButton' searchClass='fSearch'>
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="col text-orange text-xl font-fontRoboto">Register</span>
             </Header>
             <main className='font-fontRoboto fMain'>
@@ -71,7 +99,10 @@ const  Finance1 = (props)=> {
                 </div>
             </main>
             <Footer logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' className=' fFooter' logoClass='fLogo' />
-        </>
+            </> : null}
+            </>
+         
+        
     )
 };
 
