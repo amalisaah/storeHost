@@ -25,7 +25,6 @@ import Blog1 from './pages/Hosted/Blog/Blog1';
 import Templates2 from './pages/Templates/Blog/Template2/Templates2';
 import Blog2 from './pages/Hosted/Blog/Blog2';
 import Templates from './pages/Templates/Templates';
-import { hostedDuplicates } from './utils/helperUtils';
 import FinanceTemp1 from './pages/Templates/Finance/Finance1/Finance1';
 import PersonalTemp1 from './pages/Templates/Finance/Finance1/Personal';
 import BusinessTemp1 from './pages/Templates/Finance/Finance1/Business';
@@ -54,9 +53,21 @@ function App() {
 
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
-  function UpdateHosted (site){
-    const temp=hostedDuplicates(allHostedRef.current,site);
-    setAllHosted(prev=>temp ? [...prev,[...site]]:prev)
+  function UpdateHosted (site,name,path){
+
+    (async()=>{
+      try {
+          const url=`${baseUrl}/dashboard/projects`;
+          // console.log(name);
+          const data={store:name,type:path};
+          console.log(data,'post');
+          const response = await axios.put(url,data);
+          console.log(response) 
+      } catch (error) {
+          console.log(error);
+          // if (error.response.data==='Unauthorized'){setError(true)}
+      }     
+    })();
     
   }
 
@@ -74,6 +85,13 @@ function clearData() {
 
 ////PROJECT//////
 /*Fetching Data on first render*/
+  useEffect(()=>{
+    const path=`/hstores`;
+    getData(path);
+    
+   
+  },[])
+
   useEffect(()=>{
     let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
     setAllHosted(prev=>item ?[...JSON.parse(item)] : prev);
@@ -133,6 +151,7 @@ function clearData() {
           // const data = response.data
           setResponse((prev)=> response.data) 
           setProjectData(prev=>query ? response.data : prev)
+          setAllHosted(prev=>!query ? response.data : prev)
           console.log(response.data)
       } catch (error) {
           console.log(error.response);
@@ -174,9 +193,9 @@ function clearData() {
                 <Routes>
                   <Route path='/' element={<LandingPage/>} />
                   <Route path='/authentication/*' element={<Authentication  />} />
-                  <Route path='/home' element={<Home clearData={clearData} getData={getData} responseRef={responseRef} clearResponse={clearResponse} allHostedRef={allHostedRef} /> } >
+                  <Route path='/home' element={<Home clearData={clearData} responseRef={responseRef} clearResponse={clearResponse} allHostedRef={allHostedRef} /> } >
                     <Route index element={<Dashboard />} />
-                    <Route path='projects' element={<Project postData={postData} getData={getData} deleteProject={deleteProject} /> } >
+                    <Route path='projects' element={<Project postData={postData} deleteProject={deleteProject} /> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
                       <Route path='finance' element={<Finance/>} />
@@ -197,7 +216,7 @@ function clearData() {
                   </Route>
 
                   {/* <Route path='/hosted' element={<Hosted/> } > */}
-                    {allHosted.map((site,index)=>
+                    {/* {allHosted.map((site,index)=>
                     <Route path={`/${site[1]}`} element={
                       
                       ({
@@ -211,8 +230,23 @@ function clearData() {
                       key={index}>
                         <Route path='personal' element={<Personal /> } />
                         <Route path='business' element={<Business /> } />
+                    </Route> )} */}
+                    {allHosted.map((site,index)=>
+                    <Route path={site.store} element={
+                      
+                      ({
+                        'Blog-1': <Blog1 data={site.features} />,
+                        'Blog-2': <Blog2 data={site.features} />,
+                        'Blog-3': <Blog3 data={site.features} />,
+                        'finance-1': <Finance1 data={site.features} />
+                      }[site.type] 
+                      )
+                      } 
+                      key={index}>
+                        <Route path='personal' element={<Personal /> } />
+                        <Route path='business' element={<Business /> } />
                     </Route> )}
-                    {/* <Route path='*' element={<Navigate replace to='/' />} /> */}
+                    {/* <Route path='*' element={<Navigate to='/' />} /> */}
                     {/* <Route path='*' element={<h1 className='mx-auto' ><Link to='/authentication'> GO BACK</Link></h1>} /> */}
                   {/* <Route path='*' element={<Templates/>} /> */}
                   

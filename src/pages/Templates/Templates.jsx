@@ -76,10 +76,11 @@ const  Templates = (props)=> {
         // console.log(projectListRef.current)
         setBox(false)
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
-        const path=`/dashboard/projects`
-        // props.postData(path,JSON.stringify(projectDataRef.current))
+        const path=`/dashboard/projects`;
+        const data={[name]:editRef.current}
         
-        props.postData(path,projectDataRef.current);
+        props.postData(path,data,path);
+        // props.postData(path,projectDataRef.current);
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
 
         
@@ -116,9 +117,10 @@ const  Templates = (props)=> {
         const temp=location.pathname.split('/').at(3);
         const name = nameUtil(projectNameRef.current,user);
         const hosted= [temp,name];
-        props.UpdateHosted(hosted)
+        props.UpdateHosted(hosted,name,temp)
         sessionStorage.setItem('allHosted',JSON.stringify(props.allHostedRef.current));
-        const path=''
+
+        
         // props.postData(path,props.allHostedRef)
         navigate('/home/projects',{state:{published:true}})
         
@@ -155,6 +157,7 @@ const  Templates = (props)=> {
                 formData.append([id], picture[id].picture)
             }
             console.log(url)
+            console.log(picture)
             axios.post(url, formData, { 
                 headers: {
                     'Content-Type':'multipart/form-data'

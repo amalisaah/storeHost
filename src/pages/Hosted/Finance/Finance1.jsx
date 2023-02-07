@@ -9,13 +9,19 @@ import Header from "../../Templates/Components/Header";
 import { createSyle } from "../../../utils/styleUtils";
 
 
+
 const  Finance1 = (props)=> {
 
     /*Controls editable states*/
-    const [edit] = [props.data];
+    const [edit,setEdit] = useState({})
+    // const [edit] = [props.data]
   
-    let projStyle = edit.projStyle ? edit.projStyle :{};
-    let picture = edit.picture ? edit.picture: {};
+    let projStyle = (edit && edit.projStyle) ? edit.projStyle :{};
+    let picture = (edit && edit.picture) ? edit.picture: {};
+    useEffect(()=>{
+        setEdit(prev=>props.data ? props.data : prev)
+    },[props.data])
+    
     useEffect(()=>{
        
         const styles = createSyle(projStyle)
@@ -33,8 +39,11 @@ const  Finance1 = (props)=> {
 
 
     return (
-        <> 
-            <Header logo={edit.logo} className=' fHeader' logoClass='col text-orange font-bold font-fontRoboto text-[36px] fLogo' searchButtonClass='col text-orange fSearchButton' searchClass='fSearch'>
+        
+             <> 
+            { edit ?
+                <>
+                <Header logo={edit.logo} className=' fHeader' logoClass='col text-orange font-bold font-fontRoboto text-[36px] fLogo' searchButtonClass='col text-orange fSearchButton' searchClass='fSearch'>
                 <span className="tex-black text-xl font-fontRoboto">Login</span> | <span className="col text-orange text-xl font-fontRoboto">Register</span>
             </Header>
             <main className='font-fontRoboto fMain'>
@@ -71,7 +80,10 @@ const  Finance1 = (props)=> {
                 </div>
             </main>
             <Footer logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' className=' fFooter' logoClass='fLogo' />
-        </>
+            </> : null}
+            </>
+         
+        
     )
 };
 
