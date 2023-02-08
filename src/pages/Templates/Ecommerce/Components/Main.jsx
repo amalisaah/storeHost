@@ -6,7 +6,7 @@ const Main = () => {
       <section className="p-5 bg-grey">
         <div className="">
           {/* Carousel Images */}
-          <div class="grid grid-cols-4 gap-4 bg-white p-5 m-5">
+          <div className="grid grid-cols-4 gap-4 bg-white p-5 m-5">
             <div>
               <img src="/images/Ecommerce/Rectangle 1742.png" />
             </div>

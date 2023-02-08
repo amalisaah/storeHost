@@ -98,7 +98,7 @@ const  Finance1 = (props)=> {
                     </form>
                 </div>
             </main>
-            <Footer logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' className=' fFooter' logoClass='fLogo' />
+            <Footer logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} fb={edit.social && edit.social.fb} ig={edit.social && edit.social.ig} twitter={edit.social && edit.social.twitter} telId='tel' className=' fFooter' logoClass='fLogo' />
             </> : null}
             </>
          

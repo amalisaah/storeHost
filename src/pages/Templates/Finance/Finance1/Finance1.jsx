@@ -15,7 +15,7 @@ import MessageForm from "../../Components/MessageForm";
 const  Finance1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile] = useOutletContext() ;
+    const [edit,setEdit,,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile,socialChange,social] = useOutletContext() ;
 
 
     /*  Set edit to data if no existing changes available*/
@@ -118,7 +118,7 @@ const  Finance1 = ()=> {
                     
                 </div>
             </main>
-            <Footer logoClass='fLogo' className=' fFooter' logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' template={true} onBlur={onContentBlur} />
+            <Footer logoClass='fLogo' className=' fFooter' logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' template={true} onBlur={onContentBlur} socialChange={socialChange} social={social} />
         </>
     )
 };

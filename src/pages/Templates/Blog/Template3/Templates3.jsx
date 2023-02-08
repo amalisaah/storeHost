@@ -16,7 +16,7 @@ import Image from "../../../Home/Components/Image";
 const  Templates3 = (props)=> {  
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile] = useOutletContext() ; ;
+    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile,socialChange,social] = useOutletContext() ; ;
     
     let template= true;
     useEffect(()=>{
@@ -98,7 +98,7 @@ const  Templates3 = (props)=> {
                 </div>
             </main>
 
-            <Footer logoClass='fLogo' className=' fFooter' logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' template={true} onBlur={changeValue} >
+            <Footer logoClass='fLogo' className=' fFooter' logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' template={true} onBlur={changeValue} socialChange={socialChange} social={social} >
                 
             </Footer>
         </>}

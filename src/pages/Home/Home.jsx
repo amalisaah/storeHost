@@ -62,16 +62,7 @@ const  Home = (props)=> {
 
     const allHostedRef=props.allHostedRef;
 
-    const [projectData,setProjectData] = useContext(projectDataContext)
-    // useEffect(()=>{
-    //     setProjectData((prev)=>{
-    //         // const id=user.id;
-    //         return({
-    //         ...prev,
-            
-    //         })
-    //     })
-    // },[])  
+ 
 
     /*populating session storage with fetched data on first render*/
     useEffect(()=>{
@@ -98,9 +89,7 @@ const  Home = (props)=> {
             try {
                 const url=`${baseUrl}${role}`;
                 console.log(url,val);
-                // const val=value;
                 const response = await axios.post(url,val);
-                // response.data.id  && setUser(response.data);
                 setResponse(response)
                 console.log(response) 
             } catch (error) {
@@ -117,7 +106,6 @@ const  Home = (props)=> {
     function handleClearName(){
         setProjectName('');
         sessionStorage.removeItem('projectName');
-        // console.log(e.target.parentNode.firstElementChild);
     }
 
 
