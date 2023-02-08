@@ -6,8 +6,8 @@ import Finance from '../../../assets/images/icons/Finance.png';
 
 const  Select = (props)=> {
 
-    const values=['Ecommerce', 'Finance', 'Blog']
-    const icon=[Ecommerce ,Finance, Blog]
+    const values=['Finance','Ecommerce' , 'Blog']
+    const icon=[ Finance,Ecommerce, Blog]
 
     /*For changing the values displayed in box check project*/
     function handleClick(e){

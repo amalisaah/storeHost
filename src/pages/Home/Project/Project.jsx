@@ -101,7 +101,7 @@ const  Project = (props)=> {
 
     return (
         <>
-             <div className="" style={previewed ? {filter:'blur(3px)',position:'fixed'}:{}} >
+             <div className="" style={previewed ? {filter:'blur(3px)'}:{}} >
                 { categorySel ?
                     <div className='h-[100px] w-[352px] flex justify-around items-center border-solid border border-darkBlue m-6 cursor-pointer bg-white' onClick={()=>{selectCategory(false)}}>
                         <div className='flex items-center text-2xl   '>
