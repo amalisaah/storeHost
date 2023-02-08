@@ -18,7 +18,7 @@ const  SideBar = (props)=> {
 
     return (
         // <>
-            <div className='bg-darkBlue w-[15.5%] min-h-screen text-white fixed'>
+            <div className='bg-darkBlue w-[15.5%] min-h-screen text-white fixed' style={props.style}>
                 {items.map((item,index)=>
                     <NavLink to={items[index]} className="hover:bg-sideHover active:bg-[#59AFFF]" style={({ isActive }) => 
                     (isActive ? {background: '#59AFFF'} : null)} key={index} >
@@ -37,5 +37,6 @@ const  SideBar = (props)=> {
 
 SideBar.propTypes = {
     onClick: PropTypes.func,
+    style: PropTypes.object,
 }
 export default SideBar

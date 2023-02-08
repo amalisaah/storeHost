@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import Alert from "../Components/Alert";
 import ProfilePic from "../../../Components/ProfilePic";
 import pencil from "../../../assets/images/icons/pencil.png"
 import { LoginContext } from "../../../Context/LoginContext";
@@ -11,7 +12,7 @@ const  Profile = ()=> {
     const {user,setUser} = useContext(LoginContext);
 
     /*Handle editing*/
-    const [value,setValue,onSubmit,,,,changePic,profilePic]=useOutletContext();
+    const [value,setValue,onSubmit,,,,changePic,profilePic,,isAlertVisible]=useOutletContext();
     function handleChange(e){
         e.preventDefault()
         const name=e.target.id;
@@ -51,6 +52,7 @@ const  Profile = ()=> {
     return (
         <>
             <div className='w-[559px] m-auto '>
+            {isAlertVisible ? <Alert text='Profile details sucessfully updated' /> : null}
                 <ProfilePic src={profilePic.src} template={true} text={user.business || user.firstname} alt='profile pic' icon={pencil} user={user} name={user.business || user.firstname} alternative='edit button' className='h-[226px] w-[226px] profilePic transition-all duration-1000' textClass={'text-[32px] leading-[36px] mx-8 '} onChange={changePic} id={'pic'} changeText={nameChange} />    
 
                 <form onSubmit={handleSubmit} className='mt-8'>

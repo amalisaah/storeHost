@@ -40,10 +40,14 @@ const  Templates = (props)=> {
     const onContentBlur = useCallback(e => {
         const id=e.currentTarget.id
         setEdit(prev=>({...prev,[id]:e.currentTarget.innerText}))
-        console.log(id,'\n',edit)
+        // console.log(id,'\n',edit)
     })
 
-
+    /*social media handles*/
+    const [social,setSocial,socialRef] = useState({});
+    function socialChange(id,val){
+        setSocial(prev=>({...prev,[id]:val}))
+    }
 
 
     /*Get Name of project  HANDLE NAME SAVE set data to name as key*/
@@ -67,9 +71,9 @@ const  Templates = (props)=> {
         submitPic()
         const name=nameUtil(projectNameRef.current,user);
         setEdit(prev=>(
-            {...prev,pathName:location.pathname,projStyle:styleRef.current,picture:pictureRef.current}
+            {...prev,pathName:location.pathname,projStyle:styleRef.current,picture:pictureRef.current,social:socialRef.current}
             ))//pathname is to acess template type to aid in rerouting from proect page
-        
+        setSocial({})
         setProjectData(prev=>({...prev,[name]:editRef.current}));
         console.table(projectDataRef.current)
         // setProjectList(prev=>[...prev,([name,'errrh'])]); //adds name to project list
@@ -156,8 +160,8 @@ const  Templates = (props)=> {
             for (const id of pics){
                 formData.append([id], picture[id].picture)
             }
-            console.log(url)
-            console.log(picture)
+            // console.log(url)
+            // console.log(picture)
             axios.post(url, formData, { 
                 headers: {
                     'Content-Type':'multipart/form-data'
@@ -166,7 +170,7 @@ const  Templates = (props)=> {
                 // console.log(res);
                 //
                 const data=res.data
-                console.log(data)
+                // console.log(data)
                 setPicture(prev=>({...prev,...data}))
             }).catch(error =>{
                 console.log(error)
@@ -186,7 +190,7 @@ const  Templates = (props)=> {
         (async()=>{
             try {
                 let url =  `https://storefront-dpqh.onrender.com/uploads/${projectNameRef.current}?uid=${user.id}`;
-                console.log(url);
+                // console.log(url);
                 const response = await axios.get(url);
                 setPicture(prev=> response.data)
             } catch (error) {
@@ -231,9 +235,9 @@ const  Templates = (props)=> {
     function changeStyle (item,obj){
         let temp=style[item]
         temp={...temp,...obj}
-        console.log(temp)
+        // // console.log(temp)
         setStyle(prev=>({...prev,[item]:temp}))
-        console.log(style)
+        // console.log(style)
     }
 
 
@@ -242,7 +246,7 @@ const  Templates = (props)=> {
     const [logout,setLogout]= useState(false);
     function toggleLogout(){
         setLogout(prev=>!prev)
-        console.log(logout);
+        // console.log(logout);
     }
 
     /*LOGS USER OUT*/
@@ -290,7 +294,7 @@ const  Templates = (props)=> {
                 { box ? <NameBox buttonText={'Save'} onClick={handleSubmit} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 { pubBox ? <NameBox buttonText={'Save and Publish'} onClick={handleHosting} duplicate={duplicate} user={user} checkDuplicate={checkDuplicate} /> : null }
                 <div className='mx-[5.4%]'>
-                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile]}/>
+                    <Outlet context={[edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile,socialChange,social]}/>
                 </div>
 
             </main>

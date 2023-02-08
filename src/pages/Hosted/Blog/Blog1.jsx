@@ -163,7 +163,7 @@ const  Blog1 = (props)=> {
                    
                 </section>
             </main>
-            <Footer  text={edit.footText} textId='footText' socialClass='hidden' teleClass='hidden' customerClass='hidden' template={true}  />
+            <Footer  text={edit.footText}  textId='footText' socialClass='hidden' teleClass='hidden' customerClass='hidden' template={true}  />
         </>
     )
 };

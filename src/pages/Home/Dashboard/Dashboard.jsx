@@ -9,9 +9,8 @@ const  Dashboard = ({dashboard})=> {
     const heading = ['Sites Created','Views','Orders','Earnings'];
     const item = (dashboard && dashboard.summary) ? Object.keys(dashboard.summary) : [] ;
     const summary = dashboard && dashboard.summary;
-    const table = [{vendor:'sammy',id:101254,items:121,commision:10}];
-    // const table = dashboard ? dashboard.vendors : [];
-
+    const table = (dashboard && dashboard.vendors) ? dashboard.vendors : [];
+   
     return (
         <>
             <div className="flex justify-around">

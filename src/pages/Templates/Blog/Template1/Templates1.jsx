@@ -19,7 +19,7 @@ import { sanitize } from "../../../../utils/sanitizeUtils";
 const  Templates1 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile] = useOutletContext() ;
+    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile,socialChange,social] = useOutletContext() ;
     
     let template= true;
     useEffect(()=>{
@@ -157,7 +157,7 @@ const  Templates1 = ()=> {
                    
                 </section>
             </main>
-            <Footer    text={edit.footText} textId='footText' socialClass='hidden' teleClass='hidden' customerClass='hidden' template={true} onBlur={onContentBlur} />
+            <Footer    text={edit.footText} textId='footText' socialClass='hidden' teleClass='hidden' customerClass='hidden' template={true} onBlur={onContentBlur} socialChange={socialChange} social={social} />
         </>
     )
 };

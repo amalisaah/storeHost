@@ -7,12 +7,13 @@ import Button from "../../../../Components/Button";
 const  Finance = ()=> {
 
     const navigate = useNavigate();
-    const [handleClearName] = useOutletContext();
+    const [handleClearName,previewed,changePreview] = useOutletContext();
     const ref = useRef(null);
     const hidePreview = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
             let element = document.getElementsByClassName('preview');
             element[0].style.display='none';
+            changePreview(false)
         }
     };
 
@@ -26,6 +27,7 @@ const  Finance = ()=> {
     function showPreview(e) {
         let element = document.getElementsByClassName('preview')
         element[0].style.display='block';
+        changePreview(true)
     }
 
    
@@ -35,14 +37,14 @@ const  Finance = ()=> {
             <div className='w-[full] flex justify-start pl-10'>
                 <div className='font-fontRoboto text-xl text-center w-[30%]'  >
                     <div className='preview' ref={ref} style={{display:'none'}}>
-                        <img src={preview1} alt='review' className=" absolute w-5/6 left-[7%] top-[176px] "  />
+                        <img src={preview1} alt='review' className=" absolute w-5/6 left-[7%] top-[176px] z-50 "  />
 
-                        <Button value="Edit" className=' bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none fixed right-10 bottom-20' onClick={()=>{
+                        <Button value="Edit" className=' bg-darkBlue font-fontPoppins w-[156px] h-[46px] rounded-none fixed right-10 bottom-20 z-50' onClick={()=>{
                         handleClearName()
                         navigate('/template/finance/finance-1')}
                         } />
                     </div>
-                    <Link>
+                    <Link style={previewed ? {filter:'blur(3px)'}:{}} >
                         <img src={template1} alt={'finance'} className='w-full max-h-[240px] min-w-[28%] border-[#59AFFF] hover:border-2 shadow-1' onClick={showPreview} role='icon'/>
                     </Link>
                     finance-1

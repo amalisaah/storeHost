@@ -16,7 +16,7 @@ import Sections from "../../Components/Sections";
 const  Templates2 = ()=> {
 
     /*Controls editable states*/
-    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile] = useOutletContext() ;
+    const [edit,setEdit,editRef,labelVisible,pagesVisible,componentVisible,style,changeStyle,colorVisible,colorVisibility,sectionsVisible,onContentBlur,picture,handlePicChange,mobile,socialChange,social] = useOutletContext() ;
 
     let template= true;
     useEffect(()=>{
@@ -115,7 +115,7 @@ const  Templates2 = ()=> {
 
                 </section>
             </main>
-            <Footer logoClass='fLogo' className=' fFooter' logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' template={true} onBlur={changeValue} />
+            <Footer logoClass='fLogo' className=' fFooter' logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' template={true} onBlur={changeValue} socialChange={socialChange} social={social} />
                 
             
         </>

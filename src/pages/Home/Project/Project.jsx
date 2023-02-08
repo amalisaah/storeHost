@@ -8,6 +8,7 @@ import { projectDataContext } from "../../../Context/projectDataContext";
 import { projectNameContext } from "../../../Context/projectNameContext";
 import PopUp from "../Components/PopUp";
 import Alert from "../Components/Alert";
+import { checkExistence } from "../../../utils/helperUtils";
 
 
 const  Project = (props)=> {
@@ -20,7 +21,7 @@ const  Project = (props)=> {
     // const [projectName,setProjectName] = useContext(projectNameContext)
     
     // console.log(projectList);
-    const [,,,,,,,,,isAlertVisible,selectCategory,categorySel,allHostedRef] = useOutletContext();
+    const [,,,,,,,,,isAlertVisible,selectCategory,categorySel,allHostedRef,previewed,changePreview] = useOutletContext();
     const [chooseIcon,setChooseIcon] = useState([]) //keeping track of listed project images
     /*List of project belonging to user*/
     useEffect(()=>{
@@ -41,7 +42,11 @@ const  Project = (props)=> {
 
     /*Handles selecting a project*/
     const [path,setPath] = useState({})
+    const [hosted,setHosted] = useState(false)
     function handleSelect (name,e) {
+        const hosted = checkExistence(allHostedRef.current,name);
+        setHosted(hosted)
+        console.log(hosted)
         const path=projectData[name] && projectData[name].pathName;
         setPath(({path,name}))        
         sessionStorage.setItem('projectName',JSON.stringify(name))
@@ -96,7 +101,7 @@ const  Project = (props)=> {
 
     return (
         <>
-             <div className="" >
+             <div className="" style={previewed ? {filter:'blur(3px)'}:{}} >
                 { categorySel ?
                     <div className='h-[100px] w-[352px] flex justify-around items-center border-solid border border-darkBlue m-6 cursor-pointer bg-white' onClick={()=>{selectCategory(false)}}>
                         <div className='flex items-center text-2xl   '>
@@ -118,15 +123,15 @@ const  Project = (props)=> {
                     </div>
                 }
             </div>
-                <div className='border-solid border border-fontGrayW mx-12 '></div>
+                <div className='border-solid border border-fontGrayW mx-12 ' style={previewed ? {filter:'blur(3px)'}:{}}></div>
                 <div className=''>
-                    <h2 className="font-semibold text-2xl m-6">{categorySel? 'Recent' :'Templates'}</h2>
+                    <h2 className="font-semibold text-2xl m-6" style={previewed ? {filter:'blur(3px)'}:{}}>{categorySel? 'Recent' :'Templates'}</h2>
                    { (location.state && location.state.published) ? <Alert text='Your work has been published'/> : null}
                     { categorySel ? 
                         <div className='w-[full] flex justify-start flex-wrap pl-8'>
                             {projectListRef.current.map((project,index)=>
                                 <div className='font-fontRoboto text-xl w-[30%] mb-9 mr-3 text-center relative' key={index} onClick={(e)=>{handleSelect(project,e)}}>
-                                    <PopUp onClick={handleSelect} path={path} allHostedRef={allHostedRef} deleteProject={deleteProject} />
+                                    <PopUp onClick={handleSelect} path={path} hosted={hosted} allHostedRef={allHostedRef} deleteProject={deleteProject} />
                                     <Link>
                                         <img src={`/images/projects/${chooseIcon[index]}.png`} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' role='icon' />
                                         
@@ -139,7 +144,7 @@ const  Project = (props)=> {
                     : 
                     // null
                     <div className=''>
-                        <Outlet context={[handleClearName]} />
+                        <Outlet context={[handleClearName,previewed,changePreview]} />
                     </div>}
                 </div>
         </>

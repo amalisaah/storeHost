@@ -31,6 +31,12 @@ import BusinessTemp1 from './pages/Templates/Finance/Finance1/Business';
 import Finance1 from './pages/Hosted/Finance/Finance1';
 import Personal from './pages/Hosted/Finance/Personal';
 import Business from './pages/Hosted/Finance/Business';
+import EcomHome from './pages/Templates/Ecommerce/Pages/EcomHome';
+import Cart from './pages/Templates/Ecommerce/Pages/Cart';
+import Checkout from './pages/Templates/Ecommerce/Pages/Checkout';
+import Delivery from './pages/Templates/Ecommerce/Pages/Delivery';
+import Payment from './pages/Templates/Ecommerce/Pages/Payment';
+import ProductDescription from './pages/Templates/Ecommerce/Pages/ProductDescription';
 
 
 
@@ -61,13 +67,13 @@ function App() {
     (async()=>{
       try {
           const url=`${baseUrl}/dashboard/projects`;
-          // console.log(name);
+          
           const data={store:name,type:path};
-          console.log(data,'post');
+          // console.log(data,'post');
           const response = await axios.put(url,data);
-          console.log(response) 
+          // console.log(response) 
       } catch (error) {
-          console.log(error);
+          // console.log(error);
           // if (error.response.data==='Unauthorized'){setError(true)}
       }     
     })();
@@ -150,11 +156,11 @@ useEffect(()=>{
     (async()=>{
       try {
           const url=`${baseUrl}${path}?uid=${userRef.current.id}`;
-          console.log(data,'data');
+          // console.log(data,'data');
           const val=data;
-          console.log(val,'post');
+          // console.log(val,'post');
           const response = await axios.post(url,val);
-          console.log(response.data) 
+          // console.log(response.data) 
       } catch (error) {
           console.log(error);
           // if (error.response.data==='Unauthorized'){setError(true)}
@@ -167,14 +173,14 @@ useEffect(()=>{
     (async()=>{
       try {
           let url= query ? `${baseUrl}${path}?uid=${userRef.current.id}` : `${baseUrl}${path}`;
-          console.log(url);
+          // console.log(url);
           const response = await axios.get(url);
           // const data = response.data
           setResponse((prev)=> response.data) 
           setProjectData(prev=>(query && !dash) ? response.data : prev);
           setAllHosted(prev=>(!query && host) ? response.data : prev);
           setDashboard(prev=>response.data.summary ? response.data : prev)  ///DASHBOARD
-          console.log(response.data)
+          // console.log(response.data)
       } catch (error) {
           console.log(error.response);
           // if (error.response.data==='Unauthorized'){setError(true)}
@@ -188,10 +194,10 @@ useEffect(()=>{
       try {
           let path = '/dashboard/projects'
           let url= `${baseUrl}${path}?uid=${userRef.current.id}&name=${name}`
-          console.log(url);
+          // console.log(url);
           const response = await axios.delete(url);
           setProjectData(prev=>response.data)
-          console.log(response.data)
+          // console.log(response.data)
       } catch (error) {
           console.log(error);
           // if (error.response.data==='Unauthorized'){setError(true)}
@@ -235,6 +241,12 @@ useEffect(()=>{
                       <Route path='personal' element={<PersonalTemp1 />}/>
                       <Route path='business' element={<BusinessTemp1 />}/>
                     </Route>
+                    <Route path='ecom/ecomHome/cart' element={<Cart/>} />
+                    <Route path='ecom/ecomHome/checkout' element={<Checkout/>} />
+                    <Route path='ecom/ecomHome/delivery' element={<Delivery/>} />
+                    <Route path='ecom/ecomHome/payment' element={<Payment/>} />
+                    <Route path='ecom/ecomHome/product' element={<ProductDescription/>} />
+                    <Route path='ecom/ecomHome/*' element={<EcomHome/>} />
                   </Route>
                     {allHosted.map((site,index)=>
                     <Route path={site.store} element={

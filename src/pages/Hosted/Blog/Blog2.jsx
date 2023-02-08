@@ -114,7 +114,7 @@ const  Blog2 = (props)=> {
 
             </section>
         </main>
-        <Footer logo={edit.logo} text={edit.footText} textId='footText' tel={edit.tel} telId='tel' className=' fFooter' logoClass='fLogo' />
+        <Footer logo={edit.logo} text={edit.footText} textId='footText' fb={edit.social && edit.social.fb} ig={edit.social && edit.social.ig} twitter={edit.social && edit.social.twitter} tel={edit.tel} telId='tel' className=' fFooter' logoClass='fLogo' />
         </>
     )
 };
