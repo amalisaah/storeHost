@@ -46,7 +46,7 @@ const  Project = (props)=> {
     function handleSelect (name,e) {
         const hosted = checkExistence(allHostedRef.current,name);
         setHosted(hosted)
-        console.log(hosted)
+        console.log(hosted,allHostedRef.current)
         const path=projectData[name] && projectData[name].pathName;
         setPath(({path,name}))        
         sessionStorage.setItem('projectName',JSON.stringify(name))

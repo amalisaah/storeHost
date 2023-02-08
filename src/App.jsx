@@ -62,6 +62,7 @@ function App() {
 
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
+  // const [check,setCheck]=useState(false)
   function UpdateHosted (site,name,path){
 
     (async()=>{
@@ -71,7 +72,7 @@ function App() {
           const data={store:name,type:path};
           // console.log(data,'post');
           const response = await axios.put(url,data);
-          // console.log(response) 
+           
       } catch (error) {
           // console.log(error);
           // if (error.response.data==='Unauthorized'){setError(true)}
