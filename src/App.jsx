@@ -72,6 +72,7 @@ function App() {
           const data={store:name,type:path};
           // console.log(data,'post');
           const response = await axios.put(url,data);
+          console.log(response)
           setCheck(prev=>response.status<205 ? true : false )
            
       } catch (error) {

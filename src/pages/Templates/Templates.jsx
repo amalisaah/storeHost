@@ -127,7 +127,7 @@ const  Templates = (props)=> {
         
         // props.postData(path,props.allHostedRef)
         console.log(props.check)
-        props.check && navigate('/home/projects',{state:{published:true}})
+         navigate('/home/projects',{state:{published:true}})
         
     }
 
