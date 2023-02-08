@@ -91,7 +91,7 @@ const  Home = (props)=> {
                 console.log(url,val);
                 const response = await axios.post(url,val);
                 setResponse(response)
-                console.log(response) 
+                console.log(response,'kkk') 
             } catch (error) {
                 console.log(error)
                 setResponse(error.response.data)
@@ -127,8 +127,8 @@ const  Home = (props)=> {
         const data = new FormData() 
         data.append('tag',pic.picture);
         console.log(pic.picture);
-        console.log(data);
-        console.log(path);
+        // console.log(data);
+        // console.log(path);
         (async()=>{
             try {
                 const response = await axios.post(path,data);
