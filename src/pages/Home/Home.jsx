@@ -62,6 +62,12 @@ const  Home = (props)=> {
 
     const allHostedRef=props.allHostedRef;
 
+    /*handle template preview*/
+    const [previewed,setPreview] = useState(false);
+    function changePreview(bol){
+        setPreview(bol)
+    }
+
  
 
     /*populating session storage with fetched data on first render*/
@@ -188,14 +194,14 @@ const  Home = (props)=> {
         <>
         { user.id ?
         <>
-        <Header className={'h-[88px] flex-row-reverse fixed '}>
+        <Header className={'h-[88px] flex-row-reverse fixed '} style={previewed ? {filter:'blur(3px)'}:{}} >
             <ProfilePic src={profilePic.data || profilePic.src} text={user.business || user.firstname} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
             {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
         </Header>
          <div className='flex pt-[88px] '>
-            <SideBar onClick={selectCategory}/>
+            <SideBar onClick={selectCategory} style={previewed ? {filter:'blur(3px)'}:{}}/>
             <div className='ml-[15.5%] w-full'>
-            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName,isAlertVisible,selectCategory,categorySel,allHostedRef]} /> {/*displays selected page from side bar*/}
+            <Outlet  context={[value,setValue,handleSubmit,support,setSupport,supportRef,changePic,profilePic,handleClearName,isAlertVisible,selectCategory,categorySel,allHostedRef,previewed,changePreview]} /> {/*displays selected page from side bar*/}
             </div>
 
          </div>

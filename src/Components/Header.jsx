@@ -6,7 +6,7 @@ const  Header = (props)=> {
 
     return (
         <>
-            <header className={"h-[58px] bg-white w-full z-50 flex justify-between px-[2.4%] items-center  "+ props.className}>
+            <header className={"h-[58px] bg-white w-full z-20 flex justify-between px-[2.4%] items-center  "+ props.className} style={props.style} >
                 <Logo />
                 <div className='flex justify-end items-center'>
                     <div className='inline'>
@@ -20,7 +20,8 @@ const  Header = (props)=> {
 };
 
 Header.propTypes = {
-    className : PropTypes.string
+    className : PropTypes.string,
+    style : PropTypes.object
 }
 
 export default Header

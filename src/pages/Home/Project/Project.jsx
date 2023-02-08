@@ -21,7 +21,7 @@ const  Project = (props)=> {
     // const [projectName,setProjectName] = useContext(projectNameContext)
     
     // console.log(projectList);
-    const [,,,,,,,,,isAlertVisible,selectCategory,categorySel,allHostedRef] = useOutletContext();
+    const [,,,,,,,,,isAlertVisible,selectCategory,categorySel,allHostedRef,previewed,changePreview] = useOutletContext();
     const [chooseIcon,setChooseIcon] = useState([]) //keeping track of listed project images
     /*List of project belonging to user*/
     useEffect(()=>{
@@ -101,7 +101,7 @@ const  Project = (props)=> {
 
     return (
         <>
-             <div className="" >
+             <div className="" style={previewed ? {filter:'blur(3px)',position:'fixed'}:{}} >
                 { categorySel ?
                     <div className='h-[100px] w-[352px] flex justify-around items-center border-solid border border-darkBlue m-6 cursor-pointer bg-white' onClick={()=>{selectCategory(false)}}>
                         <div className='flex items-center text-2xl   '>
@@ -123,9 +123,9 @@ const  Project = (props)=> {
                     </div>
                 }
             </div>
-                <div className='border-solid border border-fontGrayW mx-12 '></div>
+                <div className='border-solid border border-fontGrayW mx-12 ' style={previewed ? {filter:'blur(3px)'}:{}}></div>
                 <div className=''>
-                    <h2 className="font-semibold text-2xl m-6">{categorySel? 'Recent' :'Templates'}</h2>
+                    <h2 className="font-semibold text-2xl m-6" style={previewed ? {filter:'blur(3px)'}:{}}>{categorySel? 'Recent' :'Templates'}</h2>
                    { (location.state && location.state.published) ? <Alert text='Your work has been published'/> : null}
                     { categorySel ? 
                         <div className='w-[full] flex justify-start flex-wrap pl-8'>
@@ -144,7 +144,7 @@ const  Project = (props)=> {
                     : 
                     // null
                     <div className=''>
-                        <Outlet context={[handleClearName]} />
+                        <Outlet context={[handleClearName,previewed,changePreview]} />
                     </div>}
                 </div>
         </>
