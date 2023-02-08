@@ -28,6 +28,7 @@ const  PopUp = (props)=> {
     function openProject(){
         const hosted = checkExistence(props.allHostedRef.current,props.path.name);
         if (hosted) navigate('/'+props.path.name)
+       
         
     }
     function handleDelete(e) {
@@ -38,7 +39,7 @@ const  PopUp = (props)=> {
         <>
             <div className='preview w-[257px] absolute top-40 left-[40%] z-10 bg-white shadow-1 divide-y divide-solid text-left cursor-pointer hidden' ref={ref} >
                 <div className='font-fontPoppins text-2xl text-black py-5 pl-12' onClick={()=>{navigate(props.path.path)}}>Edit</div>
-                <div className='font-fontPoppins text-2xl text-black py-5 pl-12' onClick={openProject}>Open project</div>
+                <div className='font-fontPoppins text-2xl text-black py-5 pl-12' style={!props.hosted ? {display:'none'} : {}} id="project" onClick={openProject}>Open project</div>
                 <div className='font-fontPoppins text-2xl text-black py-5 pl-12' onClick={handleDelete}>Delete</div>
             </div>
         </>

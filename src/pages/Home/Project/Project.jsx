@@ -8,6 +8,7 @@ import { projectDataContext } from "../../../Context/projectDataContext";
 import { projectNameContext } from "../../../Context/projectNameContext";
 import PopUp from "../Components/PopUp";
 import Alert from "../Components/Alert";
+import { checkExistence } from "../../../utils/helperUtils";
 
 
 const  Project = (props)=> {
@@ -41,7 +42,11 @@ const  Project = (props)=> {
 
     /*Handles selecting a project*/
     const [path,setPath] = useState({})
+    const [hosted,setHosted] = useState(false)
     function handleSelect (name,e) {
+        const hosted = checkExistence(allHostedRef.current,name);
+        setHosted(hosted)
+        console.log(hosted)
         const path=projectData[name] && projectData[name].pathName;
         setPath(({path,name}))        
         sessionStorage.setItem('projectName',JSON.stringify(name))
@@ -126,7 +131,7 @@ const  Project = (props)=> {
                         <div className='w-[full] flex justify-start flex-wrap pl-8'>
                             {projectListRef.current.map((project,index)=>
                                 <div className='font-fontRoboto text-xl w-[30%] mb-9 mr-3 text-center relative' key={index} onClick={(e)=>{handleSelect(project,e)}}>
-                                    <PopUp onClick={handleSelect} path={path} allHostedRef={allHostedRef} deleteProject={deleteProject} />
+                                    <PopUp onClick={handleSelect} path={path} hosted={hosted} allHostedRef={allHostedRef} deleteProject={deleteProject} />
                                     <Link>
                                         <img src={`/images/projects/${chooseIcon[index]}.png`} alt={'Project pic'} className='w-full  border-[#59AFFF] hover:border-2 shadow-1' role='icon' />
                                         
