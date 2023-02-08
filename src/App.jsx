@@ -62,7 +62,7 @@ function App() {
 
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
-  // const [check,setCheck]=useState(false)
+  const [check,setCheck]=useState(false)
   function UpdateHosted (site,name,path){
 
     (async()=>{
@@ -72,6 +72,7 @@ function App() {
           const data={store:name,type:path};
           // console.log(data,'post');
           const response = await axios.put(url,data);
+          setCheck(prev=>response.status<205 ? true : false )
            
       } catch (error) {
           // console.log(error);
@@ -234,7 +235,7 @@ useEffect(()=>{
                         
                     <Route path='support' element={<Support/>} />
                   </Route>
-                  <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} />} >
+                  <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} check={check} />} >
                     <Route path='blog/blog-1/*' element={<Templates1 />} />
                     <Route path='blog/blog-2/*' element={<Templates2 />} />
                     <Route path='blog/blog-3/*' element={<Templates3 />} />
