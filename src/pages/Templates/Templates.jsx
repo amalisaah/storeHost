@@ -66,7 +66,7 @@ const  Templates = (props)=> {
 
     const location = useLocation() //aids in routing to page from recent projects
 
-    function handleSubmit () {
+    function handleLocalSubmit () {
         // const name=[projectNameRef.current];
         submitPic()
         const name=nameUtil(projectNameRef.current,user);
@@ -75,20 +75,25 @@ const  Templates = (props)=> {
             ))//pathname is to acess template type to aid in rerouting from proect page
         setSocial({})
         setProjectData(prev=>({...prev,[name]:editRef.current}));
-        console.table(projectDataRef.current)
+        // console.table(projectDataRef.current)
         // setProjectList(prev=>[...prev,([name,'errrh'])]); //adds name to project list
         // console.log(projectListRef.current)
         setBox(false)
         sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current));
-        const path=`/dashboard/projects`;
         const data={[name]:editRef.current}
-        
-        props.postData(path,data,path);
-        // props.postData(path,projectDataRef.current);
         sessionStorage.setItem('projectName',JSON.stringify(projectName));
-
-        
+        return data
+           
     };
+
+    function handleSubmit(){
+        const path=`/dashboard/projects`;
+        const data=handleLocalSubmit()
+        props.postData(path,data);
+        
+        // props.postData(path,projectDataRef.current);
+        
+    }
 
     
     useEffect(()=>{
@@ -99,7 +104,7 @@ const  Templates = (props)=> {
         let len = Object.keys(Data).length
         setEdit((prev)=> (len && Name) ?  Data[projectNameRef.current] : prev);
         // setStyle((prev)=> (Data && Name) ?  Data[projectNameRef.current.projStyle] : prev);
-        setStyle((prev)=> (len && Name) ?  Data[projectNameRef.current].projStyle ? Data[projectNameRef.current].projStyle : prev :prev);
+        setStyle((prev)=> (len && Name) ?  (Data[projectNameRef.current] && Data[projectNameRef.current].projStyle) ? Data[projectNameRef.current].projStyle : prev :prev);
 
     },[])
 
@@ -112,23 +117,28 @@ const  Templates = (props)=> {
         projectNameRef.current && handleSubmit()
     };
 
-
     /* Handles HOSTING */
     function handleHosting(){
         edit.template=false;
-        handleSubmit();
+        handleLocalSubmit();
         setPubBox(false);
         const temp=location.pathname.split('/').at(3);
         const name = nameUtil(projectNameRef.current,user);
-        const hosted= [temp,name];
-        props.UpdateHosted(hosted,name,temp)
-        sessionStorage.setItem('allHosted',JSON.stringify(props.allHostedRef.current));
+        const path=`/dashboard/projects`;
+        // const hosted= [temp,name];
+        const data=handleLocalSubmit()
+       props.UpdateHosted(name,path,temp,data)
+        // sessionStorage.setItem('allHosted',JSON.stringify(props.allHostedRef.current));
 
         
         // props.postData(path,props.allHostedRef)
-        navigate('/home/projects',{state:{published:true}})
+        
         
     }
+    useEffect(()=>{
+        console.log(props.check)
+        props.check==200 && navigate('/home/projects',{state:{published:true}})
+    },[props.check])
 
     /*Display or hide Pub box*/
     const [pubBox,setPubBox] = useState(false);
