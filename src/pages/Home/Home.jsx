@@ -97,6 +97,8 @@ const  Home = (props)=> {
                 console.log(url,val);
                 const response = await axios.post(url,val);
                 setResponse(response)
+                const data = response.data
+                setUser(prev =>response.data.id ? ({...data}) : prev)
                 console.log(response,'kkk') 
             } catch (error) {
                 console.log(error)
@@ -195,7 +197,7 @@ const  Home = (props)=> {
         { user.id ?
         <>
         <Header className={'h-[88px] flex-row-reverse fixed '} style={previewed ? {filter:'blur(3px)'}:{}} >
-            <ProfilePic src={profilePic.data || profilePic.src} text={user.business || user.firstname} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
+            <ProfilePic src={profilePic.data || profilePic.src} text={value ? (value.business || value.firstname):(user.business || user.firstname)} alt="user's pic" icon={arrow} alternative='arrow down icon' onClick={toggleLogout} />
             {logout ? <Button value="Logout" className='absolute left-[150px] bg-white text-darkBlue hover:text-white hover:bg-darkBlue font-fontRoboto font-semibold w-[136px] h-[45px] ' onClick={handleLogout}  /> : null}
         </Header>
          <div className='flex pt-[88px] '>

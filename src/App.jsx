@@ -62,23 +62,7 @@ function App() {
 
   /*List of published Project */
   const [allHosted, setAllHosted,allHostedRef] = useState([]);
-  function UpdateHosted (site,name,path){
-
-    (async()=>{
-      try {
-          const url=`${baseUrl}/dashboard/projects`;
-          
-          const data={store:name,type:path};
-          // console.log(data,'post');
-          const response = await axios.put(url,data);
-          // console.log(response) 
-      } catch (error) {
-          // console.log(error);
-          // if (error.response.data==='Unauthorized'){setError(true)}
-      }     
-    })();
-    
-  }
+ 
 
 /**HANDLE Clearing data on LOGOUT */
 function clearData() {
@@ -93,6 +77,7 @@ function clearData() {
 
 
 ////PROJECT//////
+
 /*Fetching Data on first render*/
   useEffect(()=>{
     const path=`/hstores`;
@@ -102,8 +87,8 @@ function clearData() {
   },[])
 
   useEffect(()=>{
-    let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
-    setAllHosted(prev=>item ?[...JSON.parse(item)] : prev);
+    // let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
+    // setAllHosted(prev=>item ?[...JSON.parse(item)] : prev);
     // console.table(allHostedRef.current);
     // console.table(projectListRef.current);
 
@@ -167,7 +152,54 @@ useEffect(()=>{
       }     
     })();
   }
+  const [check,setCheck] = useState()
+  function upCheck(){
+    setCheck(null)
+  }
+ function UpdateHosted(name,path,type,data){
+  (async()=>{
+    try {
+        const url=`${baseUrl}${path}?uid=${userRef.current.id}`;
+        // console.log(data,'data');
+        const val=data;
+        // console.log(val,'data');
+        axios.post(url,val).then(response=>{
+          const url=`${baseUrl}/dashboard/projects`; 
+          setProjectData(prev=>response.status==200 ? response.data : prev)
+          // console.log(response,'\n',url)
+          const data={store:name,type:type};
+          // console.log(data,'host')
+          return axios.put(url,data)         
+        }).then (response=>{
+          // console.log(response,'res')
+          setCheck(response.status);
+          const path=`/hstores`;
+          getData(path,false,true);
+        });
+        // console.log(response.data) 
+    } catch (error) {
+        console.log(error);
+        // if (error.response.data==='Unauthorized'){setError(true)}
+    }     
+  })();
+ }
+//  function UpdateHosted (site,name,path){
 
+//   (async()=>{
+//     try {
+//         const url=`${baseUrl}/dashboard/projects`;
+        
+//         const data={store:name,type:path};
+//         // console.log(data,'post');
+//         const response = await axios.put(url,data);
+//         // console.log(response) 
+//     } catch (error) {
+//         // console.log(error);
+//         // if (error.response.data==='Unauthorized'){setError(true)}
+//     }     
+//   })();
+  
+// }
   
   function getData(path,query,host,dash){
     (async()=>{
@@ -180,7 +212,6 @@ useEffect(()=>{
           setProjectData(prev=>(query && !dash) ? response.data : prev);
           setAllHosted(prev=>(!query && host) ? response.data : prev);
           setDashboard(prev=>response.data.summary ? response.data : prev)  ///DASHBOARD
-          // console.log(response.data)
       } catch (error) {
           console.log(error.response);
           // if (error.response.data==='Unauthorized'){setError(true)}
@@ -223,7 +254,7 @@ useEffect(()=>{
                   <Route path='/authentication/*' element={<Authentication  />} />
                   <Route path='/home' element={<Home clearData={clearData} responseRef={responseRef} clearResponse={clearResponse} allHostedRef={allHostedRef} /> } >
                     <Route index element={<Dashboard dashboard={dashboard} />} />
-                    <Route path='projects' element={<Project postData={postData} deleteProject={deleteProject} /> } >
+                    <Route path='projects' element={<Project postData={postData} deleteProject={deleteProject} upCheck={upCheck} /> } >
                       <Route path='ecommerce' element={<Ecommerce/>} />
                       <Route path='Blog' element={<Blog/>} />
                       <Route path='finance' element={<Finance/>} />
@@ -233,7 +264,7 @@ useEffect(()=>{
                         
                     <Route path='support' element={<Support/>} />
                   </Route>
-                  <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} />} >
+                  <Route path='/template' element={<Templates allHosted={allHosted} allHostedRef={allHostedRef} UpdateHosted={UpdateHosted} postData={postData} check={check} />} >
                     <Route path='blog/blog-1/*' element={<Templates1 />} />
                     <Route path='blog/blog-2/*' element={<Templates2 />} />
                     <Route path='blog/blog-3/*' element={<Templates3 />} />

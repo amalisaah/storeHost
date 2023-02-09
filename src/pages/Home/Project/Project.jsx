@@ -14,6 +14,9 @@ import { checkExistence } from "../../../utils/helperUtils";
 const  Project = (props)=> {
 
     const navigate = useNavigate();
+    useEffect(()=>{
+        props.upCheck()
+    })
     
     /*Displays active Projects*/
     const [projectList,setProjectList,projectListRef] = useContext(projectListContext);
@@ -46,7 +49,6 @@ const  Project = (props)=> {
     function handleSelect (name,e) {
         const hosted = checkExistence(allHostedRef.current,name);
         setHosted(hosted)
-        console.log(hosted)
         const path=projectData[name] && projectData[name].pathName;
         setPath(({path,name}))        
         sessionStorage.setItem('projectName',JSON.stringify(name))
