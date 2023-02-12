@@ -5,7 +5,7 @@ import template1 from "../../../../assets/images/Ecommerce/icon.png";
 import Button from "../../../../Components/Button";
 
 const  Ecommerce = ()=> {
-
+ ///    STILL UNDER CONSTRUCTION
     const navigate = useNavigate();
     const [handleClearName,previewed,changePreview] = useOutletContext();
     const ref = useRef(null);
@@ -32,8 +32,9 @@ const  Ecommerce = ()=> {
 
     return (
         <>
-          <div className='w-[full] flex justify-start pl-10'>
-                <div className='font-fontRoboto text-xl text-center w-[30%]'  >
+
+           <div className='w-[full] flex justify-start pl-10'>
+             {/*   <div className='font-fontRoboto text-xl text-center w-[30%]'  >
                     <div className='preview' ref={ref} style={{display:'none'}}>
                         <img src={preview1} alt='review' className=" absolute w-5/6 left-[7%] top-[176px] z-50 "  />
 
@@ -48,8 +49,10 @@ const  Ecommerce = ()=> {
                     Ecommerce
                     <div className=''></div>
                     
-                </div>
-            </div>  
+                </div>*/}
+                <h1>COMING SOON</h1>
+            </div>   
+            
         </>
     )
 };
