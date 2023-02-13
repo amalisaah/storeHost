@@ -64,7 +64,7 @@ const  Blog1 = (props)=> {
                     <div className=''>
                         {navs.map((nav,index)=><NavItem  value={edit['nav'+index] ? edit['nav'+index] :nav} className='text-fontRoboto text-orange text-xl font-normal '    contentEditable={template} id={'nav'+index} key={index} /> )}
                     </div>
-                    <NavItem value='Log in' className='text-fontRoboto text-orange text-xl font-normal mr-[39px] ml-20' link='/authentication' />
+                    <NavItem value='Log in' className='text-fontRoboto text-orange text-xl font-normal mr-[39px] ml-20' link='' />
                     <Button value='Sign up' className='h-10 w-36 bg-orange' link='#' style={projStyle.col ?{backgroundColor:projStyle.col.color}: {}} />
                 </div>
 
@@ -163,7 +163,7 @@ const  Blog1 = (props)=> {
                    
                 </section>
             </main>
-            <Footer  text={edit.footText}  textId='footText' socialClass='hidden' teleClass='hidden' customerClass='hidden' template={true}  />
+            <Footer  text={edit.footText}  textId='footText' socialClass='hidden' teleClass='hidden' customerClass='hidden' template={false}  />
         </>
     )
 };

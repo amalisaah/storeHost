@@ -2,6 +2,8 @@
 
 This is the front-end solution to the [Amalitech graduate training](https://amalitech.org/gtp/) capstone project.
 
+<strong>ECOMMERCE STILL UNDER CONSTRUCTION</strong>
+
 ## Table of contents
 
 - [Overview](#overview)

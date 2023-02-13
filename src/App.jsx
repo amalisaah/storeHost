@@ -87,10 +87,7 @@ function clearData() {
   },[])
 
   useEffect(()=>{
-    // let item=sessionStorage.getItem('allHosted'); // FETCH FROM BG*********
-    // setAllHosted(prev=>item ?[...JSON.parse(item)] : prev);
-    // console.table(allHostedRef.current);
-    // console.table(projectListRef.current);
+
 
   
   if (userRef.current.id){
@@ -102,7 +99,7 @@ function clearData() {
 
   /*storing all hosted projects  */ //EDIT WHEN BG IS READY
   useEffect(()=>{
-    //edit to include data of all hosted proj
+    
      sessionStorage.setItem('projectData',JSON.stringify(projectDataRef.current)) 
        
 },[projectDataRef.current])  
@@ -183,23 +180,7 @@ useEffect(()=>{
     }     
   })();
  }
-//  function UpdateHosted (site,name,path){
 
-//   (async()=>{
-//     try {
-//         const url=`${baseUrl}/dashboard/projects`;
-        
-//         const data={store:name,type:path};
-//         // console.log(data,'post');
-//         const response = await axios.put(url,data);
-//         // console.log(response) 
-//     } catch (error) {
-//         // console.log(error);
-//         // if (error.response.data==='Unauthorized'){setError(true)}
-//     }     
-//   })();
-  
-// }
   
   function getData(path,query,host,dash){
     (async()=>{
@@ -295,7 +276,7 @@ useEffect(()=>{
                         <Route path='business' element={<Business /> } />
                     </Route> )}
                     {/* <Route path='*' element={<Navigate to='/' />} /> */}
-                    {/* <Route path='*' element={<h1 className='mx-auto' ><Link to='/authentication'> GO BACK</Link></h1>} /> */}
+                    
                   {/* <Route path='*' element={<Templates/>} /> */}
                   
                 </Routes>
